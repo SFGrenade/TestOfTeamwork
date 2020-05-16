@@ -38,6 +38,31 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: Second Tower
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 80}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 2.25
+        value: {x: 0, y: 0, z: 180}
+        inSlope: {x: -0, y: -0, z: 80}
+        outSlope: {x: 0, y: 0, z: 80}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 4.5
+        value: {x: 0, y: 0, z: 360}
+        inSlope: {x: -0, y: -0, z: 80}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Second Tower (1)
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -253,6 +278,13 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 1281631711
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 227374712
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -910,6 +942,90 @@ AnimationClip:
     path: Between Thornfall and Second Tower (2)
     classID: 4
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 2.25
+        value: 0
+        inSlope: -0
+        outSlope: 0
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 4.5
+        value: 0
+        inSlope: -0
+        outSlope: 0
+        tangentMode: 69
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Second Tower (1)
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 2.25
+        value: 0
+        inSlope: -0
+        outSlope: 0
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 4.5
+        value: 0
+        inSlope: -0
+        outSlope: 0
+        tangentMode: 69
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Second Tower (1)
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 80
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 2.25
+        value: 180
+        inSlope: 80
+        outSlope: 80
+        tangentMode: 69
+      - serializedVersion: 2
+        time: 4.5
+        value: 360
+        inSlope: 80
+        outSlope: 0
+        tangentMode: 69
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Second Tower (1)
+    classID: 4
+    script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:
       serializedVersion: 2
@@ -939,6 +1055,36 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
     path: Second Tower
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Second Tower (1)
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Second Tower (1)
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Second Tower (1)
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
