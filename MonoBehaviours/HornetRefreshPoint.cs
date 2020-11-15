@@ -1,0 +1,75 @@
+﻿using ModCommon.Util;
+using System.Collections;
+using UnityEngine;
+using Logger = Modding.Logger;
+
+namespace TestOfTeamwork.MonoBehaviours
+{
+    public class HornetRefreshPoint : MonoBehaviour
+    {
+        private const float Cooldown = 1.0f;
+
+        private IEnumerator Start()
+        {
+            if (!TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion)
+            {
+                gameObject.SetActive(false);
+            }
+            yield break;
+        }
+
+        public void OnEnable()
+        {
+            if (!TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        public void OnDisable()
+        {
+        }
+
+        public void OnTriggerEnter2D(Collider2D otherCollider)
+        {
+            if (otherCollider.gameObject.name != "Knight") return;
+
+            GameManager.instance.StartCoroutine(RefreshJump());
+
+            gameObject.SetActive(false);
+
+            GameManager.instance.StartCoroutine(RefreshJumpCooldown());
+        }
+
+        private IEnumerator RefreshJump()
+        {
+            var hero = HeroController.instance;
+
+            hero.transform.Find("Can Focus Particles").gameObject.LocateMyFSM("Play").SendEvent("CAN HEAL EFFECT");
+            var tmpState = GameCameras.instance.soulOrbFSM.GetState("Can Heal 2");
+            var tmpAction = (HutongGames.PlayMaker.Actions.AudioPlayerOneShotSingle)tmpState.Actions[4];
+            tmpAction.OnEnter();
+
+            yield return new WaitWhile(() => hero.GetAttr<HeroController, int>("doubleJump_steps") != 0);
+
+            hero.ResetAirMoves();
+        }
+
+        private IEnumerator RefreshJumpCooldown()
+        {
+            yield return new WaitForSeconds(Cooldown);
+
+            gameObject.SetActive(true);
+        }
+
+        private void Log(string message)
+        {
+            Logger.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
+        }
+
+        private void Log(object message)
+        {
+            Logger.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
+        }
+    }
+}
