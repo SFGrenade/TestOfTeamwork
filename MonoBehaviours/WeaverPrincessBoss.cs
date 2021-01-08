@@ -1,15 +1,14 @@
-﻿using UnityEngine;
+﻿using HutongGames.PlayMaker.Actions;
+using ModCommon.Util;
+using TestOfTeamwork.Consts;
+using UnityEngine;
 using Logger = Modding.Logger;
 
 namespace TestOfTeamwork.MonoBehaviours
 {
     public class WeaverPrincessBoss : MonoBehaviour
     {
-        public void OnEnable()
-        {
-        }
-
-        public void OnDisable()
+        public void Start()
         {
         }
 

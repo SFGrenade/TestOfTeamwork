@@ -30,6 +30,10 @@ namespace TestOfTeamwork.Consts
         private const string EFile = "TestOfTeamwork.Resources.E.png";
         public const string TKey = "T";
         private const string TFile = "TestOfTeamwork.Resources.T.png";
+        public const string GCKey = "fammchild";
+        private const string GCFile = "TestOfTeamwork.Resources.fammchild.png";
+        public const string GC2Key = "fammchild2";
+        private const string GC2File = "TestOfTeamwork.Resources.fammchild2.png";
         public const string PetalKey = "Petal";
         private const string PetalFile = "TestOfTeamwork.Resources.Petal.png";
         #endregion Misc
@@ -40,44 +44,37 @@ namespace TestOfTeamwork.Consts
         {
             Assembly asm = Assembly.GetExecutingAssembly();
             dict = new Dictionary<string, Sprite>();
-            string[] tmpTextureFiles = {
-                InvHornetFile,
-                AchievementItemFile,
-                AchievementBossFile,
-                AchievementWeaverPrincessFile,
-                YFile,
-                EFile,
-                TFile,
-                PetalFile
-            };
-            string[] tmpTextureKeys = {
-                InvHornetKey,
-                AchievementItemKey,
-                AchievementBossKey,
-                AchievementWeaverPrincessKey,
-                YKey,
-                EKey,
-                TKey,
-                PetalKey
-            };
-            for (int i = 0; i < tmpTextureFiles.Length; i++)
+            var tmpTextures = new Dictionary<string, string>();
+            tmpTextures.Add(InvHornetKey, InvHornetFile);
+            tmpTextures.Add(AchievementItemKey, AchievementItemFile);
+            tmpTextures.Add(AchievementBossKey, AchievementBossFile);
+            tmpTextures.Add(AchievementWeaverPrincessKey, AchievementWeaverPrincessFile);
+            tmpTextures.Add(YKey, YFile);
+            tmpTextures.Add(EKey, EFile);
+            tmpTextures.Add(TKey, TFile);
+            tmpTextures.Add(GCKey, GCFile);
+            tmpTextures.Add(GC2Key, GC2File);
+            tmpTextures.Add(PetalKey, PetalFile);
+
+            foreach (var pair in tmpTextures)
             {
-                using (Stream s = asm.GetManifestResourceStream(tmpTextureFiles[i]))
+                using (Stream s = asm.GetManifestResourceStream(pair.Value))
                 {
-                    if (s == null) continue;
+                    if (s != null)
+                    {
+                        byte[] buffer = new byte[s.Length];
+                        s.Read(buffer, 0, buffer.Length);
+                        s.Dispose();
 
-                    byte[] buffer = new byte[s.Length];
-                    s.Read(buffer, 0, buffer.Length);
-                    s.Dispose();
+                        //Create texture from bytes
+                        var tex = new Texture2D(2, 2);
 
-                    //Create texture from bytes
-                    var tex = new Texture2D(2, 2);
+                        tex.LoadImage(buffer, true);
 
-                    tex.LoadImage(buffer, true);
-
-                    // Create sprite from texture
-                    // Split is to cut off the TestOfTeamwork.Resources. and the .png
-                    dict.Add(tmpTextureKeys[i], Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f)));
+                        // Create sprite from texture
+                        // Split is to cut off the DreamKing.Resources. and the .png
+                        dict.Add(pair.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f)));
+                    }
                 }
             }
         }

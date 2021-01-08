@@ -13,11 +13,6 @@ namespace TestOfTeamwork.MonoBehaviours
         private GameManager gm;
         private CameraController cc;
 
-        private IEnumerator Start()
-        {
-            yield break;
-        }
-
         private void Awake()
         {
             gm = GameManager.instance;

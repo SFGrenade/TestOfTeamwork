@@ -9,13 +9,12 @@ namespace TestOfTeamwork.MonoBehaviours
     {
         private const float Cooldown = 1.0f;
 
-        private IEnumerator Start()
+        private void Start()
         {
             if (!TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion)
             {
                 gameObject.SetActive(false);
             }
-            yield break;
         }
 
         public void OnEnable()
@@ -34,11 +33,11 @@ namespace TestOfTeamwork.MonoBehaviours
         {
             if (otherCollider.gameObject.name != "Knight") return;
 
-            GameManager.instance.StartCoroutine(RefreshJump());
+            HeroController.instance.StartCoroutine(RefreshJump());
 
             gameObject.SetActive(false);
 
-            GameManager.instance.StartCoroutine(RefreshJumpCooldown());
+            HeroController.instance.StartCoroutine(RefreshJumpCooldown());
         }
 
         private IEnumerator RefreshJump()

@@ -97,13 +97,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts\AudioStrings.cs" />
+    <Compile Include="Consts\RealHazardType.cs" />
     <Compile Include="Consts\StateNames.cs" />
     <Compile Include="Consts\TextureStrings.cs" />
     <Compile Include="Consts\TransitionGateNames.cs" />
     <Compile Include="Consts\AchievementStrings.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchAreaTitleController.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchBlocker.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchDreamEnter.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchEnemies.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchPlayMakerManager.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchInspectRegion.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchSceneManager.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchSobParticleSystem.cs" />
+    <Compile Include="MonoBehaviours\Patcher\PatchTinkEffect.cs" />
+    <Compile Include="MonoBehaviours\SceneLogger.cs" />
+    <Compile Include="MonoBehaviours\WeaverPrincessBoss.cs" />
+    <Compile Include="PrefabHolder.cs" />
     <Compile Include="MonoBehaviours\SceneExpander.cs" />
     <Compile Include="MonoBehaviours\HornetRefreshPoint.cs" />
-    <Compile Include="MonoBehaviours\WeaverPrincessBoss.cs" />
+    <Compile Include="MonoBehaviours\Patcher\SceneMapPatcher.cs" />
+    <Compile Include="MonoBehaviours\WeaverPrincessBossIntro.cs" />
     <Compile Include="TotSettings.cs" />
     <Compile Include="Utils\ActualLogAction.cs" />
     <Compile Include="Utils\FsmUtil.cs" />
@@ -147,6 +161,12 @@
     <None Include=".gitignore" />
     <None Include="ReadMe.md" />
     <None Include="Resources\.gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\fammchild.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\fammchild2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

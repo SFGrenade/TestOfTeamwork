@@ -10,6 +10,7 @@
         public const string Tot02 = Tot + "02";
         public const string Tot03 = Tot + "03";
         public const string TotEndless = Tot + "Endless";
+        public const string TotDropdown = Tot + "Dropdown";
         #endregion Scene Names
         #region Gateway Names
         public const string Wp06Tot01 = "sf_tot_right1";

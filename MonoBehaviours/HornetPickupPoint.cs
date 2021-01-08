@@ -17,7 +17,7 @@ namespace TestOfTeamwork.MonoBehaviours
         private bool running;
         private IEnumerator coroutine;
 
-        private IEnumerator Start()
+        private void Start()
         {
             if (!TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion)
             {
@@ -28,7 +28,6 @@ namespace TestOfTeamwork.MonoBehaviours
                 running = false;
                 coroutine = null;
             }
-            yield break;
         }
 
         public void OnEnable()
@@ -47,7 +46,7 @@ namespace TestOfTeamwork.MonoBehaviours
         {
             if (coroutine != null)
             {
-                GameManager.instance.StopCoroutine(coroutine);
+                HeroController.instance.StopCoroutine(coroutine);
                 coroutine = null;
             }
         }
@@ -58,7 +57,7 @@ namespace TestOfTeamwork.MonoBehaviours
                 return;
             if (otherCollider.gameObject.name == "Knight")
             {
-                GameManager.instance.StartCoroutine(coroutine = MoveKnight());
+                HeroController.instance.StartCoroutine(coroutine = MoveKnight());
             }
         }
 

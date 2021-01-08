@@ -12,7 +12,8 @@ namespace TestOfTeamwork.Consts
         public const string HornetInvDescKey = "SFGrenadeTestOfTeamwork_HornetInvDesc";
         #endregion Mechanics
         #region Bosses
-        public const string HornetMonologueKey = "SFGrenadeTestOfTeamwork_HornetMonologue";
+        public const string HornetMonologue1Key = "SFGrenadeTestOfTeamwork_HornetMonologue1";
+        public const string HornetMonologue2Key = "SFGrenadeTestOfTeamwork_HornetMonologue2";
 
         public const string WeaverPrincessNameSuperKey = "SFGrenadeTestOfTeamwork_WeaverPrincessName_SUPER";
         public const string WeaverPrincessNameMainKey = "SFGrenadeTestOfTeamwork_WeaverPrincessName_MAIN";
