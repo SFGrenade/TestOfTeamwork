@@ -1,6 +1,4 @@
-﻿//#define DEBUG_CHARMS
-
-using Modding;
+﻿using Modding;
 using SFCore;
 using System;
 using System.Collections;
@@ -11,19 +9,18 @@ using System.Reflection;
 using System.Security.Cryptography;
 using HutongGames.PlayMaker.Actions;
 using InControl;
-using ModCommon.Util;
 using TestOfTeamwork.Consts;
 using TestOfTeamwork.MonoBehaviours;
 using TestOfTeamwork.MonoBehaviours.Patcher;
-using TestOfTeamwork.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UObject = UnityEngine.Object;
+using SFCore.Generics;
 
 namespace TestOfTeamwork
 {
-    public class TestOfTeamwork : Mod<TotSaveSettings, TotGlobalSettings>
+    public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings>
     {
         internal static TestOfTeamwork Instance;
 
@@ -41,18 +38,7 @@ namespace TestOfTeamwork
 
         public static Sprite GetSprite(string name) => Instance.SpriteDict.Get(name);
 
-        public override string GetVersion()
-        {
-            Assembly asm = Assembly.GetExecutingAssembly();
-            string ver = asm.GetName().Version.ToString();
-            SHA1 sha1 = SHA1.Create();
-            FileStream stream = File.OpenRead(asm.Location);
-            byte[] hashBytes = sha1.ComputeHash(stream);
-            string hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-            stream.Close();
-            sha1.Clear();
-            return $"{ver}-{hash.Substring(0, 6)}";
-        }
+        public override string GetVersion() => SFCore.Utils.Util.GetVersion(Assembly.GetExecutingAssembly());
 
         public override List<ValueTuple<string, string>> GetPreloadNames()
         {
@@ -90,6 +76,15 @@ namespace TestOfTeamwork
 
             AchievementHelper.Initialize();
             AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincess_Key, TestOfTeamwork.GetSprite(TextureStrings.AchievementWeaverPrincessKey), LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
+
+            InitInventory();
+
+#if DEBUG_CHARMS
+            charmHelper = new CharmHelper();
+            charmHelper.customCharms = 4;
+            charmHelper.customSprites = new Sprite[] { GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.TKey) };
+#endif
+
             InitCallbacks();
         }
 
@@ -101,14 +96,7 @@ namespace TestOfTeamwork
             InitGlobalSettings();
             SceneChanger = new SceneChanger(preloadedObjects);
             AudioDict = new AudioStrings(SceneChanger);
-            InitInventory();
             //UIManager.instance.RefreshAchievementsList();
-
-#if DEBUG_CHARMS
-            charmHelper = new CharmHelper();
-            charmHelper.customCharms = 6;
-            charmHelper.customSprites = new Sprite[] { GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.TKey), GetSprite(TextureStrings.GCKey), GetSprite(TextureStrings.GC2Key) };
-#endif
 
             //GameManager.instance.StartCoroutine(DEBUG_Shade_Style());
             GameManager.instance.StartCoroutine(Register2BossModCore());
@@ -126,27 +114,6 @@ namespace TestOfTeamwork
         {
             // Found in a project, might help saving, don't know, but who cares
             // Save Settings
-            // Start Mod Quest
-            Settings.SFGrenadeTestOfTeamworkStartQuest = Settings.SFGrenadeTestOfTeamworkStartQuest;
-            if (!Settings.SFGrenadeTestOfTeamworkStartQuest)
-                Settings.SFGrenadeTestOfTeamworkStartQuest = (PlayerData.instance.royalCharmState == 4);
-            // Mechanics
-            Settings.SFGrenadeTestOfTeamworkHornetCompanion = Settings.SFGrenadeTestOfTeamworkHornetCompanion;
-            // Bosses
-            Settings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = Settings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess;
-            // Areas
-            Settings.SFGrenadeTestOfTeamworkTotOpened = Settings.SFGrenadeTestOfTeamworkTotOpened;
-            Settings.SFGrenadeTestOfTeamworkVisitedTestOfTeamwork = Settings.SFGrenadeTestOfTeamworkVisitedTestOfTeamwork;
-            Settings.SFGrenadeTestOfTeamworkTotOpenedShortcut = Settings.SFGrenadeTestOfTeamworkTotOpenedShortcut;
-            Settings.SFGrenadeTestOfTeamworkTotOpenedTotem = Settings.SFGrenadeTestOfTeamworkTotOpenedTotem;
-
-#if DEBUG_CHARMS
-            // Charms
-            Settings.gotCharms = Settings.gotCharms;
-            Settings.newCharms = Settings.newCharms;
-            Settings.equippedCharms = Settings.equippedCharms;
-            Settings.charmCosts = Settings.charmCosts;
-#endif
         }
 
         private void InitCallbacks()
@@ -164,13 +131,14 @@ namespace TestOfTeamwork
 
         private void InitInventory()
         {
-            ItemHelper.AddNormalItem(StateNames.InvStateHornet, TestOfTeamwork.GetSprite(TextureStrings.InvHornetKey), nameof(Settings.SFGrenadeTestOfTeamworkHornetCompanion), LanguageStrings.HornetInvNameKey, LanguageStrings.HornetInvDescKey);
+            ItemHelper.init();
+            ItemHelper.AddNormalItem(StateNames.InvStateHornet, TestOfTeamwork.GetSprite(TextureStrings.InvHornetKey), nameof(_saveSettings.SFGrenadeTestOfTeamworkHornetCompanion), LanguageStrings.HornetInvNameKey, LanguageStrings.HornetInvDescKey);
         }
 
         private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
         {
             // Don't change scene content if quest isn't started
-            if (!Settings.SFGrenadeTestOfTeamworkStartQuest)
+            if (!_saveSettings.SFGrenadeTestOfTeamworkStartQuest)
                 return;
 
             string scene = to.name;
@@ -195,14 +163,6 @@ namespace TestOfTeamwork
             {
                 // Path of Pain Entrance, needs change to make "Test of Teamwork" accessible
                 SceneChanger.CR_Change_White_Palace_06(to);
-                //var tmpET = GameObject.FindObjectOfType<SceneManager>().gameObject.LocateMyFSM("Music Control").GetAction<SendEventByName>("Start", 1).eventTarget;
-                //Log($"tmpET.target: {tmpET.target.ToString()}");
-                //Log($"tmpET.excludeSelf: {tmpET.excludeSelf.Value}");
-                //Log($"tmpET.fsmComponent: {tmpET.fsmComponent}");
-                //Log($"tmpET.fsmName: {tmpET.fsmName.Value}");
-                //Log($"tmpET.gameObject.OwnerOption: {tmpET.gameObject.OwnerOption.ToString()}");
-                //Log($"tmpET.gameObject.GameObject: {tmpET.gameObject.GameObject.Value}");
-                //Log($"tmpET.sendToChildren: {tmpET.sendToChildren.Value}");
             }
             else if (scene == TransitionGateNames.Tot01)
             {
@@ -300,19 +260,13 @@ namespace TestOfTeamwork
 
         private bool OnGetPlayerBoolHook(string target)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
-            {
-                return (bool)tmpField.GetValue(Settings);
-            }
 #if DEBUG_CHARMS
-            #region Custom Charms
             if (target.StartsWith("gotCharm_"))
             {
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    return Settings.gotCharms[charmHelper.charmIDs.IndexOf(charmNum)];
+                    return Settings.gotCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)];
                 }
             }
             if (target.StartsWith("newCharm_"))
@@ -320,7 +274,7 @@ namespace TestOfTeamwork
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    return Settings.newCharms[charmHelper.charmIDs.IndexOf(charmNum)];
+                    return Settings.newCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)];
                 }
             }
             if (target.StartsWith("equippedCharm_"))
@@ -328,30 +282,27 @@ namespace TestOfTeamwork
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    return Settings.equippedCharms[charmHelper.charmIDs.IndexOf(charmNum)];
+                    return Settings.equippedCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)];
                 }
             }
-            #endregion
 #endif
+            var tmpField = _saveSettingsType.GetField(target);
+            if (tmpField != null)
+            {
+                return (bool)tmpField.GetValue(_saveSettings);
+            }
             return PlayerData.instance.GetBoolInternal(target);
         }
 
         private void OnSetPlayerBoolHook(string target, bool val)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
-            {
-                tmpField.SetValue(Settings, val);
-                return;
-            }
 #if DEBUG_CHARMS
-            #region Custom Charms
             if (target.StartsWith("gotCharm_"))
             {
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    Settings.gotCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
+                    Settings.gotCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
                     return;
                 }
             }
@@ -360,7 +311,7 @@ namespace TestOfTeamwork
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    Settings.newCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
+                    Settings.newCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
                     return;
                 }
             }
@@ -369,50 +320,53 @@ namespace TestOfTeamwork
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    Settings.equippedCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
+                    Settings.equippedCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
                     return;
                 }
             }
-            #endregion
 #endif
+            var tmpField = _saveSettingsType.GetField(target);
+            if (tmpField != null)
+            {
+                tmpField.SetValue(_saveSettings, val);
+                return;
+            }
             PlayerData.instance.SetBoolInternal(target, val);
         }
 
         private int OnGetPlayerIntHook(string target)
         {
-            var tmpField = Settings.GetType().GetField(target);
-            if (tmpField != null)
-            {
-                return (int)tmpField.GetValue(Settings);
-            }
 #if DEBUG_CHARMS
-            #region Custom Charms
             if (target.StartsWith("charmCost_"))
             {
                 int charmNum = int.Parse(target.Split('_')[1]);
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
-                    return Settings.charmCosts[charmHelper.charmIDs.IndexOf(charmNum)];
+                    return Settings.customCharmCosts[charmHelper.charmIDs.IndexOf(charmNum)];
                 }
             }
-            #endregion
 #endif
+            var tmpField = _saveSettingsType.GetField(target);
+            if (tmpField != null)
+            {
+                return (int)tmpField.GetValue(_saveSettings);
+            }
             return PlayerData.instance.GetIntInternal(target);
         }
 
         private void OnSetPlayerIntHook(string target, int val)
         {
-            var tmpField = Settings.GetType().GetField(target);
+            var tmpField = _saveSettingsType.GetField(target);
             if (tmpField != null)
             {
-                tmpField.SetValue(Settings, val);
+                tmpField.SetValue(_saveSettings, val);
             }
             else
             {
                 PlayerData.instance.SetIntInternal(target, val);
             }
-            if ((target == "royalCharmState") && (!Settings.SFGrenadeTestOfTeamworkStartQuest))
-                Settings.SFGrenadeTestOfTeamworkStartQuest = (PlayerData.instance.royalCharmState >= 4);
+            if ((target == "royalCharmState") && (!_saveSettings.SFGrenadeTestOfTeamworkStartQuest))
+                _saveSettings.SFGrenadeTestOfTeamworkStartQuest = (PlayerData.instance.royalCharmState >= 4);
         }
 
         #endregion Get/Set Hooks

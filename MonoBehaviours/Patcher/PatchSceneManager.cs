@@ -1,4 +1,4 @@
-﻿using ModCommon.Util;
+﻿using SFCore.Utils;
 using UnityEngine;
 
 namespace TestOfTeamwork.MonoBehaviours.Patcher

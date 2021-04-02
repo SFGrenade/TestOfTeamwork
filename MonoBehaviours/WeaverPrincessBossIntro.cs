@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using HutongGames.PlayMaker.Actions;
-using ModCommon.Util;
 using TestOfTeamwork.Consts;
 using UnityEngine;
 using Logger = Modding.Logger;
+using SFCore.Utils;
 
 namespace TestOfTeamwork.MonoBehaviours
 {

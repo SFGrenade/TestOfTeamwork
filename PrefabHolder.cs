@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using ModCommon.Util;
 using UObject = UnityEngine.Object;
+using SFCore.Utils;
 
 namespace TestOfTeamwork
 {
@@ -103,6 +103,7 @@ namespace TestOfTeamwork
             {
                 UObject.Destroy(shinyPrefab.transform.GetChild(2));
                 UObject.Destroy(shinyPrefab.transform.GetChild(1));
+                UObject.Destroy(shinyPrefab.transform.GetChild(0).gameObject.GetComponent<PersistentBoolItem>());
             }
             SetInactive(shinyPrefab);
             wp03Door = GameObject.Instantiate(preloadedObjects["White_Palace_03_hub"]["door1"]);

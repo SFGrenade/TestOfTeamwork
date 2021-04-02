@@ -1,10 +1,10 @@
 ﻿using GlobalEnums;
-using ModCommon.Util;
 using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
 using Logger = Modding.Logger;
+using SFCore.Utils;
 
 namespace TestOfTeamwork.MonoBehaviours
 {
@@ -19,7 +19,7 @@ namespace TestOfTeamwork.MonoBehaviours
 
         private void Start()
         {
-            if (!TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion)
+            if (!PlayerData.instance.GetBool("SFGrenadeTestOfTeamworkHornetCompanion"))
             {
                 gameObject.SetActive(false);
             }
@@ -32,7 +32,7 @@ namespace TestOfTeamwork.MonoBehaviours
 
         public void OnEnable()
         {
-            if (!TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion)
+            if (!PlayerData.instance.GetBool("SFGrenadeTestOfTeamworkHornetCompanion"))
             {
                 gameObject.SetActive(false);
             }

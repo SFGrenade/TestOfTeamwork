@@ -30,7 +30,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
             atcFsm.FsmVariables.GetFsmBool("Display Right").Value = DisplayRight;
             atcFsm.FsmVariables.GetFsmBool("Only On Revisit").Value = OnlyOnRevisit;
             atcFsm.FsmVariables.GetFsmBool("Sub Area").Value = SubArea;
-            atcFsm.FsmVariables.GetFsmBool("Visited Area").Value = TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkVisitedTestOfTeamwork;
+            atcFsm.FsmVariables.GetFsmBool("Visited Area").Value = PlayerData.instance.GetBool("SFGrenadeTestOfTeamworkVisitedTestOfTeamwork");
             atcFsm.FsmVariables.GetFsmBool("Wait for Trigger").Value = WaitForTrigger;
 
             atcFsm.FsmVariables.GetFsmString("Area Event").Value = AreaEvent;

@@ -12,21 +12,20 @@ using Logger = Modding.Logger;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.Profiling;
-using ModCommon.Util;
 using HutongGames.PlayMaker.Actions;
 using SFCore.MonoBehaviours;
 using TestOfTeamwork.MonoBehaviours;
 using TestOfTeamwork.Consts;
 using TestOfTeamwork.MonoBehaviours.Patcher;
-using TestOfTeamwork.Utils;
 using UnityEngine.UI;
 using UObject = UnityEngine.Object;
+using SFCore.Utils;
 
 namespace TestOfTeamwork
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const bool _DEBUG = true;
+        private const bool _DEBUG = false;
         private const string _AB_PATH = "E:\\Github_Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
@@ -181,12 +180,12 @@ namespace TestOfTeamwork
 
             var pdbtAction = new PlayerDataBoolTest();
             pdbtAction.gameObject = hornetNpcFsm.GetAction<PlayerDataBoolTest>("Choice", 1).gameObject;
-            pdbtAction.boolName = nameof(TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion);
+            pdbtAction.boolName = "SFGrenadeTestOfTeamworkHornetCompanion";
             pdbtAction.isFalse = FsmEvent.GetFsmEvent("ABSENT");
 
             hornetNpcFsm.InsertAction("Choice", pdbtAction, 1);
 
-            hornetNpcFsm.AddTransition("Choice", "ABSENT", "Give Item", false);
+            hornetNpcFsm.AddTransition("Choice", "ABSENT", "Give Item");
 
             #endregion
 
@@ -240,7 +239,7 @@ namespace TestOfTeamwork
             shinyFsmVars.FindFsmBool("Slug Fling").Value = false;
             shinyFsmVars.FindFsmBool("Super Dash").Value = false;
             shinyFsmVars.FindFsmString("Item Name").Value = LanguageStrings.HornetInvNameKey;
-            shinyFsmVars.FindFsmString("PD Bool Name").Value = nameof(TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion);
+            shinyFsmVars.FindFsmString("PD Bool Name").Value = "SFGrenadeTestOfTeamworkHornetCompanion";
 
             IntSwitch isAction = shinyFsm.GetAction<IntSwitch>("Trinket Type", 0);
             var tmpCompareTo = new List<FsmInt>(isAction.compareTo);
@@ -253,11 +252,11 @@ namespace TestOfTeamwork
 
             shinyFsm.CopyState("Love Key", "Necklace");
 
-            shinyFsm.GetAction<SetPlayerDataBool>("Necklace", 0).boolName = nameof(TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkHornetCompanion);
+            shinyFsm.GetAction<SetPlayerDataBool>("Necklace", 0).boolName = "SFGrenadeTestOfTeamworkHornetCompanion";
             shinyFsm.GetAction<SetSpriteRendererSprite>("Necklace", 1).sprite = TestOfTeamwork.Instance.SpriteDict.Get(TextureStrings.InvHornetKey);
             shinyFsm.GetAction<GetLanguageString>("Necklace", 2).convName = LanguageStrings.HornetInvNameKey;
 
-            shinyFsm.AddTransition("Trinket Type", "PURE SEED", "Necklace", false);
+            shinyFsm.AddTransition("Trinket Type", "PURE SEED", "Necklace");
 
             #endregion
 
@@ -283,7 +282,7 @@ namespace TestOfTeamwork
                 CreateGateway(TransitionGateNames.Wp06Tot01, new Vector2(50.5f, 8), new Vector2(1, 4), TransitionGateNames.TotEndless, TransitionGateNames.Tot01Wp06,
                               new Vector2(-3, 0), false, true, false, GameManager.SceneLoadVisualizations.Default);
             }
-            CreateBreakableWall(scene.name, "SF_ToT_Breakable_Wall_ToT", new Vector3(30.0f, 8.0f, 0.05f), Vector3.zero, Vector3.one, new Vector2(6.0f, 4.0f), nameof(TestOfTeamwork.Instance.Settings.SFGrenadeTestOfTeamworkTotOpened));
+            CreateBreakableWall(scene.name, "SF_ToT_Breakable_Wall_ToT", new Vector3(30.0f, 8.0f, 0.05f), Vector3.zero, Vector3.one, new Vector2(6.0f, 4.0f), "SFGrenadeTestOfTeamworkTotOpened");
             //yield return null;
 
             PatchMusicRegions.altMusic = UnityEngine.Random.Range(0.0f, 1.0f) > 0.5f;

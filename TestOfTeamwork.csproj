@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -32,67 +32,58 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="ModCommon">
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Mods\ModCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="SeanprCore">
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Mods\SeanprCore.dll</HintPath>
-    </Reference>
-    <Reference Include="SFCore">
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Mods\SFCore.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.JSONSerializeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.UIModule.dll</HintPath>
     </Reference>
     <Reference Include="PlayMaker, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\PlayMaker.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\PlayMaker.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -119,15 +110,11 @@
     <Compile Include="MonoBehaviours\Patcher\SceneMapPatcher.cs" />
     <Compile Include="MonoBehaviours\WeaverPrincessBossIntro.cs" />
     <Compile Include="TotSettings.cs" />
-    <Compile Include="Utils\ActualLogAction.cs" />
-    <Compile Include="Utils\FsmUtil.cs" />
     <Compile Include="MonoBehaviours\HornetPickupPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneChanger.cs" />
     <Compile Include="Consts\LanguageStrings.cs" />
     <Compile Include="TestOfTeamwork.cs" />
-    <Compile Include="Utils\USceneUtil.cs" />
-    <Compile Include="Utils\WavUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Achievement_Item.png" />
@@ -168,6 +155,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\fammchild2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFCore\SFCore.csproj">
+      <Project>{1af3fc55-9cdc-4183-b322-865c6d96c75d}</Project>
+      <Name>SFCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
@@ -175,7 +168,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>rem "Copy the Mod's dll into the Mods folder"
-      copy "$(ProjectDir)$(OutputPath)\$(ProjectName).dll" "E:\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Mods\$(ProjectName).dll"
+      copy "$(ProjectDir)$(OutputPath)\$(ProjectName).dll" "E:\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\Mods\$(ProjectName).dll"
 </PostBuildEvent>
   </PropertyGroup>
   <ProjectExtensions />
