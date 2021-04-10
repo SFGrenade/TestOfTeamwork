@@ -359,28 +359,6 @@ namespace TestOfTeamwork
             Log("CR_Change_White_Palace_06 Done");
         }
 
-        public void CR_Change_ToT01(Scene scene)
-        {
-            Log("CR_Change_ToT01()");
-
-            PatchTotLever(scene);
-        }
-
-        public void CR_Change_ToT02(Scene scene)
-        {
-            Log("CR_Change_ToT02()");
-
-            PatchTotLever(scene);
-            //PatchBoss(scene);
-        }
-
-        public void CR_Change_ToT03(Scene scene)
-        {
-            Log("CR_Change_ToT03()");
-
-            PatchTotLever(scene);
-        }
-
         public void CR_Change_ToTEndless(Scene scene)
         {
             Log("CR_Change_ToTEndless()");
@@ -397,51 +375,6 @@ namespace TestOfTeamwork
             var part = Instantiate(scene.Find($"Part {total - 1}"));
             part.transform.SetPosition2D(32 * total, 0);
             part.name = $"Part {total}";
-        }
-
-        public void CR_Change_ToTDropdown(Scene scene)
-        {
-            Log("CR_Change_ToTDropdown()");
-
-            PatchTotLever(scene);
-        }
-
-        private void PatchTotLever(Scene scene)
-        {
-            if (!scene.name.StartsWith(TransitionGateNames.Tot))
-                return;
-            Log("!PatchTotLever");
-
-            GameObject markers = scene.FindRoot("_Markers");
-            // SFGrenadeDreamKing_TotOpenedShortcut
-            GameObject leverList = markers.transform.Find("LeverList").gameObject;
-            GameObject lever;
-            for (int i = (leverList.transform.childCount - 1); i >= 0; i--)
-            {
-                Transform tmpTransform = leverList.transform.GetChild(i);
-                if (tmpTransform == null)
-                    continue;
-                lever = leverList.transform.GetChild(i).gameObject;
-                if (lever.activeInHierarchy)
-                {
-                    GameObject actualLever = GameObject.Instantiate(PrefabHolder.wpLeverPrefab);
-                    actualLever.name = lever.name;
-                    actualLever.SetActive(true);
-                    actualLever.transform.position = lever.transform.position;
-                    actualLever.transform.eulerAngles = lever.transform.eulerAngles;
-                    actualLever.transform.localScale = lever.transform.lossyScale;
-
-                    PlayMakerFSM leverFsm = actualLever.LocateMyFSM("Switch Control");
-                    var leverFsmVars = leverFsm.FsmVariables;
-                    leverFsmVars.FindFsmBool("Activated").Value = PlayerData.instance.GetBool(lever.name);
-                    leverFsmVars.FindFsmBool("SetPlayerData").Value = true;
-                    leverFsmVars.FindFsmString("Player Data").Value = lever.name;
-
-                    GameObject.Destroy(lever);
-                }
-            }
-
-            Log("~PatchTotLever");
         }
 
         private void CreateBreakableWall(string sceneName, string name, Vector3 pos, Vector3 angles, Vector3 scale, Vector2 size, string playerDataBool)

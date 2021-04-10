@@ -9,9 +9,6 @@ namespace TestOfTeamwork
 {
     public class TotSaveSettings : ModSettings
     {
-        // Start Mod Quest
-        public bool SFGrenadeTestOfTeamworkStartQuest = false;
-
         // Mechanics
         public bool SFGrenadeTestOfTeamworkHornetCompanion = false;
 

@@ -3,18 +3,11 @@ using SFCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
-using HutongGames.PlayMaker.Actions;
-using InControl;
+using Microsoft.Win32;
 using TestOfTeamwork.Consts;
 using TestOfTeamwork.MonoBehaviours;
-using TestOfTeamwork.MonoBehaviours.Patcher;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 using UObject = UnityEngine.Object;
 using SFCore.Generics;
 
@@ -137,12 +130,7 @@ namespace TestOfTeamwork
 
         private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
         {
-            // Don't change scene content if quest isn't started
-            if (!_saveSettings.SFGrenadeTestOfTeamworkStartQuest)
-                return;
-
             string scene = to.name;
-            Log("Scene Changed to: " + scene);
 
             try
             {
@@ -166,17 +154,14 @@ namespace TestOfTeamwork
             }
             else if (scene == TransitionGateNames.Tot01)
             {
-                SceneChanger.CR_Change_ToT01(to);
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
             else if (scene == TransitionGateNames.Tot02)
             {
-                SceneChanger.CR_Change_ToT02(to);
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
             else if (scene == TransitionGateNames.Tot03)
             {
-                SceneChanger.CR_Change_ToT03(to);
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
             else if (scene == TransitionGateNames.TotEndless)
@@ -186,39 +171,8 @@ namespace TestOfTeamwork
             }
             else if (scene == TransitionGateNames.TotDropdown)
             {
-                SceneChanger.CR_Change_ToTDropdown(to);
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
-            //else if (scene == "GG_Hive_Knight")
-            //{
-            //    var hkGO = to.Find("Hive Knight");
-            //    var hkFsm = hkGO.LocateMyFSM("Control");
-            //    var hkFsmVars = hkFsm.FsmVariables;
-
-            //    var srev3_1 = hkFsm.GetAction<SendRandomEventV3>("Phase 1", 1);
-            //    srev3_1.events = new FsmEvent[] { FsmEvent.FindEvent("JUMP") };
-            //    srev3_1.weights = new FsmFloat[] { 1.0f };
-            //    srev3_1.trackingInts = new FsmInt[] { hkFsmVars.FindFsmInt("Ct Jump") };
-            //    srev3_1.eventMax = new FsmInt[] { int.MaxValue };
-            //    srev3_1.trackingIntsMissed = new FsmInt[] { hkFsmVars.FindFsmInt("Ms Jump") };
-            //    srev3_1.missedMax = new FsmInt[] { 4 };
-
-            //    var srev3_2 = hkFsm.GetAction<SendRandomEventV3>("Phase 2", 2);
-            //    srev3_2.events = new FsmEvent[] { FsmEvent.FindEvent("JUMP") };
-            //    srev3_2.weights = new FsmFloat[] { 1.0f };
-            //    srev3_2.trackingInts = new FsmInt[] { hkFsmVars.FindFsmInt("Ct Jump") };
-            //    srev3_2.eventMax = new FsmInt[] { int.MaxValue };
-            //    srev3_2.trackingIntsMissed = new FsmInt[] { hkFsmVars.FindFsmInt("Ms Jump") };
-            //    srev3_2.missedMax = new FsmInt[] { 4 };
-
-            //    var srev3_3 = hkFsm.GetAction<SendRandomEventV3>("Phase 3", 1);
-            //    srev3_3.events = new FsmEvent[] { FsmEvent.FindEvent("JUMP") };
-            //    srev3_3.weights = new FsmFloat[] { 1.0f };
-            //    srev3_3.trackingInts = new FsmInt[] { hkFsmVars.FindFsmInt("Ct Jump") };
-            //    srev3_3.eventMax = new FsmInt[] { int.MaxValue };
-            //    srev3_3.trackingIntsMissed = new FsmInt[] { hkFsmVars.FindFsmInt("Ms Jump") };
-            //    srev3_3.missedMax = new FsmInt[] { 4 };
-            //}
         }
 
         private void SaveTotGlobalSettings()
@@ -226,13 +180,13 @@ namespace TestOfTeamwork
             SaveGlobalSettings();
         }
 
-        #region Get/Set Hooks
+#region Get/Set Hooks
 
         private string OnLanguageGetHook(string key, string sheet)
         {
 #if DEBUG_CHARMS
             // There probably is a better way to do this, but for now take this
-            #region Custom Charms
+#region Custom Charms
             if (key.StartsWith("CHARM_NAME_"))
             {
                 int charmNum = int.Parse(key.Split('_')[2]);
@@ -249,7 +203,7 @@ namespace TestOfTeamwork
                     return "CHARM DESC";
                 }
             }
-            #endregion
+#endregion
 #endif
             if (LangStrings.ContainsKey(key, sheet))
             {
@@ -365,11 +319,9 @@ namespace TestOfTeamwork
             {
                 PlayerData.instance.SetIntInternal(target, val);
             }
-            if ((target == "royalCharmState") && (!_saveSettings.SFGrenadeTestOfTeamworkStartQuest))
-                _saveSettings.SFGrenadeTestOfTeamworkStartQuest = (PlayerData.instance.royalCharmState >= 4);
         }
 
-        #endregion Get/Set Hooks
+#endregion Get/Set Hooks
 
         enum Commands
         {

@@ -14,8 +14,13 @@ namespace TestOfTeamwork.MonoBehaviours
         public Vector2[] points;
         public float speed = 0;
         public float secondsDelayBeforeInputAccepting = 0;
+        private float currentSecondsDelayBeforeInputAccepting;
         private bool running;
-        private IEnumerator coroutine;
+        private HeroController heroController;
+        private Rigidbody2D heroRb2d;
+        private Vector2 heroGoPos;
+        private int checkPointIndex;
+        private MethodInfo heroResetAttacksFunction = typeof(HeroController).GetMethod("ResetAttacks", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
         private void Start()
         {
@@ -26,7 +31,6 @@ namespace TestOfTeamwork.MonoBehaviours
             else
             {
                 running = false;
-                coroutine = null;
             }
         }
 
@@ -42,133 +46,136 @@ namespace TestOfTeamwork.MonoBehaviours
             }
         }
 
-        public void OnDisable()
-        {
-            if (coroutine != null)
-            {
-                HeroController.instance.StopCoroutine(coroutine);
-                coroutine = null;
-            }
-        }
-
         public void OnTriggerEnter2D(Collider2D otherCollider)
         {
             if (points.Length <= 0 || speed == 0 || _moving || running)
                 return;
             if (otherCollider.gameObject.name == "Knight")
             {
-                HeroController.instance.StartCoroutine(coroutine = MoveKnight());
+                //HeroController.instance.StartCoroutine(coroutine = MoveKnight());
+
+                #region IEnumerator Start
+
+                _moving = true;
+                running = true;
+                //Log("Moving the Knight");
+
+                checkPointIndex = 0;
+                heroController = HeroController.instance;
+                heroRb2d = heroController.GetComponent<Rigidbody2D>();
+
+                // Cancel stuff
+                // Spells
+                if (heroController.spellControl.ActiveStateName.Contains("Quake"))
+                {
+                    PlayMakerFSM.BroadcastEvent("QUAKE FALL END");
+                    heroController.spellControl.SetState("Quake Finish");
+                }
+                Transform spellsTransform = heroController.transform.Find("Spells");
+                for (int child = 0; child < spellsTransform.childCount; child++)
+                {
+                    spellsTransform.GetChild(child).gameObject.SetActive(false);
+                }
+                // Nail Arts
+                heroController.EndCyclone();
+                var nailArtFsm = heroController.gameObject.LocateMyFSM("Nail Arts");
+                nailArtFsm.SendEvent("END");
+                nailArtFsm.SendEvent("FINISHED");
+                try { heroController.transform.Find("Great Slash").gameObject.SetActive(false); }
+                catch (Exception)
+                { }
+
+                try { heroController.transform.Find("Cyclone Slash").gameObject.SetActive(false); }
+                catch (Exception)
+                { }
+
+                try { heroController.transform.Find("Dash Slash").gameObject.SetActive(false); }
+                catch (Exception)
+                { }
+
+                // Other stuff
+                heroController.CancelSuperDash();
+                typeof(HeroController).GetMethod("CancelJump", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelDoubleJump", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelDash", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelWallsliding", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelBackDash", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelDownAttack", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelAttack", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelBounce", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelRecoilHorizontal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("CancelDamageRecoil", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                heroResetAttacksFunction?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("ResetAttacksDash", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                typeof(HeroController).GetMethod("ResetLook", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(heroController, null);
+                // Animation
+                var hac = heroController.GetAttr<HeroController, HeroAnimationController>("animCtrl");
+                typeof(HeroAnimationController).GetMethod("Play", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hac, new object[] { "Airborne" });
+
+                // Now we can do stuff
+                heroController.IgnoreInputWithoutReset();
+                heroController.ResetHardLandingTimer();
+                heroController.hero_state = ActorStates.airborne;
+                heroController.hero_state = ActorStates.no_input;
+                heroController.AffectedByGravity(false);
+
+                heroGoPos = gameObject.transform.position;
+
+                currentSecondsDelayBeforeInputAccepting = 0;
+
+                #endregion
             }
         }
 
-        private IEnumerator MoveKnight()
+        private void FixedUpdate()
         {
-            _moving = true;
-            running = true;
-            //Log("Moving the Knight");
+            if (!running) return;
 
-            int i = 0;
-            var hero = HeroController.instance;
-            Rigidbody2D rb2d = hero.GetComponent<Rigidbody2D>();
-
-            var heroResetAttacksFunction = typeof(HeroController).GetMethod("ResetAttacks", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-            // Cancel stuff
-            // Spells
-            if (hero.spellControl.ActiveStateName.Contains("Quake"))
+            if (checkPointIndex < points.Length)
             {
-                PlayMakerFSM.BroadcastEvent("QUAKE FALL END");
-                hero.spellControl.SetState("Quake Finish");
-            }
-            Transform spellsTransform = hero.transform.Find("Spells");
-            for (int child = 0; child < spellsTransform.childCount; child++)
-            {
-                spellsTransform.GetChild(child).gameObject.SetActive(false);
-            }
-            // Nail Arts
-            hero.EndCyclone();
-            var nailArtFsm = hero.gameObject.LocateMyFSM("Nail Arts");
-            nailArtFsm.SendEvent("END");
-            nailArtFsm.SendEvent("FINISHED");
-            try { hero.transform.Find("Great Slash").gameObject.SetActive(false); }
-            catch (Exception)
-            { }
-
-            try { hero.transform.Find("Cyclone Slash").gameObject.SetActive(false); }
-            catch (Exception)
-            { }
-
-            try { hero.transform.Find("Dash Slash").gameObject.SetActive(false); }
-            catch (Exception)
-            { }
-
-            // Other stuff
-            hero.CancelSuperDash();
-            typeof(HeroController).GetMethod("CancelJump", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelDoubleJump", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelDash", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelWallsliding", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelBackDash", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelDownAttack", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelAttack", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelBounce", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelRecoilHorizontal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("CancelDamageRecoil", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            heroResetAttacksFunction?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("ResetAttacksDash", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            typeof(HeroController).GetMethod("ResetLook", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hero, null);
-            // Animation
-            var hac = hero.GetAttr<HeroController, HeroAnimationController>("animCtrl");
-            typeof(HeroAnimationController).GetMethod("Play", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(hac, new object[] { "Airborne" });
-
-            // Now we can do stuff
-            hero.IgnoreInputWithoutReset();
-            hero.ResetHardLandingTimer();
-            hero.hero_state = ActorStates.airborne;
-            hero.hero_state = ActorStates.no_input;
-            hero.AffectedByGravity(false);
-
-            Vector2 goPos = gameObject.transform.position;
-
-            while (i < points.Length && _moving)
-            {
-                Vector2 heroPos = hero.transform.position;
-                Vector2 distance = points[i] + goPos - heroPos;
+                Vector2 heroPos = heroController.transform.position;
+                Vector2 distance = points[checkPointIndex] + heroGoPos - heroPos;
 
                 if (distance.magnitude <= 0.5)
                 {
-                    //Log("Passed Waypoint " + i);
-                    i++;
+                    //Log("Passed Waypoint " + checkPointIndex);
+                    checkPointIndex++;
                 }
 
                 distance.Normalize();
                 distance.Scale(new Vector2(speed, speed));
 
-                hero.cState.falling = false;
-                heroResetAttacksFunction?.Invoke(hero, null);
+                heroController.cState.falling = false;
+                heroResetAttacksFunction?.Invoke(heroController, null);
 
-                yield return null;
-                rb2d.velocity = distance;
-                hero.current_velocity = distance;
+                heroRb2d.velocity = distance;
+                heroController.current_velocity = distance;
             }
-            //Log("Moved the Knight");
-            hero.cState.falling = true;
-            hero.cState.doubleJumping = false;
-            hero.cState.dashing = false;
-            hero.cState.backDashing = false;
-            hero.cState.preventDash = false;
-            hero.SetAttr("doubleJump_steps", 0);
-            hero.SetAttr("dash_timer", 0.0f);
-            hero.SetAttr("airDashed", false);
-            hero.SetAttr("doubleJumped", false);
-            hero.hero_state = ActorStates.airborne;
-            hero.AffectedByGravity(true);
-            running = false;
+            else
+            {
+                heroController.cState.falling = true;
+                heroController.cState.doubleJumping = false;
+                heroController.cState.dashing = false;
+                heroController.cState.backDashing = false;
+                heroController.cState.preventDash = false;
+                heroController.SetAttr("doubleJump_steps", 0);
+                heroController.SetAttr("dash_timer", 0.0f);
+                heroController.SetAttr("airDashed", false);
+                heroController.SetAttr("doubleJumped", false);
+                heroController.hero_state = ActorStates.airborne;
+                heroController.AffectedByGravity(true);
 
-            yield return new WaitForSeconds(secondsDelayBeforeInputAccepting);
-            _moving = false;
-            hero.AcceptInput();
-            coroutine = null;
+                if (currentSecondsDelayBeforeInputAccepting < secondsDelayBeforeInputAccepting)
+                {
+                    currentSecondsDelayBeforeInputAccepting += Time.fixedDeltaTime;
+                }
+                else
+                {
+                    running = false;
+                    _moving = false;
+                    heroController.AcceptInput();
+                }
+            }
         }
 
         private void Log(string message)
