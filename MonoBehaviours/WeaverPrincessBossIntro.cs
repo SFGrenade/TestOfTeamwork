@@ -11,9 +11,9 @@ namespace TestOfTeamwork.MonoBehaviours
     {
         public string EncounterPdBoolName = "SFGrenadeTestOfTeamworkEncounterBeforeBoss";
         public string Dialogue1ConvoSheet = "Hornet";
-        public string Dialogue1ConvoKey = LanguageStrings.HornetMonologue1Key;
+        public string Dialogue1ConvoKey = Consts.LanguageStrings.HornetMonologue1Key;
         public string Dialogue2ConvoSheet = "Hornet";
-        public string Dialogue2ConvoKey = LanguageStrings.HornetMonologue2Key;
+        public string Dialogue2ConvoKey = Consts.LanguageStrings.HornetMonologue2Key;
 
         public void Start()
         {

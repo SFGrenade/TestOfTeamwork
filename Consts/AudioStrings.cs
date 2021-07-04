@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Logger = Modding.Logger;
 
 namespace TestOfTeamwork.Consts
 {
@@ -33,47 +34,41 @@ namespace TestOfTeamwork.Consts
         private const string HealSfxFile = "hk_focus_health_heal";
         #endregion Singleshots
 
-        private readonly Dictionary<string, AudioClip> dict;
+        private Dictionary<string, AudioClip> dict;
 
         public AudioStrings(SceneChanger sc)
         {
             dict = new Dictionary<string, AudioClip>();
-            string[] tmpAudioFiles = {
-                ToT01File,
-                ToT02File,
-                ToT04File,
-                ToT05File,
-                ToT06File,
-                ToT01FileZ,
-                ToT02FileZ,
-                ToT04FileZ,
-                ToT05FileZ,
-                ToT06FileZ,
-                HealSfxFile
-            };
-            string[] tmpAudioKeys = {
-                ToT01Key,
-                ToT02Key,
-                ToT04Key,
-                ToT05Key,
-                ToT06Key,
-                ToT01KeyZ,
-                ToT02KeyZ,
-                ToT04KeyZ,
-                ToT05KeyZ,
-                ToT06KeyZ,
-                HealSfxKey
-            };
-            for (int i = 0; i < tmpAudioFiles.Length; i++)
+            var tmpAudio = new Dictionary<string, string>();
+            tmpAudio.Add(ToT01Key, ToT01File);
+            tmpAudio.Add(ToT02Key, ToT02File);
+            tmpAudio.Add(ToT04Key, ToT04File);
+            tmpAudio.Add(ToT05Key, ToT05File);
+            tmpAudio.Add(ToT06Key, ToT06File);
+            tmpAudio.Add(ToT01KeyZ, ToT01FileZ);
+            tmpAudio.Add(ToT02KeyZ, ToT02FileZ);
+            tmpAudio.Add(ToT04KeyZ, ToT04FileZ);
+            tmpAudio.Add(ToT05KeyZ, ToT05FileZ);
+            tmpAudio.Add(ToT06KeyZ, ToT06FileZ);
+
+            foreach (var pair in tmpAudio)
             {
-                dict.Add(tmpAudioKeys[i], sc.AbOverallMat.LoadAsset<AudioClip>(tmpAudioFiles[i]));
-                Object.DontDestroyOnLoad(dict[tmpAudioKeys[i]]);
+                Log($"Loading Audio '{pair.Value}'");
+                dict.Add(pair.Key, sc.AbOverallMat.LoadAsset<AudioClip>(pair.Value));
+                Log($"Loaded Audio '{pair.Value}'!");
+                Object.DontDestroyOnLoad(dict[pair.Key]);
+                Log($"Made '{pair.Value}' not be deleted!");
             }
         }
 
         public AudioClip Get(string key)
         {
             return dict[key];
+        }
+
+        private void Log(string message)
+        {
+            Logger.Log($"[ToT][Audio] - {message}");
         }
     }
 }

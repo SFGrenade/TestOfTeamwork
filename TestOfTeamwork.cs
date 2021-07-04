@@ -10,6 +10,13 @@ using TestOfTeamwork.MonoBehaviours;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 using SFCore.Generics;
+using SFCore.Utils;
+using HutongGames.PlayMaker.Actions;
+using System.IO;
+using Language;
+using Newtonsoft.Json;
+using TMPro;
+using Random = UnityEngine.Random;
 
 namespace TestOfTeamwork
 {
@@ -17,7 +24,7 @@ namespace TestOfTeamwork
     {
         internal static TestOfTeamwork Instance;
 
-        public LanguageStrings LangStrings { get; private set; }
+        public Consts.LanguageStrings LangStrings { get; private set; }
         public TextureStrings SpriteDict { get; private set; }
         public AudioStrings AudioDict { get; private set; }
         public SceneChanger SceneChanger { get; private set; }
@@ -64,11 +71,10 @@ namespace TestOfTeamwork
         {
             Instance = this;
 
-            LangStrings = new LanguageStrings();
+            LangStrings = new Consts.LanguageStrings();
             SpriteDict = new TextureStrings();
 
-            AchievementHelper.Initialize();
-            AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincess_Key, TestOfTeamwork.GetSprite(TextureStrings.AchievementWeaverPrincessKey), LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
+            AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincess_Key, TestOfTeamwork.GetSprite(TextureStrings.AchievementWeaverPrincessKey), Consts.LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, Consts.LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
 
             InitInventory();
 
@@ -94,9 +100,59 @@ namespace TestOfTeamwork
             //GameManager.instance.StartCoroutine(DEBUG_Shade_Style());
             GameManager.instance.StartCoroutine(Register2BossModCore());
 
+            #region Achievements
+
+            foreach (var keyname in Registry.CurrentUser.OpenSubKey("SOFTWARE").OpenSubKey("Team Cherry").OpenSubKey("Hollow Knight").GetValueNames())
+            {
+                if (keyname.Contains("_"))
+                {
+                    string paddedName = keyname.Substring(0, keyname.LastIndexOf('_'));
+                    try
+                    {
+                        string decryptedName = Encryption.Decrypt(paddedName);
+                        string ret = (string) typeof(PlayerPrefsSharedData).GetMethod("ReadEncrypted", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(Platform.Current.EncryptedSharedData, new object[] { decryptedName });
+
+                        Log($"Raw Key: '{decryptedName}': '{ret}'");
+                    }
+                    catch (Exception e)
+                    {
+                        string retString = PlayerPrefs.GetString(paddedName, "DOESN'T EXIST");
+                        if (retString.Equals("DOESN'T EXIST"))
+                        {
+                            float retfloat = PlayerPrefs.GetFloat(paddedName, -123.456f);
+                            if (retfloat.Equals(-123.456f))
+                            {
+                                Log($"Other Key: '{paddedName}': '{PlayerPrefs.GetInt(paddedName, 0)}'");
+                            }
+                            else
+                            {
+                                Log($"Float Key: '{paddedName}': '{retfloat}'");
+                            }
+                        }
+                        else
+                        {
+                            Log($"String Key: '{paddedName}': '{retString}'");
+                        }
+                    }
+                }
+            }
+
+            #endregion
+
+            //Log("Loading Hugger 1");
+            //memoryHugger1 = new int[536870912];
+            //Log("Loading Hugger 2");
+            //memoryHugger2 = new int[536870912];
+            //Log("Loading Hugger 3");
+            //memoryHugger3 = new int[536870912];
+            //Log("Loading Hugger 4");
+            //memoryHugger4 = new int[536870912];
+            //Log("Loading Hugger 5");
+            //memoryHugger5 = new int[536870912];
+
             Log("Initialized");
         }
-        
+
         private void InitGlobalSettings()
         {
             // Found in a project, might help saving, don't know, but who cares
@@ -112,20 +168,19 @@ namespace TestOfTeamwork
         private void InitCallbacks()
         {
             // Hooks
-            ModHooks.Instance.GetPlayerBoolHook += OnGetPlayerBoolHook;
-            ModHooks.Instance.SetPlayerBoolHook += OnSetPlayerBoolHook;
-            ModHooks.Instance.GetPlayerIntHook += OnGetPlayerIntHook;
-            ModHooks.Instance.SetPlayerIntHook += OnSetPlayerIntHook;
-            ModHooks.Instance.AfterSavegameLoadHook += InitSaveSettings;
-            ModHooks.Instance.ApplicationQuitHook += SaveTotGlobalSettings;
-            ModHooks.Instance.LanguageGetHook += OnLanguageGetHook;
+            ModHooks.GetPlayerBoolHook += OnGetPlayerBoolHook;
+            ModHooks.SetPlayerBoolHook += OnSetPlayerBoolHook;
+            ModHooks.GetPlayerIntHook += OnGetPlayerIntHook;
+            ModHooks.SetPlayerIntHook += OnSetPlayerIntHook;
+            ModHooks.AfterSavegameLoadHook += InitSaveSettings;
+            ModHooks.ApplicationQuitHook += SaveTotGlobalSettings;
+            ModHooks.LanguageGetHook += OnLanguageGetHook;
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
         private void InitInventory()
         {
-            ItemHelper.init();
-            ItemHelper.AddNormalItem(StateNames.InvStateHornet, TestOfTeamwork.GetSprite(TextureStrings.InvHornetKey), nameof(_saveSettings.SFGrenadeTestOfTeamworkHornetCompanion), LanguageStrings.HornetInvNameKey, LanguageStrings.HornetInvDescKey);
+            ItemHelper.AddNormalItem(TestOfTeamwork.GetSprite(TextureStrings.InvHornetKey), nameof(_saveSettings.SFGrenadeTestOfTeamworkHornetCompanion), Consts.LanguageStrings.HornetInvNameKey, Consts.LanguageStrings.HornetInvDescKey);
         }
 
         private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
@@ -173,6 +228,15 @@ namespace TestOfTeamwork
             {
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
+            else if (scene == "GG_Hornet_2")
+            {
+                var go = to.Find("Hornet Boss 2");
+                var fsm = go.LocateMyFSM("Control");
+                fsm.GetAction<IntCompare>("Escalation", 2).integer2 = 99999999;
+                fsm.ChangeTransition("Refight Wake", "FINISHED", "Barb Antic");
+                fsm.ChangeTransition("Barb Recover", "FINISHED", "Flourish?");
+                go.GetComponent<HealthManager>().hp = 1500;
+            }
         }
 
         private void SaveTotGlobalSettings()
@@ -182,11 +246,11 @@ namespace TestOfTeamwork
 
 #region Get/Set Hooks
 
-        private string OnLanguageGetHook(string key, string sheet)
+        private string OnLanguageGetHook(string key, string sheet, string orig)
         {
 #if DEBUG_CHARMS
             // There probably is a better way to do this, but for now take this
-#region Custom Charms
+            #region Custom Charms
             if (key.StartsWith("CHARM_NAME_"))
             {
                 int charmNum = int.Parse(key.Split('_')[2]);
@@ -203,16 +267,16 @@ namespace TestOfTeamwork
                     return "CHARM DESC";
                 }
             }
-#endregion
+            #endregion
 #endif
             if (LangStrings.ContainsKey(key, sheet))
             {
                 return LangStrings.Get(key, sheet);
             }
-            return Language.Language.GetInternal(key, sheet);
+            return orig;
         }
 
-        private bool OnGetPlayerBoolHook(string target)
+        private bool OnGetPlayerBoolHook(string target, bool orig)
         {
 #if DEBUG_CHARMS
             if (target.StartsWith("gotCharm_"))
@@ -240,15 +304,15 @@ namespace TestOfTeamwork
                 }
             }
 #endif
-            var tmpField = _saveSettingsType.GetField(target);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
             if (tmpField != null)
             {
                 return (bool)tmpField.GetValue(_saveSettings);
             }
-            return PlayerData.instance.GetBoolInternal(target);
+            return orig;
         }
 
-        private void OnSetPlayerBoolHook(string target, bool val)
+        private bool OnSetPlayerBoolHook(string target, bool orig)
         {
 #if DEBUG_CHARMS
             if (target.StartsWith("gotCharm_"))
@@ -257,7 +321,6 @@ namespace TestOfTeamwork
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
                     Settings.gotCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
-                    return;
                 }
             }
             if (target.StartsWith("newCharm_"))
@@ -266,7 +329,6 @@ namespace TestOfTeamwork
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
                     Settings.newCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
-                    return;
                 }
             }
             if (target.StartsWith("equippedCharm_"))
@@ -275,20 +337,18 @@ namespace TestOfTeamwork
                 if (charmHelper.charmIDs.Contains(charmNum))
                 {
                     Settings.equippedCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
-                    return;
                 }
             }
 #endif
-            var tmpField = _saveSettingsType.GetField(target);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
             if (tmpField != null)
             {
-                tmpField.SetValue(_saveSettings, val);
-                return;
+                tmpField.SetValue(_saveSettings, orig);
             }
-            PlayerData.instance.SetBoolInternal(target, val);
+            return orig;
         }
 
-        private int OnGetPlayerIntHook(string target)
+        private int OnGetPlayerIntHook(string target, int orig)
         {
 #if DEBUG_CHARMS
             if (target.StartsWith("charmCost_"))
@@ -300,25 +360,22 @@ namespace TestOfTeamwork
                 }
             }
 #endif
-            var tmpField = _saveSettingsType.GetField(target);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
             if (tmpField != null)
             {
-                return (int)tmpField.GetValue(_saveSettings);
+                return (int) tmpField.GetValue(_saveSettings);
             }
-            return PlayerData.instance.GetIntInternal(target);
+            return orig;
         }
 
-        private void OnSetPlayerIntHook(string target, int val)
+        private int OnSetPlayerIntHook(string target, int orig)
         {
-            var tmpField = _saveSettingsType.GetField(target);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
             if (tmpField != null)
             {
-                tmpField.SetValue(_saveSettings, val);
+                tmpField.SetValue(_saveSettings, orig);
             }
-            else
-            {
-                PlayerData.instance.SetIntInternal(target, val);
-            }
+            return orig;
         }
 
 #endregion Get/Set Hooks

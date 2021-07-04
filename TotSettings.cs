@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TestOfTeamwork
 {
-    public class TotSaveSettings : ModSettings
+    public class TotSaveSettings
     {
         // Mechanics
         public bool SFGrenadeTestOfTeamworkHornetCompanion = false;
@@ -31,7 +31,7 @@ namespace TestOfTeamwork
 #endif
     }
 
-    public class TotGlobalSettings : ModSettings
+    public class TotGlobalSettings
     {
     }
 }

@@ -23,7 +23,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 GameObject tmp = GameObject.Instantiate(PrefabHolder.wpFlyPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
-                tmp.transform.localScale = transform.localScale / 1.4f;
+                tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
                 GameObject.Destroy(gameObject);
@@ -33,7 +33,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 GameObject tmp = GameObject.Instantiate(PrefabHolder.wpSawNoSoundPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
-                tmp.transform.localScale = transform.localScale / 1.56f;
+                tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
                 GameObject.Destroy(gameObject);
@@ -43,7 +43,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 GameObject tmp = GameObject.Instantiate(PrefabHolder.wpSawWithSoundPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
-                tmp.transform.localScale = transform.localScale / 1.56f;
+                tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
                 GameObject.Destroy(gameObject);
@@ -54,7 +54,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 GameObject tmpPrefab = GameObject.Instantiate(PrefabHolder.wpSawWithSoundPrefab, transform);
                 tmpPrefab.name = gameObject.name;
                 tmpPrefab.transform.localPosition = tmp.transform.localPosition;
-                tmpPrefab.transform.localScale = tmp.transform.localScale / 1.56f;
+                tmpPrefab.transform.localScale = tmp.transform.localScale;
                 tmpPrefab.transform.localEulerAngles = tmp.transform.localEulerAngles;
                 tmpPrefab.SetActive(true);
                 GameObject.Destroy(tmp);
@@ -64,7 +64,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 GameObject tmp = GameObject.Instantiate(PrefabHolder.wpInfSoulTotemPrefab);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
-                tmp.transform.localScale = transform.localScale / 1.5f;
+                tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
                 var tmpFsm = tmp.LocateMyFSM("soul_totem");
@@ -77,7 +77,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 GameObject tmp = GameObject.Instantiate(PrefabHolder.wpSpikesPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
-                tmp.transform.localScale = new Vector3(transform.localScale.x / 1.625f, transform.localScale.y / 1.45f, transform.localScale.z / 1.5f);
+                tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
                 GameObject.Destroy(gameObject);

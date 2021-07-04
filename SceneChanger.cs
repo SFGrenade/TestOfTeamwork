@@ -25,7 +25,7 @@ namespace TestOfTeamwork
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const bool _DEBUG = false;
+        private const bool _DEBUG = true;
         private const string _AB_PATH = "E:\\Github_Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
@@ -238,7 +238,7 @@ namespace TestOfTeamwork
             shinyFsmVars.FindFsmBool("Show Charm Tute").Value = false;
             shinyFsmVars.FindFsmBool("Slug Fling").Value = false;
             shinyFsmVars.FindFsmBool("Super Dash").Value = false;
-            shinyFsmVars.FindFsmString("Item Name").Value = LanguageStrings.HornetInvNameKey;
+            shinyFsmVars.FindFsmString("Item Name").Value = Consts.LanguageStrings.HornetInvNameKey;
             shinyFsmVars.FindFsmString("PD Bool Name").Value = "SFGrenadeTestOfTeamworkHornetCompanion";
 
             IntSwitch isAction = shinyFsm.GetAction<IntSwitch>("Trinket Type", 0);
@@ -254,7 +254,7 @@ namespace TestOfTeamwork
 
             shinyFsm.GetAction<SetPlayerDataBool>("Necklace", 0).boolName = "SFGrenadeTestOfTeamworkHornetCompanion";
             shinyFsm.GetAction<SetSpriteRendererSprite>("Necklace", 1).sprite = TestOfTeamwork.Instance.SpriteDict.Get(TextureStrings.InvHornetKey);
-            shinyFsm.GetAction<GetLanguageString>("Necklace", 2).convName = LanguageStrings.HornetInvNameKey;
+            shinyFsm.GetAction<GetLanguageString>("Necklace", 2).convName = Consts.LanguageStrings.HornetInvNameKey;
 
             shinyFsm.AddTransition("Trinket Type", "PURE SEED", "Necklace");
 
@@ -362,8 +362,6 @@ namespace TestOfTeamwork
         public void CR_Change_ToTEndless(Scene scene)
         {
             Log("CR_Change_ToTEndless()");
-
-            PatchTotLever(scene);
 
             HeroController.instance.gameObject.AddComponent<SceneExpander>();
             var tmp = HeroController.instance.gameObject.GetComponent<SceneExpander>();
