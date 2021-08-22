@@ -79,21 +79,21 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
         public float saturation = 0.5f;
         public bool ignorePlatformSaturationModifiers = false;
         public AnimationCurve redChannel = new AnimationCurve(
-            new Keyframe[]
+            new[]
             {
                 new Keyframe(0, 0),
                 new Keyframe(1, 1), 
             }
         );
         public AnimationCurve greenChannel = new AnimationCurve(
-            new Keyframe[]
+            new[]
             {
                 new Keyframe(0, 0),
                 new Keyframe(1, 1),
             }
         );
         public AnimationCurve blueChannel = new AnimationCurve(
-            new Keyframe[]
+            new[]
             {
                 new Keyframe(0, 0),
                 new Keyframe(1, 1),
@@ -110,7 +110,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
 
         public void Awake()
         {
-            GameObject actualSceneManager = GameObject.Instantiate(PrefabHolder.popSceneManagerPrefab);
+            GameObject actualSceneManager = Instantiate(PrefabHolder.PopSceneManagerPrefab);
             actualSceneManager.SetActive(false);
             actualSceneManager.name = "_SceneManager";
 
@@ -137,7 +137,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
             sm.SetAttr("musicTransitionTime", musicTransitionTime);
 
             actualSceneManager.SetActive(true);
-            GameObject.Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -4,19 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.Win32;
 using TestOfTeamwork.Consts;
 using TestOfTeamwork.MonoBehaviours;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 using SFCore.Generics;
-using SFCore.Utils;
-using HutongGames.PlayMaker.Actions;
-using System.IO;
-using Language;
-using Newtonsoft.Json;
-using TMPro;
-using Random = UnityEngine.Random;
 
 namespace TestOfTeamwork
 {
@@ -24,7 +16,7 @@ namespace TestOfTeamwork
     {
         internal static TestOfTeamwork Instance;
 
-        public Consts.LanguageStrings LangStrings { get; private set; }
+        public LanguageStrings LangStrings { get; private set; }
         public TextureStrings SpriteDict { get; private set; }
         public AudioStrings AudioDict { get; private set; }
         public SceneChanger SceneChanger { get; private set; }
@@ -71,10 +63,10 @@ namespace TestOfTeamwork
         {
             Instance = this;
 
-            LangStrings = new Consts.LanguageStrings();
+            LangStrings = new LanguageStrings();
             SpriteDict = new TextureStrings();
 
-            AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincess_Key, TestOfTeamwork.GetSprite(TextureStrings.AchievementWeaverPrincessKey), Consts.LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, Consts.LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
+            AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincessKey, GetSprite(TextureStrings.AchievementWeaverPrincessKey), LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
 
             InitInventory();
 
@@ -92,77 +84,12 @@ namespace TestOfTeamwork
             Log("Initializing");
             Instance = this;
 
-            InitGlobalSettings();
             SceneChanger = new SceneChanger(preloadedObjects);
             AudioDict = new AudioStrings(SceneChanger);
-            //UIManager.instance.RefreshAchievementsList();
 
-            //GameManager.instance.StartCoroutine(DEBUG_Shade_Style());
             GameManager.instance.StartCoroutine(Register2BossModCore());
 
-            #region Achievements
-
-            foreach (var keyname in Registry.CurrentUser.OpenSubKey("SOFTWARE").OpenSubKey("Team Cherry").OpenSubKey("Hollow Knight").GetValueNames())
-            {
-                if (keyname.Contains("_"))
-                {
-                    string paddedName = keyname.Substring(0, keyname.LastIndexOf('_'));
-                    try
-                    {
-                        string decryptedName = Encryption.Decrypt(paddedName);
-                        string ret = (string) typeof(PlayerPrefsSharedData).GetMethod("ReadEncrypted", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(Platform.Current.EncryptedSharedData, new object[] { decryptedName });
-
-                        Log($"Raw Key: '{decryptedName}': '{ret}'");
-                    }
-                    catch (Exception e)
-                    {
-                        string retString = PlayerPrefs.GetString(paddedName, "DOESN'T EXIST");
-                        if (retString.Equals("DOESN'T EXIST"))
-                        {
-                            float retfloat = PlayerPrefs.GetFloat(paddedName, -123.456f);
-                            if (retfloat.Equals(-123.456f))
-                            {
-                                Log($"Other Key: '{paddedName}': '{PlayerPrefs.GetInt(paddedName, 0)}'");
-                            }
-                            else
-                            {
-                                Log($"Float Key: '{paddedName}': '{retfloat}'");
-                            }
-                        }
-                        else
-                        {
-                            Log($"String Key: '{paddedName}': '{retString}'");
-                        }
-                    }
-                }
-            }
-
-            #endregion
-
-            //Log("Loading Hugger 1");
-            //memoryHugger1 = new int[536870912];
-            //Log("Loading Hugger 2");
-            //memoryHugger2 = new int[536870912];
-            //Log("Loading Hugger 3");
-            //memoryHugger3 = new int[536870912];
-            //Log("Loading Hugger 4");
-            //memoryHugger4 = new int[536870912];
-            //Log("Loading Hugger 5");
-            //memoryHugger5 = new int[536870912];
-
             Log("Initialized");
-        }
-
-        private void InitGlobalSettings()
-        {
-            // Found in a project, might help saving, don't know, but who cares
-            // Global Settings
-        }
-
-        private void InitSaveSettings(SaveGameData data)
-        {
-            // Found in a project, might help saving, don't know, but who cares
-            // Save Settings
         }
 
         private void InitCallbacks()
@@ -172,7 +99,6 @@ namespace TestOfTeamwork
             ModHooks.SetPlayerBoolHook += OnSetPlayerBoolHook;
             ModHooks.GetPlayerIntHook += OnGetPlayerIntHook;
             ModHooks.SetPlayerIntHook += OnSetPlayerIntHook;
-            ModHooks.AfterSavegameLoadHook += InitSaveSettings;
             ModHooks.ApplicationQuitHook += SaveTotGlobalSettings;
             ModHooks.LanguageGetHook += OnLanguageGetHook;
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
@@ -180,7 +106,7 @@ namespace TestOfTeamwork
 
         private void InitInventory()
         {
-            ItemHelper.AddNormalItem(TestOfTeamwork.GetSprite(TextureStrings.InvHornetKey), nameof(_saveSettings.SFGrenadeTestOfTeamworkHornetCompanion), Consts.LanguageStrings.HornetInvNameKey, Consts.LanguageStrings.HornetInvDescKey);
+            ItemHelper.AddNormalItem(GetSprite(TextureStrings.InvHornetKey), nameof(SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion), LanguageStrings.HornetInvNameKey, LanguageStrings.HornetInvDescKey);
         }
 
         private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
@@ -227,15 +153,6 @@ namespace TestOfTeamwork
             else if (scene == TransitionGateNames.TotDropdown)
             {
                 GameManager.instance.RefreshTilemapInfo(scene);
-            }
-            else if (scene == "GG_Hornet_2")
-            {
-                var go = to.Find("Hornet Boss 2");
-                var fsm = go.LocateMyFSM("Control");
-                fsm.GetAction<IntCompare>("Escalation", 2).integer2 = 99999999;
-                fsm.ChangeTransition("Refight Wake", "FINISHED", "Barb Antic");
-                fsm.ChangeTransition("Barb Recover", "FINISHED", "Flourish?");
-                go.GetComponent<HealthManager>().hp = 1500;
             }
         }
 
@@ -304,10 +221,10 @@ namespace TestOfTeamwork
                 }
             }
 #endif
-            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
             if (tmpField != null)
             {
-                return (bool)tmpField.GetValue(_saveSettings);
+                return (bool)tmpField.GetValue(SaveSettings);
             }
             return orig;
         }
@@ -340,10 +257,10 @@ namespace TestOfTeamwork
                 }
             }
 #endif
-            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
             if (tmpField != null)
             {
-                tmpField.SetValue(_saveSettings, orig);
+                tmpField.SetValue(SaveSettings, orig);
             }
             return orig;
         }
@@ -360,20 +277,20 @@ namespace TestOfTeamwork
                 }
             }
 #endif
-            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
             if (tmpField != null)
             {
-                return (int) tmpField.GetValue(_saveSettings);
+                return (int) tmpField.GetValue(SaveSettings);
             }
             return orig;
         }
 
         private int OnSetPlayerIntHook(string target, int orig)
         {
-            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target, false);
+            var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
             if (tmpField != null)
             {
-                tmpField.SetValue(_saveSettings, orig);
+                tmpField.SetValue(SaveSettings, orig);
             }
             return orig;
         }
@@ -387,10 +304,10 @@ namespace TestOfTeamwork
             StatueDescription,
             CustomScene,
             ScenePrefabName,
-            StatueGO
+            STATUE_GO
         }
-        private bool r2BmcTimeout;
-        private bool r2BmcSuccess;
+        private bool _r2BmcTimeout;
+        private bool _r2BmcSuccess;
         private static readonly string R2BmcBmc = "BossModCore";
         private static readonly string R2BmcCom = $"{R2BmcBmc} - ";
         private static readonly string R2BmcSetNum = $" - {Commands.NumBosses}";
@@ -398,26 +315,26 @@ namespace TestOfTeamwork
         private static readonly string R2BmcSetStatDesc = $" - {Commands.StatueDescription} - ";
         private static readonly string R2BmcSetCustomScene = $" - {Commands.CustomScene} - ";
         private static readonly string R2BmcSetCustomSceneName = $" - {Commands.ScenePrefabName} - ";
-        private static readonly string R2BmcSetStatGo = $" - {Commands.StatueGO} - ";
+        private static readonly string R2BmcSetStatGo = $" - {Commands.STATUE_GO} - ";
 
         private IEnumerator Register2BossModCore()
         {
             PlayerData pd = PlayerData.instance;
-            r2BmcTimeout = false;
+            _r2BmcTimeout = false;
 
             GameManager.instance.StartCoroutine(RegisterTimeout());
 
-            while (!r2BmcTimeout)
+            while (!_r2BmcTimeout)
             {
-                r2BmcSuccess = pd.GetBool(R2BmcBmc);
-                if (r2BmcSuccess)
+                _r2BmcSuccess = pd.GetBool(R2BmcBmc);
+                if (_r2BmcSuccess)
                 {
-                    r2BmcTimeout = true;
+                    _r2BmcTimeout = true;
                 }
                 yield return null;
             }
 
-            if (!r2BmcSuccess)
+            if (!_r2BmcSuccess)
             {
                 Log(R2BmcBmc + " not found!");
                 yield break;
@@ -425,20 +342,19 @@ namespace TestOfTeamwork
             Log(R2BmcBmc + " is able to be registered to!");
             yield return null;
 
-            pd.SetInt(R2BmcCom + this.GetType().Name + R2BmcSetNum, 1);
-            pd.SetString(R2BmcCom + this.GetType().Name + R2BmcSetStatName + "0", "Boss Statue Name");
-            pd.SetString(R2BmcCom + this.GetType().Name + R2BmcSetStatDesc + "0", "Boss Statue Description");
-            pd.SetBool(R2BmcCom + this.GetType().Name + R2BmcSetCustomScene + "0", false);
-            pd.SetString(R2BmcCom + this.GetType().Name + R2BmcSetCustomSceneName + "0", "GG_Hornet_2");
-            pd.SetVariable<GameObject>(R2BmcCom + this.GetType().Name + R2BmcSetStatGo + "0", new GameObject("StatePrefabGO"));
+            pd.SetInt(R2BmcCom + GetType().Name + R2BmcSetNum, 1);
+            pd.SetString(R2BmcCom + GetType().Name + R2BmcSetStatName + "0", "Boss Statue Name");
+            pd.SetString(R2BmcCom + GetType().Name + R2BmcSetStatDesc + "0", "Boss Statue Description");
+            pd.SetBool(R2BmcCom + GetType().Name + R2BmcSetCustomScene + "0", false);
+            pd.SetString(R2BmcCom + GetType().Name + R2BmcSetCustomSceneName + "0", "GG_Hornet_2");
+            pd.SetVariable(R2BmcCom + GetType().Name + R2BmcSetStatGo + "0", new GameObject("StatePrefabGO"));
         }
 
         private IEnumerator RegisterTimeout()
         {
             yield return new WaitForSecondsRealtime(3.0f);
-            r2BmcTimeout = true;
-            r2BmcSuccess = false;
-            yield break;
+            _r2BmcTimeout = true;
+            _r2BmcSuccess = false;
         }
     }
 }

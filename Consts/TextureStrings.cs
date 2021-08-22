@@ -28,22 +28,22 @@ namespace TestOfTeamwork.Consts
         private const string YFile = "TestOfTeamwork.Resources.Y.png";
         public const string EKey = "E";
         private const string EFile = "TestOfTeamwork.Resources.E.png";
-        public const string TKey = "T";
-        private const string TFile = "TestOfTeamwork.Resources.T.png";
-        public const string GCKey = "fammchild";
-        private const string GCFile = "TestOfTeamwork.Resources.fammchild.png";
-        public const string GC2Key = "fammchild2";
-        private const string GC2File = "TestOfTeamwork.Resources.fammchild2.png";
+        public const string Key = "T";
+        private const string File = "TestOfTeamwork.Resources.T.png";
+        public const string GcKey = "fammchild";
+        private const string GcFile = "TestOfTeamwork.Resources.fammchild.png";
+        public const string Gc2Key = "fammchild2";
+        private const string Gc2File = "TestOfTeamwork.Resources.fammchild2.png";
         public const string PetalKey = "Petal";
         private const string PetalFile = "TestOfTeamwork.Resources.Petal.png";
         #endregion Misc
 
-        private readonly Dictionary<string, Sprite> dict;
+        private readonly Dictionary<string, Sprite> _dict;
 
         public TextureStrings()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
-            dict = new Dictionary<string, Sprite>();
+            _dict = new Dictionary<string, Sprite>();
             var tmpTextures = new Dictionary<string, string>();
             tmpTextures.Add(InvHornetKey, InvHornetFile);
             tmpTextures.Add(AchievementItemKey, AchievementItemFile);
@@ -51,9 +51,9 @@ namespace TestOfTeamwork.Consts
             tmpTextures.Add(AchievementWeaverPrincessKey, AchievementWeaverPrincessFile);
             tmpTextures.Add(YKey, YFile);
             tmpTextures.Add(EKey, EFile);
-            tmpTextures.Add(TKey, TFile);
-            tmpTextures.Add(GCKey, GCFile);
-            tmpTextures.Add(GC2Key, GC2File);
+            tmpTextures.Add(Key, File);
+            tmpTextures.Add(GcKey, GcFile);
+            tmpTextures.Add(Gc2Key, Gc2File);
             tmpTextures.Add(PetalKey, PetalFile);
 
             foreach (var pair in tmpTextures)
@@ -73,7 +73,7 @@ namespace TestOfTeamwork.Consts
 
                         // Create sprite from texture
                         // Split is to cut off the DreamKing.Resources. and the .png
-                        dict.Add(pair.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f)));
+                        _dict.Add(pair.Key, Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f)));
                     }
                 }
             }
@@ -81,7 +81,7 @@ namespace TestOfTeamwork.Consts
 
         public Sprite Get(string key)
         {
-            return dict[key];
+            return _dict[key];
         }
     }
 }

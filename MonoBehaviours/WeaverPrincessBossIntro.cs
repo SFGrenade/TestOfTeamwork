@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using HutongGames.PlayMaker.Actions;
-using TestOfTeamwork.Consts;
+﻿using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 using Logger = Modding.Logger;
 using SFCore.Utils;
@@ -17,7 +15,7 @@ namespace TestOfTeamwork.MonoBehaviours
 
         public void Start()
         {
-            var beforeFightPrefab = Instantiate(PrefabHolder.hornet2BossPrefab);
+            var beforeFightPrefab = Instantiate(PrefabHolder.Hornet2BossPrefab);
             beforeFightPrefab.transform.position = transform.position;
             beforeFightPrefab.SetActive(true);
 
@@ -26,12 +24,12 @@ namespace TestOfTeamwork.MonoBehaviours
 
             encounterFsm.RemoveAction("Point", 2);
 
-            var dialogueVars1 = new HutongGames.PlayMaker.FsmVar[] { new HutongGames.PlayMaker.FsmVar(typeof(string)), new HutongGames.PlayMaker.FsmVar(typeof(string)) };
+            var dialogueVars1 = new[] { new HutongGames.PlayMaker.FsmVar(typeof(string)), new HutongGames.PlayMaker.FsmVar(typeof(string)) };
             dialogueVars1[0].SetValue(Dialogue1ConvoKey);
             dialogueVars1[1].SetValue(Dialogue1ConvoSheet);
             encounterFsm.GetAction<CallMethodProper>("Dialogue", 1).parameters = dialogueVars1;
 
-            var dialogueVars2 = new HutongGames.PlayMaker.FsmVar[] { new HutongGames.PlayMaker.FsmVar(typeof(string)), new HutongGames.PlayMaker.FsmVar(typeof(string)) };
+            var dialogueVars2 = new[] { new HutongGames.PlayMaker.FsmVar(typeof(string)), new HutongGames.PlayMaker.FsmVar(typeof(string)) };
             dialogueVars2[0].SetValue(Dialogue2ConvoKey);
             dialogueVars2[1].SetValue(Dialogue2ConvoSheet);
             encounterFsm.GetAction<CallMethodProper>("Dialogue 2", 0).parameters = dialogueVars2;

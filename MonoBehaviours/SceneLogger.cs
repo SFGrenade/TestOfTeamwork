@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using Logger = Modding.Logger;
 using USM = UnityEngine.SceneManagement.SceneManager;
 

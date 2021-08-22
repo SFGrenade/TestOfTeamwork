@@ -1,11 +1,4 @@
-﻿using Modding;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace TestOfTeamwork
+﻿namespace TestOfTeamwork
 {
     public class TotSaveSettings
     {

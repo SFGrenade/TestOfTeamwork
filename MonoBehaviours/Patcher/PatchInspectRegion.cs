@@ -14,9 +14,9 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
         {
             try
             {
-                PrefabHolder.popTabletInspectPrefab.SetActive(true);
-                GameObject inspect = GameObject.Instantiate(PrefabHolder.popTabletInspectPrefab, transform);
-                PrefabHolder.popTabletInspectPrefab.SetActive(false);
+                PrefabHolder.PopTabletInspectPrefab.SetActive(true);
+                GameObject inspect = Instantiate(PrefabHolder.PopTabletInspectPrefab, transform);
+                PrefabHolder.PopTabletInspectPrefab.SetActive(false);
                 inspect.transform.localPosition = Vector3.zero;
                 inspect.transform.localEulerAngles = Vector3.zero;
                 inspect.transform.localScale = Vector3.one;
@@ -35,7 +35,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
             }
             catch (Exception e)
             {
-                Debug.Log("PatchInspectRegion - " + e.ToString());
+                Debug.Log("PatchInspectRegion - " + e);
             }
         }
     }

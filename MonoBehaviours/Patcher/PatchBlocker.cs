@@ -2,8 +2,6 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using SFCore.Utils;
-using System;
-using Logger = Modding.Logger;
 using Object = UnityEngine.Object;
 
 namespace TestOfTeamwork.MonoBehaviours.Patcher
@@ -23,7 +21,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
         {
             if (type == Type.FLOOR)
             {
-                GameObject actualBlocker = GameObject.Instantiate(PrefabHolder.popQuakeFloorPrefab, transform.parent, true);
+                GameObject actualBlocker = Instantiate(PrefabHolder.PopQuakeFloorPrefab, transform.parent, true);
                 actualBlocker.SetActive(false);
                 actualBlocker.transform.position = transform.position;
                 actualBlocker.transform.localScale = transform.lossyScale;
@@ -132,7 +130,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 blockerFsm.MakeLog(true);
 
                 actualBlocker.SetActive(true);
-                Object.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (type == Type.WALL)
             {

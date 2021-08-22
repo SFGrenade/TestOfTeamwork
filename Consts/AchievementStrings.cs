@@ -3,6 +3,6 @@
     internal struct AchievementStrings
     {
         // Bosses
-        public const string DefeatedWeaverPrincess_Key = "SFGrenadeTestOfTeamwork_DefeatedWeaverPrincess";
+        public const string DefeatedWeaverPrincessKey = "SFGrenadeTestOfTeamwork_DefeatedWeaverPrincess";
     }
 }

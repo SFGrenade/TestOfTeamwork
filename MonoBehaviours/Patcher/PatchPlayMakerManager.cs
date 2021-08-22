@@ -8,9 +8,9 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
 
         public void Awake()
         {
-            GameObject tmpPMU2D = GameObject.Instantiate(PrefabHolder.popPmU2dPrefab, managerTransform);
-            tmpPMU2D.SetActive(true);
-            tmpPMU2D.name = "PlayMaker Unity 2D";
+            GameObject tmpPmu2D = Instantiate(PrefabHolder.PopPmU2dPrefab, managerTransform);
+            tmpPmu2D.SetActive(true);
+            tmpPmu2D.name = "PlayMaker Unity 2D";
         }
     }
 }

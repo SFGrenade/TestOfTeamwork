@@ -16,7 +16,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
 
         public void Awake()
         {
-            GameObject atc = GameObject.Instantiate(PrefabHolder.popAreaTitleCtrlPrefab);
+            GameObject atc = Instantiate(PrefabHolder.PopAreaTitleCtrlPrefab);
             atc.SetActive(false);
             atc.transform.localPosition = transform.position;
             atc.transform.localEulerAngles = transform.eulerAngles;
@@ -42,7 +42,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
 
             atc.SetActive(true);
 
-            GameObject.Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

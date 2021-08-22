@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using GlobalEnums;
 using HutongGames.PlayMaker;
-using On;
 using Logger = Modding.Logger;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
-using UnityEngine.Profiling;
 using HutongGames.PlayMaker.Actions;
 using SFCore.MonoBehaviours;
 using TestOfTeamwork.MonoBehaviours;
 using TestOfTeamwork.Consts;
-using TestOfTeamwork.MonoBehaviours.Patcher;
-using UnityEngine.UI;
 using UObject = UnityEngine.Object;
 using SFCore.Utils;
 
@@ -25,8 +17,8 @@ namespace TestOfTeamwork
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const bool _DEBUG = true;
-        private const string _AB_PATH = "E:\\Github_Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
+        private const bool Debug = true;
+        private const string AbPath = "E:\\Github_Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
         public AssetBundle AbTotScene { get; private set; } = null;
@@ -36,19 +28,18 @@ namespace TestOfTeamwork
         {
             On.GameManager.RefreshTilemapInfo += OnGameManagerRefreshTilemapInfo;
 
-            PrefabHolder.preloaded(preloadedObjects);
+            PrefabHolder.Preloaded(preloadedObjects);
 
-            Assembly _asm;
+            Assembly asm;
 
             #region Load AssetBundles
 #pragma warning disable CS0162 // Unerreichbarer Code wurde entdeckt.
-            Log("Loading AssetBundles");
-            _asm = Assembly.GetExecutingAssembly();
+            asm = Assembly.GetExecutingAssembly();
             if (AbOverallMat == null)
             {
-                if (!_DEBUG)
+                if (!Debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("TestOfTeamwork.Resources.overall_materials_tot"))
+                    using (Stream s = asm.GetManifestResourceStream("TestOfTeamwork.Resources.overall_materials_tot"))
                     {
                         if (s != null)
                         {
@@ -58,14 +49,14 @@ namespace TestOfTeamwork
                 }
                 else
                 {
-                    AbOverallMat = AssetBundle.LoadFromFile(_AB_PATH + "overall_materials_tot");
+                    AbOverallMat = AssetBundle.LoadFromFile(AbPath + "overall_materials_tot");
                 }
             }
             if (AbTotScene == null)
             {
-                if (!_DEBUG)
+                if (!Debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("TestOfTeamwork.Resources.test_of_teamwork_scenes"))
+                    using (Stream s = asm.GetManifestResourceStream("TestOfTeamwork.Resources.test_of_teamwork_scenes"))
                     {
                         if (s != null)
                         {
@@ -75,14 +66,14 @@ namespace TestOfTeamwork
                 }
                 else
                 {
-                    AbTotScene = AssetBundle.LoadFromFile(_AB_PATH + "test_of_teamwork_scenes");
+                    AbTotScene = AssetBundle.LoadFromFile(AbPath + "test_of_teamwork_scenes");
                 }
             }
             if (AbTotMat == null)
             {
-                if (!_DEBUG)
+                if (!Debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("TestOfTeamwork.Resources.test_of_teamwork_materials"))
+                    using (Stream s = asm.GetManifestResourceStream("TestOfTeamwork.Resources.test_of_teamwork_materials"))
                     {
                         if (s != null)
                         {
@@ -92,10 +83,9 @@ namespace TestOfTeamwork
                 }
                 else
                 {
-                    AbTotMat = AssetBundle.LoadFromFile(_AB_PATH + "test_of_teamwork_materials");
+                    AbTotMat = AssetBundle.LoadFromFile(AbPath + "test_of_teamwork_materials");
                 }
             }
-            Log("Finished loading AssetBundles");
 #pragma warning restore CS0162 // Unerreichbarer Code wurde entdeckt.
             #endregion
         }
@@ -153,15 +143,22 @@ namespace TestOfTeamwork
                 self.sceneHeight = height;
                 FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
             }
+            else if (targetScene == TransitionGateNames.TotClaus)
+            {
+                float width = 330;
+                float height = 17;
+                self.tilemap.width = (int)width;
+                self.tilemap.height = (int)height;
+                self.sceneWidth = width;
+                self.sceneHeight = height;
+                FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
+            }
         }
 
         public void CR_Change_Room_temple(Scene scene)
         {
             if (scene.name != "Room_temple")
                 return;
-
-            Log("CR_Change_Room_temple()");
-            //yield return null;
 
             #region Hornet NPC FSM
 
@@ -172,7 +169,7 @@ namespace TestOfTeamwork
             hornetNpcFsm.CopyState("Greet", "Give Item");
             hornetNpcFsm.RemoveAction("Give Item", 0);
 
-            hornetNpcFsm.GetAction<CallMethodProper>("Give Item", 0).parameters = new FsmVar[]
+            hornetNpcFsm.GetAction<CallMethodProper>("Give Item", 0).parameters = new[]
             {
                 new FsmVar(typeof(string)) { stringValue = "CUSTOM_HORNET_PRE_FINAL_BATTLE" },
                 new FsmVar(typeof(string)) { stringValue = "Hornet" }
@@ -191,7 +188,7 @@ namespace TestOfTeamwork
 
             #region Shiny FSM
 
-            GameObject shinyParent = GameObject.Instantiate(PrefabHolder.shinyPrefab);
+            GameObject shinyParent = Instantiate(PrefabHolder.ShinyPrefab);
             shinyParent.name = "Necklace";
             shinyParent.SetActive(false);
             shinyParent.transform.GetChild(0).gameObject.SetActive(true);
@@ -200,7 +197,7 @@ namespace TestOfTeamwork
             hornetNpcFsm.CopyState("Box Up", "Give Item Spawn");
 
             hornetNpcFsm.ChangeTransition("Give Item Spawn", FsmEvent.Finished.Name, "Talk Finish");
-            hornetNpcFsm.GetState("Give Item").Transitions.First(x => x.ToState == "Talk Finish").ToState = "Give Item Spawn";
+            hornetNpcFsm.ChangeTransition("Give Item", "CONVO_FINISH", "Give Item Spawn");
 
             hornetNpcFsm.RemoveAction("Give Item Spawn", 5);
             hornetNpcFsm.RemoveAction("Give Item Spawn", 4);
@@ -259,17 +256,12 @@ namespace TestOfTeamwork
             shinyFsm.AddTransition("Trinket Type", "PURE SEED", "Necklace");
 
             #endregion
-
-            Log("~CR_Change_Room_temple()");
         }
 
         public void CR_Change_White_Palace_06(Scene scene)
         {
             if (scene.name != "White_Palace_06")
                 return;
-
-            Log("CR_Change_White_Palace_06()");
-            //yield return null;
 
             var endless = UnityEngine.Random.Range(0.0f, 1.0f) < 0.001f;
             if (!endless)
@@ -355,14 +347,10 @@ namespace TestOfTeamwork
             edgeCollider2Ds[1].points = points;
             #endregion
             #endregion
-
-            Log("CR_Change_White_Palace_06 Done");
         }
 
         public void CR_Change_ToTEndless(Scene scene)
         {
-            Log("CR_Change_ToTEndless()");
-
             HeroController.instance.gameObject.AddComponent<SceneExpander>();
             var tmp = HeroController.instance.gameObject.GetComponent<SceneExpander>();
             tmp.scene = scene;
@@ -377,10 +365,7 @@ namespace TestOfTeamwork
 
         private void CreateBreakableWall(string sceneName, string name, Vector3 pos, Vector3 angles, Vector3 scale, Vector2 size, string playerDataBool)
         {
-            Log("!CreateBreakableWall");
-            //SFGrenadeDreamKing_TotOpened
-
-            GameObject breakableWall = GameObject.Instantiate(PrefabHolder.breakableWallPrefab);
+            GameObject breakableWall = Instantiate(PrefabHolder.BreakableWallPrefab);
             breakableWall.SetActive(true);
             breakableWall.name = name;
             breakableWall.transform.position = pos;
@@ -395,15 +380,11 @@ namespace TestOfTeamwork
             wallFsm.FsmVariables.GetFsmBool("Activated").Value = false;
             wallFsm.FsmVariables.GetFsmBool("Ruin Lift").Value = false;
             wallFsm.FsmVariables.GetFsmString("PlayerData Bool").Value = playerDataBool;
-
-            Log("~CreateBreakableWall");
         }
 
         private void CreateGateway(string gateName, Vector2 pos, Vector2 size, string toScene, string entryGate, Vector2 respawnPoint,
                                    bool right, bool left, bool onlyOut, GameManager.SceneLoadVisualizations vis)
         {
-            Log("!Gateway");
-
             GameObject gate = new GameObject(gateName);
             gate.transform.SetPosition2D(pos);
             var tp = gate.AddComponent<TransitionPoint>();
@@ -425,13 +406,11 @@ namespace TestOfTeamwork
             tmp.respawnFacingRight = right;
             tp.respawnMarker = rm.GetComponent<HazardRespawnMarker>();
             tp.sceneLoadVisualization = vis;
-
-            Log("~Gateway");
         }
 
         private void CreateBench(string benchName, Vector3 pos, string sceneName)
         {
-            GameObject bench = GameObject.Instantiate(PrefabHolder.whiteBenchPrefab);
+            GameObject bench = Instantiate(PrefabHolder.WhiteBenchPrefab);
             bench.SetActive(true);
             bench.transform.position = pos;
             bench.name = benchName;
@@ -440,7 +419,7 @@ namespace TestOfTeamwork
             benchFsm.FsmVariables.FindFsmString("Spawn Name").Value = benchName;
         }
 
-        private void printDebug(GameObject go, string tabindex = "")
+        private void PrintDebug(GameObject go, string tabindex = "")
         {
             Log(tabindex + "Name: " + go.name);
             foreach (var comp in go.GetComponents<Component>())
@@ -449,24 +428,24 @@ namespace TestOfTeamwork
             }
             for (int i = 0; i < go.transform.childCount; i++)
             {
-                printDebug(go.transform.GetChild(i).gameObject, tabindex + "\t");
+                PrintDebug(go.transform.GetChild(i).gameObject, tabindex + "\t");
             }
         }
 
         private void Log(String message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
         private void Log(System.Object message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message.ToString()}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
 
         private static void SetInactive(GameObject go)
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                DontDestroyOnLoad(go);
                 go.SetActive(false);
             }
         }
@@ -474,7 +453,7 @@ namespace TestOfTeamwork
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                DontDestroyOnLoad(go);
             }
         }
     }

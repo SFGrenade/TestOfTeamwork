@@ -1,5 +1,4 @@
-﻿using TestOfTeamwork.Consts;
-using UnityEngine;
+﻿using UnityEngine;
 using Logger = Modding.Logger;
 
 namespace TestOfTeamwork.MonoBehaviours.Patcher
@@ -11,12 +10,12 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
 
         public void Start()
         {
-            GameObject door1 = GameObject.Instantiate(PrefabHolder.wp03Door);
+            GameObject door1 = Instantiate(PrefabHolder.Wp03Door);
             door1.SetActive(true);
             door1.name = EnterDoorName;
             door1.transform.position = EnterPosition;
 
-            GameObject dreamEntry = GameObject.Instantiate(PrefabHolder.wp03Dream);
+            GameObject dreamEntry = Instantiate(PrefabHolder.Wp03Dream);
             dreamEntry.SetActive(true);
             dreamEntry.name = "Dream Entry";
             dreamEntry.transform.position = Vector3.zero;

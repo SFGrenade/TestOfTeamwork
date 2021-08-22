@@ -20,48 +20,48 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
         {
             if (type == EnemyType.WP_FLY)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.wpFlyPrefab, transform.parent);
+                GameObject tmp = Instantiate(PrefabHolder.WpFlyPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
                 tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (type == EnemyType.SAW_NO_SOUND)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.wpSawNoSoundPrefab, transform.parent);
+                GameObject tmp = Instantiate(PrefabHolder.WpSawNoSoundPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
                 tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (type == EnemyType.SAW_SOUND)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.wpSawWithSoundPrefab, transform.parent);
+                GameObject tmp = Instantiate(PrefabHolder.WpSawWithSoundPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
                 tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (type == EnemyType.MOVING_SAW_SOUND)
             {
                 GameObject tmp = transform.GetChild(0).gameObject;
-                GameObject tmpPrefab = GameObject.Instantiate(PrefabHolder.wpSawWithSoundPrefab, transform);
+                GameObject tmpPrefab = Instantiate(PrefabHolder.WpSawWithSoundPrefab, transform);
                 tmpPrefab.name = gameObject.name;
                 tmpPrefab.transform.localPosition = tmp.transform.localPosition;
                 tmpPrefab.transform.localScale = tmp.transform.localScale;
                 tmpPrefab.transform.localEulerAngles = tmp.transform.localEulerAngles;
                 tmpPrefab.SetActive(true);
-                GameObject.Destroy(tmp);
+                Destroy(tmp);
             }
             else if (type == EnemyType.INF_SOUL_TOTEM)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.wpInfSoulTotemPrefab);
+                GameObject tmp = Instantiate(PrefabHolder.WpInfSoulTotemPrefab);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
                 tmp.transform.localScale = transform.localScale;
@@ -70,17 +70,17 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
                 var tmpFsm = tmp.LocateMyFSM("soul_totem");
                 tmpFsm.SetState("Pause Frame");
                 tmpFsm.SendEvent("RESET");
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (type == EnemyType.WHITE_SPIKES)
             {
-                GameObject tmp = GameObject.Instantiate(PrefabHolder.wpSpikesPrefab, transform.parent);
+                GameObject tmp = Instantiate(PrefabHolder.WpSpikesPrefab, transform.parent);
                 tmp.name = gameObject.name;
                 tmp.transform.localPosition = transform.localPosition;
                 tmp.transform.localScale = transform.localScale;
                 tmp.transform.localEulerAngles = transform.localEulerAngles;
                 tmp.SetActive(true);
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }

@@ -1,56 +1,50 @@
-﻿using GlobalEnums;
-using System;
-using System.Collections;
-using System.Reflection;
-using HutongGames.PlayMaker;
+﻿using System.Collections;
 using UnityEngine;
-using Logger = Modding.Logger;
-using SFCore.Utils;
 
 namespace TestOfTeamwork.MonoBehaviours
 {
     public class DreamFallCatcher : MonoBehaviour
     {
-        private HeroController h;
-        private GameObject hGo;
-        private GameManager g;
-        private CameraController c;
-        private IEnumerator df;
+        private HeroController _h;
+        private GameObject _hGo;
+        private GameManager _g;
+        private CameraController _c;
+        private IEnumerator _df;
 
         private void Start()
         {
-            h = HeroController.instance;
-            hGo = h.gameObject;
-            g = GameManager.instance;
-            c = g.cameraCtrl;
-            df = null;
+            _h = HeroController.instance;
+            _hGo = _h.gameObject;
+            _g = GameManager.instance;
+            _c = _g.cameraCtrl;
+            _df = null;
         }
 
         private void FixedUpdate()
         {
-            if (h.transform.position.y > 0) return;
-            if (df != null) return;
+            if (_h.transform.position.y > 0) return;
+            if (_df != null) return;
 
-            df = DreamFall();
-            StartCoroutine(df);
+            _df = DreamFall();
+            StartCoroutine(_df);
         }
 
         private IEnumerator DreamFall()
         {
             #region Freeze Camera
-            c.FreezeInPlace(true);
+            _c.FreezeInPlace(true);
             #endregion
 
             #region Fade Out
 
-            foreach (var item in hGo.GetComponentsInChildren<PlayMakerFSM>())
+            foreach (var item in _hGo.GetComponentsInChildren<PlayMakerFSM>())
             {
                 item.SendEvent("FSM CANCEL");
             }
-            hGo.LocateMyFSM("ProxyFSM").FsmVariables.GetFsmBool("No Charms").Value = false;
-            h.RelinquishControl();
+            _hGo.LocateMyFSM("ProxyFSM").FsmVariables.GetFsmBool("No Charms").Value = false;
+            _h.RelinquishControl();
             // Spawn "Audio Player Actor" at the knight's position with the "dream_enter" audioclip, at 1-1 pitch with 1 volume, 0 delay, maybe store?
-            h.StopAnimationControl();
+            _h.StopAnimationControl();
             foreach (var item in GameObject.Find("HUD Blanker White").GetComponentsInChildren<PlayMakerFSM>())
                 item.SendEvent("FADE IN");
             GameObject.Find("HUD Blanker White").LocateMyFSM("Blanker Control").FsmVariables.GetFsmFloat("Fade Time").Value = 0.9f;
@@ -60,11 +54,11 @@ namespace TestOfTeamwork.MonoBehaviours
             #endregion
 
             #region New Scene
-            g.TimePasses();
-            g.ResetSemiPersistentItems();
+            _g.TimePasses();
+            _g.ResetSemiPersistentItems();
             GameObject.Find("MainCamera").LocateMyFSM("CameraFade").FsmVariables.GetFsmBool("No Fade").Value = true;
-            hGo.LocateMyFSM("Dream Return").FsmVariables.GetFsmBool("Dream Returning").Value = true;
-            h.EnterWithoutInput(true);
+            _hGo.LocateMyFSM("Dream Return").FsmVariables.GetFsmBool("Dream Returning").Value = true;
+            _h.EnterWithoutInput(true);
             #endregion
 
             #region Waterways

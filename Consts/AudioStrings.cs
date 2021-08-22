@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Logger = Modding.Logger;
 
 namespace TestOfTeamwork.Consts
 {
@@ -34,11 +33,11 @@ namespace TestOfTeamwork.Consts
         private const string HealSfxFile = "hk_focus_health_heal";
         #endregion Singleshots
 
-        private Dictionary<string, AudioClip> dict;
+        private Dictionary<string, AudioClip> _dict;
 
         public AudioStrings(SceneChanger sc)
         {
-            dict = new Dictionary<string, AudioClip>();
+            _dict = new Dictionary<string, AudioClip>();
             var tmpAudio = new Dictionary<string, string>();
             tmpAudio.Add(ToT01Key, ToT01File);
             tmpAudio.Add(ToT02Key, ToT02File);
@@ -53,22 +52,14 @@ namespace TestOfTeamwork.Consts
 
             foreach (var pair in tmpAudio)
             {
-                Log($"Loading Audio '{pair.Value}'");
-                dict.Add(pair.Key, sc.AbOverallMat.LoadAsset<AudioClip>(pair.Value));
-                Log($"Loaded Audio '{pair.Value}'!");
-                Object.DontDestroyOnLoad(dict[pair.Key]);
-                Log($"Made '{pair.Value}' not be deleted!");
+                _dict.Add(pair.Key, sc.AbOverallMat.LoadAsset<AudioClip>(pair.Value));
+                Object.DontDestroyOnLoad(_dict[pair.Key]);
             }
         }
 
         public AudioClip Get(string key)
         {
-            return dict[key];
-        }
-
-        private void Log(string message)
-        {
-            Logger.Log($"[ToT][Audio] - {message}");
+            return _dict[key];
         }
     }
 }
