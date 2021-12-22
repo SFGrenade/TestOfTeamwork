@@ -17,7 +17,7 @@ namespace TestOfTeamwork
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const bool Debug = true;
+        private const bool Debug = false;
         private const string AbPath = "E:\\Github_Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
@@ -93,37 +93,37 @@ namespace TestOfTeamwork
         private void OnGameManagerRefreshTilemapInfo(On.GameManager.orig_RefreshTilemapInfo orig, GameManager self, string targetScene)
         {
             orig(self, targetScene);
-            if (targetScene == TransitionGateNames.Tot01)
-            {
-                float width = 192;
-                float height = 64;
-                self.tilemap.width = (int)width;
-                self.tilemap.height = (int)height;
-                self.sceneWidth = width;
-                self.sceneHeight = height;
-                FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
-            }
-            else if (targetScene == TransitionGateNames.Tot02)
-            {
-                float width = 128;
-                float height = 64;
-                self.tilemap.width = (int)width;
-                self.tilemap.height = (int)height;
-                self.sceneWidth = width;
-                self.sceneHeight = height;
-                FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
-            }
-            else if (targetScene == TransitionGateNames.Tot03)
-            {
-                float width = 96;
-                float height = 96;
-                self.tilemap.width = (int)width;
-                self.tilemap.height = (int)height;
-                self.sceneWidth = width;
-                self.sceneHeight = height;
-                FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
-            }
-            else if (targetScene == TransitionGateNames.TotEndless)
+            //if (targetScene == TransitionGateNames.Tot01)
+            //{
+            //    float width = 192;
+            //    float height = 64;
+            //    self.tilemap.width = (int)width;
+            //    self.tilemap.height = (int)height;
+            //    self.sceneWidth = width;
+            //    self.sceneHeight = height;
+            //    FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
+            //}
+            //else if (targetScene == TransitionGateNames.Tot02)
+            //{
+            //    float width = 128;
+            //    float height = 64;
+            //    self.tilemap.width = (int)width;
+            //    self.tilemap.height = (int)height;
+            //    self.sceneWidth = width;
+            //    self.sceneHeight = height;
+            //    FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
+            //}
+            //else if (targetScene == TransitionGateNames.Tot03)
+            //{
+            //    float width = 96;
+            //    float height = 96;
+            //    self.tilemap.width = (int)width;
+            //    self.tilemap.height = (int)height;
+            //    self.sceneWidth = width;
+            //    self.sceneHeight = height;
+            //    FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
+            //}
+            /*else*/ if (targetScene == TransitionGateNames.TotEndless)
             {
                 float width = 32;
                 float height = 32;
@@ -143,16 +143,16 @@ namespace TestOfTeamwork
                 self.sceneHeight = height;
                 FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
             }
-            else if (targetScene == TransitionGateNames.TotClaus)
-            {
-                float width = 330;
-                float height = 17;
-                self.tilemap.width = (int)width;
-                self.tilemap.height = (int)height;
-                self.sceneWidth = width;
-                self.sceneHeight = height;
-                FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
-            }
+            //else if (targetScene == TransitionGateNames.TotClaus)
+            //{
+            //    float width = 330;
+            //    float height = 17;
+            //    self.tilemap.width = (int)width;
+            //    self.tilemap.height = (int)height;
+            //    self.sceneWidth = width;
+            //    self.sceneHeight = height;
+            //    FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
+            //}
         }
 
         public void CR_Change_Room_temple(Scene scene)

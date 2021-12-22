@@ -3,12 +3,15 @@ using SFCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
+using MonoMod.RuntimeDetour;
 using TestOfTeamwork.Consts;
 using TestOfTeamwork.MonoBehaviours;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 using SFCore.Generics;
+using Logger = Modding.Logger;
 
 namespace TestOfTeamwork
 {
@@ -54,6 +57,7 @@ namespace TestOfTeamwork
                 new ValueTuple<string, string>("White_Palace_03_hub", "WhiteBench"),
                 new ValueTuple<string, string>("Crossroads_07", "Breakable Wall_Silhouette"),
                 new ValueTuple<string, string>("Deepnest_East_Hornet_boss", "Hornet Outskirts Battle Encounter"),
+                new ValueTuple<string, string>("Deepnest_East_Hornet_boss", "Hornet Boss 2"),
                 new ValueTuple<string, string>("White_Palace_03_hub", "door1"),
                 new ValueTuple<string, string>("White_Palace_03_hub", "Dream Entry")
             };
@@ -135,6 +139,7 @@ namespace TestOfTeamwork
             }
             else if (scene == TransitionGateNames.Tot01)
             {
+                GameManager.instance.AwardAchievement("totTest");
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
             else if (scene == TransitionGateNames.Tot02)
@@ -167,7 +172,7 @@ namespace TestOfTeamwork
         {
 #if DEBUG_CHARMS
             // There probably is a better way to do this, but for now take this
-            #region Custom Charms
+#region Custom Charms
             if (key.StartsWith("CHARM_NAME_"))
             {
                 int charmNum = int.Parse(key.Split('_')[2]);
@@ -184,7 +189,7 @@ namespace TestOfTeamwork
                     return "CHARM DESC";
                 }
             }
-            #endregion
+#endregion
 #endif
             if (LangStrings.ContainsKey(key, sheet))
             {
@@ -224,7 +229,11 @@ namespace TestOfTeamwork
             var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
             if (tmpField != null)
             {
-                return (bool)tmpField.GetValue(SaveSettings);
+                return (bool) tmpField.GetValue(SaveSettings);
+            }
+            if (target == "alwaysFalse")
+            {
+                return false;
             }
             return orig;
         }

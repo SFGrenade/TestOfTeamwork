@@ -6,7 +6,7 @@
         public bool SFGrenadeTestOfTeamworkHornetCompanion = false;
 
         // Bosses
-        public bool SFGrenadeTestOfTeamworkEncounterBeforeBoss = false;
+        public bool SFGrenadeTestOfTeamworkEncounteredWeaverPrincess = false;
         public bool SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = false;
 
         // Areas

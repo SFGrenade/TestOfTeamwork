@@ -24,6 +24,7 @@ namespace TestOfTeamwork
         public static GameObject WhiteBenchPrefab { get; private set; }
         public static GameObject WpLeverPrefab { get; private set; }
         public static GameObject BreakableWallPrefab { get; private set; }
+        public static GameObject Hornet2BossEncounterPrefab { get; private set; }
         public static GameObject Hornet2BossPrefab { get; private set; }
         public static GameObject ShinyPrefab { get; private set; }
         public static GameObject Wp03Door { get; private set; }
@@ -97,7 +98,9 @@ namespace TestOfTeamwork
                 }
             }
             SetInactive(PopQuakeFloorPrefab);
-            Hornet2BossPrefab = UObject.Instantiate(preloadedObjects["Deepnest_East_Hornet_boss"]["Hornet Outskirts Battle Encounter"]);
+            Hornet2BossEncounterPrefab = UObject.Instantiate(preloadedObjects["Deepnest_East_Hornet_boss"]["Hornet Outskirts Battle Encounter"]);
+            SetInactive(Hornet2BossEncounterPrefab);
+            Hornet2BossPrefab = UObject.Instantiate(preloadedObjects["Deepnest_East_Hornet_boss"]["Hornet Boss 2"]);
             SetInactive(Hornet2BossPrefab);
             ShinyPrefab = UObject.Instantiate(preloadedObjects["Grimm_Divine"]["Charm Holder"]);
             {

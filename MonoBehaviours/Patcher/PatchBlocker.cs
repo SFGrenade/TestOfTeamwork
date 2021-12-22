@@ -127,7 +127,7 @@ namespace TestOfTeamwork.MonoBehaviours.Patcher
 
                 blockerFsm.SetState("Pause");
 
-                blockerFsm.MakeLog(true);
+                //blockerFsm.MakeLog(true);
 
                 actualBlocker.SetActive(true);
                 Destroy(gameObject);
