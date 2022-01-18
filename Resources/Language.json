@@ -1,0 +1,59 @@
+{
+  "DE": {
+  },
+  "EN": {
+    "UI": {
+      "SFGrenadeTestOfTeamwork_HornetInvName": "Weaver's Necklace",
+      "SFGrenadeTestOfTeamwork_HornetInvDesc": "A necklace Hornet gave you to show her trust.<br>She will help you traverse faded passages."
+    },
+    "Achievements": {
+      "SFGrenadeTestOfTeamwork_Achievement_Title_DefeatedWeaverPrincess": "Weaver Princess",
+      "SFGrenadeTestOfTeamwork_Achievement_Text_DefeatedWeaverPrincess": "Defeat the Weaver Princess"
+    },
+    "CP2": {
+      "SFGrenadeTestOfTeamwork_TotLoreTablet": "Those born of god<br>Given higher thought<br>Work together to achieve<br>Lost power to retrieve",
+      "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>by SFGrenade<br>Credits<br><page>SFGrenade:<br>Ideas<br>Sprites & Music<br>Programming<br><page>NoSoundlow:<br>Main idea of DreamKing<br><page>profdrmops:<br>Boss idea<br>Several sprites<br><page>Zaliant:<br>Music<br>Major playtesting<br>Platforming suggestions<br><page>SalehAce1:<br>Code to borrow<br>Playtesting<br><page>56:<br>Playtesting<br>Bug reporting<br><page>Araraura:<br>Major bug reporting<br>Playtesting<br><page>Laucian:<br>Platforming suggestions<br><page>Chrome:<br>Platforming suggestions<br><page>fireb0rn:<br>Promotion<br>Playtesting<br>Platforming suggestions<br><page>Void Ruby:<br>Playtesting<br><page>Special Thanks:<br>NoSoundlow & profdrmops<br>Members of the Hollow Knight Discord<br>Members of the Hollow Knight Modding Discord",
+      "SFGrenadeTestOfTeamwork_NotFinishedTabled": "Those born of god<br>Given higher thought<br>Will be back for more<br>In the future continue to soar<br><page>tldr:<br>This part is not finished.<br>Thanks for understanding.<br>~ SFGrenade"
+    },
+    "Titles": {
+      "SFGrenadeTestOfTeamwork_WeaverPrincessName_SUPER": "Weaver Princess",
+      "SFGrenadeTestOfTeamwork_WeaverPrincessName_MAIN": "Hornet",
+      "SFGrenadeTestOfTeamwork_WeaverPrincessName_SUB": "",
+      "SFGrenadeTestOfTeamwork_TotAreaTitle_SUPER": "Test of",
+      "SFGrenadeTestOfTeamwork_TotAreaTitle_MAIN": "Teamwork",
+      "SFGrenadeTestOfTeamwork_TotAreaTitle_SUB": "",
+      "SFGrenadeTestOfTeamwork_EndlessAreaTitle_SUPER": "sometimes i think that",
+      "SFGrenadeTestOfTeamwork_EndlessAreaTitle_MAIN": "i shouldn't be here",
+      "SFGrenadeTestOfTeamwork_EndlessAreaTitle_SUB": "but i think that's ok"
+    },
+    "Hornet": {
+      "CUSTOM_HORNET_PRE_FINAL_BATTLE": "You look like you want to show me something.<page>I will come when you want, wherever that may be.",
+      "SFGrenadeTestOfTeamwork_HornetMonologue1": "TODO:<page>Add text that says something about this place<br>and the weirdo in the background",
+      "SFGrenadeTestOfTeamwork_HornetMonologue2": "TODO:<page>Add text that says something about the particles<br>that fell from above<br>to give them time to dissappear"
+    },
+    "Enemy Dreams": {
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN1": "Entry 1",
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN2": "Entry 2",
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN3": "Entry 3"
+    },
+    "MISC": {
+      "TotAreaTitle_Event": "SFGrenadeTestOfTeamwork_TotAreaTitle"
+    }
+  },
+  "ES": {
+  },
+  "FR": {
+  },
+  "IT": {
+  },
+  "JA": {
+  },
+  "KO": {
+  },
+  "PT": {
+  },
+  "RU": {
+  },
+  "ZH": {
+  }
+}
