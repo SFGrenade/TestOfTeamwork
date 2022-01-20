@@ -12,6 +12,7 @@
         public const string TotEndless = Tot + "Endless";
         public const string TotDropdown = Tot + "Dropdown";
         public const string TotClaus = "SF_ToT_Claustrophobia";
+        public const string TotOrganRoom = "sf_tot_organ";
         #endregion Scene Names
         #region Gateway Names
         public const string Wp06Tot01 = "sf_tot_right1";
@@ -24,6 +25,7 @@
         public const string Tot03Tot01 = "sf_tot_bot1";
         public const string Tot02Tot03 = "sf_tot_right1";
         public const string Tot03Tot02 = "sf_tot_left1";
+
         #endregion Gateway Names
     }
 }

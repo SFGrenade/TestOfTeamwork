@@ -133,12 +133,14 @@ namespace TestOfTeamwork.MonoBehaviours
             GameObject newCorpse = GameObject.Instantiate(origCorpse);
             newCorpse.SetActive(false);
             PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
+            FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
             corpseControlFsm.RemoveAction("Set PD", 2);
             corpseControlFsm.RemoveAction("Set PD", 0);
             corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
             corpseControlFsm.InsertMethod("End", () =>
             {
                 newCorpse.SetActive(false);
+                corpseControlFsmVars.FindFsmGameObject("Thread").Value.SetActive(false);
                 BlockerGo.SetActive(false);
             }, 0);
             hornetEDEU.SetAttr("corpsePrefab", newCorpse);

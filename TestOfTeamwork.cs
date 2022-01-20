@@ -158,6 +158,14 @@ namespace TestOfTeamwork
             {
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
+            else if (scene == TransitionGateNames.TotClaus)
+            {
+                GameManager.instance.RefreshTilemapInfo(scene);
+            }
+            else if (scene == TransitionGateNames.TotOrganRoom)
+            {
+                GameManager.instance.RefreshTilemapInfo(scene);
+            }
         }
 
         private void SaveTotGlobalSettings()
