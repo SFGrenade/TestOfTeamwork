@@ -18,7 +18,7 @@ namespace TestOfTeamwork.MonoBehaviours
         public GameObject AdditionalEffects;
         public string FightSnapShot = "Normal";
         public AudioClip[] FightAudioClips = new AudioClip[6];
-        public GameObject BossGo;
+        public GameObject BlockerGo;
 
         private MusicCue fightingMusicCue;
 
@@ -44,6 +44,15 @@ namespace TestOfTeamwork.MonoBehaviours
             PlayMakerFSM destroyFsm = hornetBoss.LocateMyFSM("destroy_if_playerdatabool");
             FsmVariables destroyFsmVars = destroyFsm.FsmVariables;
             destroyFsmVars.FindFsmString("playerData bool").Value = DefeatBoolName;
+            
+
+            HealthManager hornetHm = hornetBoss.GetComponent<HealthManager>();
+            hornetHm.hp = 3000;
+            
+            PlayMakerFSM stunControlFsm = hornetBoss.LocateMyFSM("Stun Control");
+            FsmVariables stunControlFsmVars = stunControlFsm.FsmVariables;
+            stunControlFsmVars.FindFsmInt("Stun Combo").Value = hornetHm.hp;
+            stunControlFsmVars.FindFsmInt("Stun Hit Max").Value = hornetHm.hp;
             
             PlayMakerFSM controlFsm = hornetBoss.LocateMyFSM("Control");
             FsmVariables controlFsmVars = controlFsm.FsmVariables;
@@ -85,10 +94,7 @@ namespace TestOfTeamwork.MonoBehaviours
             });
             controlFsm.GetAction<SetFsmString>("Refight Wake", 14).setValue = "SFGrenadeTestOfTeamwork_WeaverPrincessName";
             controlFsm.GetAction<SetFsmString>("Flourish", 6).setValue = "SFGrenadeTestOfTeamwork_WeaverPrincessName";
-            controlFsm.GetAction<IntCompare>("Escalation", 2).integer2 = 750;
-
-            HealthManager hornetHm = hornetBoss.GetComponent<HealthManager>();
-            hornetHm.hp = 1500;
+            controlFsm.GetAction<IntCompare>("Escalation", 2).integer2 = hornetHm.hp / 2;
 
             EnemyDreamnailReaction hornetEdr = hornetBoss.GetComponent<EnemyDreamnailReaction>();
             hornetEdr.SetConvoTitle("SFGrenadeTestOfTeamwork_WeaverPrincessDN");
@@ -97,9 +103,24 @@ namespace TestOfTeamwork.MonoBehaviours
             hornetR.SetAttr("recoilSpeedBase", 10f);
             hornetR.SetAttr("recoilDuration", 0.15f);
 
+            EnemyDeathEffects hornetEDEU = hornetBoss.GetComponent<EnemyDeathEffectsUninfected>();
+            GameObject origCorpse = hornetEDEU.GetAttr<EnemyDeathEffects, GameObject>("corpsePrefab");
+            GameObject newCorpse = GameObject.Instantiate(origCorpse);
+            newCorpse.SetActive(false);
+            PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
+            corpseControlFsm.RemoveAction("Set PD", 2);
+            corpseControlFsm.RemoveAction("Set PD", 0);
+            corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
+            corpseControlFsm.InsertMethod("End", () =>
+            {
+                BlockerGo.SetActive(false);
+            }, 0);
+            hornetEDEU.SetAttr("corpsePrefab", newCorpse);
+
             AdditionalEffects.transform.SetParent(hornetBoss.transform, false);
             hornetBoss.transform.position = transform.position;
             hornetBoss.SetActive(true);
+            BlockerGo.SetActive(true);
         }
 
         private void Log(string message)
