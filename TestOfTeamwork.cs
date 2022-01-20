@@ -139,7 +139,6 @@ namespace TestOfTeamwork
             }
             else if (scene == TransitionGateNames.Tot01)
             {
-                GameManager.instance.AwardAchievement("totTest");
                 GameManager.instance.RefreshTilemapInfo(scene);
             }
             else if (scene == TransitionGateNames.Tot02)
