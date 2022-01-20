@@ -68,21 +68,24 @@ namespace TestOfTeamwork.MonoBehaviours
             controlFsmVars.FindFsmFloat("Run Wait Max").Value = 0.5f;
             controlFsmVars.FindFsmFloat("Stun Air Speed").Value = 15f;
 
-            controlFsmVars.FindFsmFloat("Wall X Left").Value = 8f;
-            controlFsmVars.FindFsmFloat("Wall X Right").Value = 40f;
+            Rect h2Arena = new Rect(15, 27, 23, 13);
+            Rect wpArena = new Rect(8, 24, 32, 22);
 
-            controlFsmVars.FindFsmFloat("Jump X").Value = 39f;
-            controlFsmVars.FindFsmFloat("Jump Y").Value = 9f;
+            controlFsmVars.FindFsmFloat("Wall X Left").Value = wpArena.xMin + 0.15f;
+            controlFsmVars.FindFsmFloat("Wall X Right").Value = wpArena.xMax - 0.15f;
 
-            controlFsmVars.FindFsmFloat("Left X").Value = 9f;
-            controlFsmVars.FindFsmFloat("Right X").Value = 39f;
+            //controlFsmVars.FindFsmFloat("Jump X").Value = 39f; // dynamically set in fsm
+            //controlFsmVars.FindFsmFloat("Jump Y").Value = 9f; // dynamically set in fsm
 
-            controlFsmVars.FindFsmFloat("Floor Y").Value = 24f;
-            controlFsmVars.FindFsmFloat("Roof Y").Value = 52f;
-            controlFsmVars.FindFsmFloat("Sphere Y").Value = 30.25f;
+            controlFsmVars.FindFsmFloat("Left X").Value = wpArena.xMin + 1.25f;
+            controlFsmVars.FindFsmFloat("Right X").Value = wpArena.xMax - 1.25f;
 
-            controlFsmVars.FindFsmFloat("Throw X L").Value = 15.45f;
-            controlFsmVars.FindFsmFloat("Throw X R").Value = 44.55f;
+            controlFsmVars.FindFsmFloat("Floor Y").Value = wpArena.yMin + 0.55f;
+            controlFsmVars.FindFsmFloat("Roof Y").Value = wpArena.yMax - 1.0f;
+            controlFsmVars.FindFsmFloat("Sphere Y").Value = wpArena.yMin + 7.0f;
+
+            controlFsmVars.FindFsmFloat("Throw X L").Value = wpArena.xMin + ((wpArena.width / 3) - 1f);
+            controlFsmVars.FindFsmFloat("Throw X R").Value = wpArena.xMax - ((wpArena.width / 3) - 1f);
             controlFsm.GetAction<PlayerDataBoolTest>("Inert", 1).boolName = EncounterPdBoolName;
             controlFsm.AddMethod("Wake", () => {
                 AdditionalEffects.SetActive(true);
@@ -135,6 +138,7 @@ namespace TestOfTeamwork.MonoBehaviours
             corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
             corpseControlFsm.InsertMethod("End", () =>
             {
+                newCorpse.SetActive(false);
                 BlockerGo.SetActive(false);
             }, 0);
             hornetEDEU.SetAttr("corpsePrefab", newCorpse);
