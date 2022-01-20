@@ -21,6 +21,8 @@ namespace TestOfTeamwork.MonoBehaviours
         public GameObject BlockerGo;
 
         private MusicCue fightingMusicCue;
+        private static Color32 startColor = new Color32(208, 221, 221, 224); // D0DDDD
+        private static Color32 endColor = new Color32(208, 160, 160, 224); // D0A0A0
 
         public void Start()
         {
@@ -44,23 +46,23 @@ namespace TestOfTeamwork.MonoBehaviours
             PlayMakerFSM destroyFsm = hornetBoss.LocateMyFSM("destroy_if_playerdatabool");
             FsmVariables destroyFsmVars = destroyFsm.FsmVariables;
             destroyFsmVars.FindFsmString("playerData bool").Value = DefeatBoolName;
-            
 
+            int maxHp = 3000;
             HealthManager hornetHm = hornetBoss.GetComponent<HealthManager>();
-            hornetHm.hp = 3000;
+            hornetHm.hp = maxHp;
             
             PlayMakerFSM stunControlFsm = hornetBoss.LocateMyFSM("Stun Control");
             FsmVariables stunControlFsmVars = stunControlFsm.FsmVariables;
-            stunControlFsmVars.FindFsmInt("Stun Combo").Value = hornetHm.hp;
-            stunControlFsmVars.FindFsmInt("Stun Hit Max").Value = hornetHm.hp;
+            stunControlFsmVars.FindFsmInt("Stun Combo").Value = maxHp;
+            stunControlFsmVars.FindFsmInt("Stun Hit Max").Value = maxHp;
             
             PlayMakerFSM controlFsm = hornetBoss.LocateMyFSM("Control");
             FsmVariables controlFsmVars = controlFsm.FsmVariables;
-            controlFsmVars.FindFsmFloat("Gravity").Value = 2f;
+            controlFsmVars.FindFsmFloat("Gravity").Value = 2.2f;
             controlFsmVars.FindFsmFloat("A Dash Speed").Value = 40f;
             controlFsmVars.FindFsmFloat("Evade Speed").Value = 25f;
             controlFsmVars.FindFsmFloat("G Dash Speed").Value = -35f;
-            controlFsmVars.FindFsmFloat("Throw Speed").Value = -45f;
+            controlFsmVars.FindFsmFloat("Throw Speed").Value = 45f;
             controlFsmVars.FindFsmFloat("Run Speed").Value = -10f;
             controlFsmVars.FindFsmFloat("Run Wait Min").Value = 0.2f;
             controlFsmVars.FindFsmFloat("Run Wait Max").Value = 0.5f;
@@ -94,7 +96,27 @@ namespace TestOfTeamwork.MonoBehaviours
             });
             controlFsm.GetAction<SetFsmString>("Refight Wake", 14).setValue = "SFGrenadeTestOfTeamwork_WeaverPrincessName";
             controlFsm.GetAction<SetFsmString>("Flourish", 6).setValue = "SFGrenadeTestOfTeamwork_WeaverPrincessName";
-            controlFsm.GetAction<IntCompare>("Escalation", 2).integer2 = hornetHm.hp / 2;
+            controlFsm.GetAction<IntCompare>("Escalation", 2).integer2 = maxHp / 2;
+            controlFsm.RemoveAction("Escalation", 4);
+            controlFsm.InsertMethod("Escalation", () =>
+            {
+                foreach (var ps in AdditionalEffects.GetComponentsInChildren<ParticleSystem>())
+                {
+                    ps.startColor = Color.Lerp(endColor, startColor, ((float) hornetHm.hp) / ((float) maxHp));
+                }
+            }, 0);
+            controlFsm.AddMethod("Escalation", () =>
+            {
+                controlFsmVars.FindFsmFloat("Gravity").Value = 2f; // orig: 2f
+                controlFsmVars.FindFsmFloat("A Dash Speed").Value = 45f; // orig: 40f
+                controlFsmVars.FindFsmFloat("Evade Speed").Value = 30f; // orig: 25f
+                controlFsmVars.FindFsmFloat("G Dash Speed").Value = -40f; // orig: -35f
+                controlFsmVars.FindFsmFloat("Throw Speed").Value = 55f; // orig: 45f
+                controlFsmVars.FindFsmFloat("Run Speed").Value = -15f; // orig: -10f
+                controlFsmVars.FindFsmFloat("Run Wait Min").Value = 0.0f; // orig: 0.2f
+                controlFsmVars.FindFsmFloat("Run Wait Max").Value = 0.3f; // orig: 0.5f
+                controlFsmVars.FindFsmFloat("Stun Air Speed").Value = 20f; // orig: 15f
+            });
 
             EnemyDreamnailReaction hornetEdr = hornetBoss.GetComponent<EnemyDreamnailReaction>();
             hornetEdr.SetConvoTitle("SFGrenadeTestOfTeamwork_WeaverPrincessDN");
