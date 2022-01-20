@@ -88,6 +88,7 @@ namespace TestOfTeamwork.MonoBehaviours
             controlFsmVars.FindFsmFloat("Throw X R").Value = wpArena.xMax - ((wpArena.width / 3) - 1f);
             controlFsm.GetAction<PlayerDataBoolTest>("Inert", 1).boolName = EncounterPdBoolName;
             controlFsm.AddMethod("Wake", () => {
+                BlockerGo.SetActive(true);
                 AdditionalEffects.SetActive(true);
             });
             controlFsm.GetAction<ApplyMusicCue>("Music", 0).musicCue = fightingMusicCue;
@@ -95,6 +96,7 @@ namespace TestOfTeamwork.MonoBehaviours
             controlFsm.GetAction<ApplyMusicCue>("Music (not GG)", 1).musicCue = fightingMusicCue;
             controlFsm.GetAction<TransitionToAudioSnapshot>("Music (not GG)", 2).snapshot = _musicAm.FindSnapshot(FightSnapShot);
             controlFsm.AddMethod("Refight Wake", () => {
+                BlockerGo.SetActive(true);
                 AdditionalEffects.SetActive(true);
             });
             controlFsm.GetAction<SetFsmString>("Refight Wake", 14).setValue = "SFGrenadeTestOfTeamwork_WeaverPrincessName";
@@ -149,7 +151,6 @@ namespace TestOfTeamwork.MonoBehaviours
             AdditionalEffects.transform.SetParent(hornetBoss.transform, false);
             hornetBoss.transform.position = transform.position;
             hornetBoss.SetActive(true);
-            BlockerGo.SetActive(true);
         }
 
         private void Log(string message)
