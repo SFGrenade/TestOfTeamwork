@@ -123,6 +123,7 @@ namespace TestOfTeamwork.MonoBehaviours
 
             EnemyDreamnailReaction hornetEdr = hornetBoss.GetComponent<EnemyDreamnailReaction>();
             hornetEdr.SetConvoTitle("SFGrenadeTestOfTeamwork_WeaverPrincessDN");
+            hornetEdr.SetAttr("convoAmount", 1);
 
             Recoil hornetR = hornetBoss.GetComponent<Recoil>();
             hornetR.SetAttr("recoilSpeedBase", 10f);

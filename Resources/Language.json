@@ -13,7 +13,8 @@
     "CP2": {
       "SFGrenadeTestOfTeamwork_TotLoreTablet": "Those born of god<br>Given higher thought<br>Work together to achieve<br>Lost power to retrieve",
       "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>by SFGrenade<br>Credits<br><page>SFGrenade:<br>Ideas<br>Sprites & Music<br>Programming<br><page>NoSoundlow:<br>Main idea of DreamKing<br><page>profdrmops:<br>Boss idea<br>Several sprites<br><page>Zaliant:<br>Music<br>Major playtesting<br>Platforming suggestions<br><page>Chaktis:<br>NPC Sprites<br><page>SalehAce1:<br>Code to borrow<br>Playtesting<br><page>56:<br>Playtesting<br>Bug reporting<br><page>Araraura:<br>Major bug reporting<br>Playtesting<br><page>Laucian:<br>Platforming suggestions<br><page>Chrome:<br>Platforming suggestions<br><page>fireb0rn:<br>Promotion<br>Playtesting<br>Platforming suggestions<br><page>Void Ruby:<br>Playtesting<br><page>Special Thanks:<br>NoSoundlow & profdrmops<br>Members of the Hollow Knight Discord<br>Members of the Hollow Knight Modding Discord",
-      "SFGrenadeTestOfTeamwork_NotFinishedTabled": "Those born of god<br>Given higher thought<br>Will be back for more<br>In the future continue to soar<br><page>tldr:<br>This part is not finished.<br>Thanks for understanding.<br>~ SFGrenade"
+      "SFGrenadeTestOfTeamwork_NotFinishedTabled": "Those born of god<br>Given higher thought<br>Will be back for more<br>In the future continue to soar<br><page>tldr:<br>This part is not finished.<br>Thanks for understanding.<br>~ SFGrenade",
+      "SFGrenadeTestOfTeamwork_NPC_Talk": "...<br><page>This organ doesn't play by itself...<br><page>"
     },
     "Titles": {
       "SFGrenadeTestOfTeamwork_WeaverPrincessName_SUPER": "Weaver Princess",
@@ -28,13 +29,11 @@
     },
     "Hornet": {
       "CUSTOM_HORNET_PRE_FINAL_BATTLE": "You look like you want to show me something.<page>I will come when you want, wherever that may be.",
-      "SFGrenadeTestOfTeamwork_HornetMonologue1": "TODO:<page>Add text that says something about this place<br>and the weirdo in the background",
-      "SFGrenadeTestOfTeamwork_HornetMonologue2": "TODO:<page>Add text that says something about the particles<br>that fell from above<br>to give them time to dissappear"
+      "SFGrenadeTestOfTeamwork_HornetMonologue1": "So this is what you wanted to show me.<page>But who is th-",
+      "SFGrenadeTestOfTeamwork_HornetMonologue2": "What was that?<br>It came from up there<page>...<page>Light...<br>Faded light..."
     },
     "Enemy Dreams": {
-      "SFGrenadeTestOfTeamwork_WeaverPrincessDN1": "Entry 1",
-      "SFGrenadeTestOfTeamwork_WeaverPrincessDN2": "Entry 2",
-      "SFGrenadeTestOfTeamwork_WeaverPrincessDN3": "Entry 3"
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN1": "Faded light..."
     },
     "MISC": {
       "TotAreaTitle_Event": "SFGrenadeTestOfTeamwork_TotAreaTitle"
