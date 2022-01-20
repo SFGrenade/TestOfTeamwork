@@ -6,6 +6,7 @@ using HutongGames.PlayMaker.Actions;
 using UnityEngine.Audio;
 using SFCore.MonoBehaviours;
 using System.Linq;
+using TestOfTeamwork.Consts;
 
 namespace TestOfTeamwork.MonoBehaviours
 {
@@ -139,6 +140,10 @@ namespace TestOfTeamwork.MonoBehaviours
             FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
             corpseControlFsm.RemoveAction("Set PD", 2);
             corpseControlFsm.RemoveAction("Set PD", 0);
+            corpseControlFsm.AddMethod("Set PD", () =>
+            {
+                GameManager.instance.AwardAchievement(AchievementStrings.DefeatedWeaverPrincessKey);
+            });
             corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
             corpseControlFsm.InsertMethod("End", () =>
             {
