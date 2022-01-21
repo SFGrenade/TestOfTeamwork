@@ -12,7 +12,7 @@
     },
     "CP2": {
       "SFGrenadeTestOfTeamwork_TotLoreTablet": "Those born of god<br>Given higher thought<br>Work together to achieve<br>Lost power to retrieve",
-      "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>by SFGrenade<br>Credits<br><page>SFGrenade:<br>Ideas<br>Sprites & Music<br>Programming<br><page>NoSoundlow:<br>Main idea of DreamKing<br><page>profdrmops:<br>Boss idea<br>Several sprites<br><page>Zaliant:<br>Music<br>Major playtesting<br>Platforming suggestions<br><page>Chaktis:<br>NPC Sprites<br><page>HelenSB:<br>Translation & Revising<br><page>SalehAce1:<br>Borrowed code<br>Playtesting<br><page>56:<br>Playtesting<br>Bug reporting<br><page>Araraura:<br>Major bug reporting<br>Playtesting<br><page>Laucian:<br>Platforming suggestions<br><page>Chrome:<br>Platforming suggestions<br><page>fireb0rn:<br>Promotion<br>Playtesting<br>Platforming suggestions<br><page>Astral Ruby:<br>Playtesting<br><page>Special Thanks:<br>NoSoundlow & profdrmops<br>Members of the Hollow Knight Discord<br>Members of the Hollow Knight Modding Discord",
+      "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>by SFGrenade<br>Credits<br><page>SFGrenade:<br>Ideas<br>Sprites & Music<br>Programming<br><page>NoSoundlow:<br>Main idea of DreamKing<br><page>profdrmops:<br>Boss idea<br>Several sprites<br><page>Zaliant:<br>Music<br>Major playtesting<br>Platforming suggestions<br><page>Chaktis:<br>NPC Sprites<br><page>HelenSB:<br>Translation & Revising<br><page>Clazex:<br>Translation<br><page>SalehAce1:<br>Borrowed code<br>Playtesting<br><page>56:<br>Playtesting<br>Bug reporting<br><page>Araraura:<br>Major bug reporting<br>Playtesting<br><page>Laucian:<br>Platforming suggestions<br><page>Chrome:<br>Platforming suggestions<br><page>fireb0rn:<br>Promotion<br>Playtesting<br>Platforming suggestions<br><page>Astral Ruby:<br>Playtesting<br><page>Special Thanks:<br>NoSoundlow & profdrmops<br>Members of the Hollow Knight Discord<br>Members of the Hollow Knight Modding Discord",
       "SFGrenadeTestOfTeamwork_NotFinishedTabled": "Those born of god<br>Given higher thought<br>Will be back for more<br>In the future continue to soar<br><page>tldr:<br>This part is not finished.<br>Thanks for understanding.<br>~ SFGrenade",
       "SFGrenadeTestOfTeamwork_NPC_Talk": "...<br><page>This organ doesn't play by itself..."
     },
@@ -50,7 +50,7 @@
     },
     "CP2": {
       "SFGrenadeTestOfTeamwork_TotLoreTablet": "De un dios su creación<br>Con el don de iluminación<br>Juntos para poder lograr<br>Un poder perdido encontrar",
-      "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>de SFGrenade<br>Créditos<br><page>SFGrenade:<br>Ideas<br>Sprites & Música<br>Programación<br><page>NoSoundlow:<br>Idea principal de DreamKing<br><page>profdrmops:<br>Idea del jefe<br>Varios sprites<br><page>Zaliant:<br>Música<br>Testeo principal<br>Sugerencias de plataformas<br><page>Chaktis:<br>Sprites de PNJ<br><page>HelenSB:<br>Traducción & Revisión<br><page>SalehAce1:<br>Código prestado<br>Testeo<br><page>56:<br>Testeo<br>Informes de errores<br><page>Araraura:<br>Informes de errores principales<br>Testeo<br><page>Laucian:<br>Sugerencias de plataformas<br><page>Chrome:<br>Sugerencias de plataformas<br><page>fireb0rn:<br>Promoción<br>Testeo<br>Sugerencias de plataformas<br><page>Astral Ruby:<br>Testeo<br><page>Agradecimientos especiales:<br>NoSoundlow & profdrmops<br>Miembros del Discord Hollow Knight<br>Miembros del Discord Hollow Knight Modding",
+      "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>de SFGrenade<br>Créditos<br><page>SFGrenade:<br>Ideas<br>Sprites & Música<br>Programación<br><page>NoSoundlow:<br>Idea principal de DreamKing<br><page>profdrmops:<br>Idea del jefe<br>Varios sprites<br><page>Zaliant:<br>Música<br>Testeo principal<br>Sugerencias de plataformas<br><page>Chaktis:<br>Sprites de PNJ<br><page>HelenSB:<br>Traducción & Revisión<br><page>Clazex:<br>Traducción<br><page>SalehAce1:<br>Código prestado<br>Testeo<br><page>56:<br>Testeo<br>Informes de errores<br><page>Araraura:<br>Informes de errores principales<br>Testeo<br><page>Laucian:<br>Sugerencias de plataformas<br><page>Chrome:<br>Sugerencias de plataformas<br><page>fireb0rn:<br>Promoción<br>Testeo<br>Sugerencias de plataformas<br><page>Astral Ruby:<br>Testeo<br><page>Agradecimientos especiales:<br>NoSoundlow & profdrmops<br>Miembros del Discord Hollow Knight<br>Miembros del Discord Hollow Knight Modding",
       "SFGrenadeTestOfTeamwork_NotFinishedTabled": "Those born of god<br>Given higher thought<br>Will be back for more<br>In the future continue to soar<br><page>tldr:<br>This part is not finished.<br>Thanks for understanding.<br>~ SFGrenade",
       "SFGrenadeTestOfTeamwork_NPC_Talk": "...<br><page>Este órgano no se toca solo..."
     },
@@ -90,5 +90,41 @@
   "RU": {
   },
   "ZH": {
+    "UI": {
+      "SFGrenadeTestOfTeamwork_HornetInvName": "编织者项链",
+      "SFGrenadeTestOfTeamwork_HornetInvDesc": "大黄蜂给予你的象征信任的项链。<br>她将带你穿过被忘却的道路。"
+    },
+    "Achievements": {
+      "SFGrenadeTestOfTeamwork_Achievement_Title_DefeatedWeaverPrincess": "编织者公主",
+      "SFGrenadeTestOfTeamwork_Achievement_Text_DefeatedWeaverPrincess": "打败编织者公主"
+    },
+    "CP2": {
+      "SFGrenadeTestOfTeamwork_TotLoreTablet": "Those born of god<br>Given higher thought<br>Work together to achieve<br>Lost power to retrieve",
+      "SFGrenadeTestOfTeamwork_TotCreditsTablet": "Test of Teamwork<br>by SFGrenade<br>鸣谢<br><page>SFGrenade：<br>策划<br>贴图 & 配乐<br>开发<br><page>NoSoundlow：<br>DreamKing 主策划<br><page>profdrmops：<br>Boss 策划<br>若干贴图<br><page>Zaliant：<br>音乐<br>主测试<br>平台跳跃建议<br><page>Chaktis：<br>NPC 贴图<br><page>HelenSB：<br>翻译 & 校对<br><page>Clazex：<br>翻译<br><page>SalehAce1：<br>代码借用<br>测试<br><page>56：<br>测试<br>Bug 反馈<br><page>Araraura：<br>主 Bug 反馈<br>测试<br><page>Laucian：<br>平台跳跃建议<br><page>Chrome：<br>平台跳跃建议<br><page>fireb0rn：<br>宣发<br>测试<br>平台跳跃建议<br><page>Astral Ruby：<br>测试<br><page>特别鸣谢：<br>NoSoundlow & profdrmops<br>空洞骑士 Discord 的成员<br>空洞骑士模组开发 Discord 的成员",
+      "SFGrenadeTestOfTeamwork_NotFinishedTabled": "Those born of god<br>Given higher thought<br>Will be back for more<br>In the future continue to soar<br><page>TL;DR：<br>此部分尚未完成。<br>感谢理解。<br>~ SFGrenade",
+      "SFGrenadeTestOfTeamwork_NPC_Talk": "……<br><page>这个风琴不会自己弹奏自己……"
+    },
+    "Titles": {
+      "SFGrenadeTestOfTeamwork_WeaverPrincessName_SUPER": "编织者公主",
+      "SFGrenadeTestOfTeamwork_WeaverPrincessName_MAIN": "大黄蜂",
+      "SFGrenadeTestOfTeamwork_WeaverPrincessName_SUB": "",
+      "SFGrenadeTestOfTeamwork_TotAreaTitle_SUPER": "Test of",
+      "SFGrenadeTestOfTeamwork_TotAreaTitle_MAIN": "Teamwork",
+      "SFGrenadeTestOfTeamwork_TotAreaTitle_SUB": "",
+      "SFGrenadeTestOfTeamwork_EndlessAreaTitle_SUPER": "有的时侯我在想",
+      "SFGrenadeTestOfTeamwork_EndlessAreaTitle_MAIN": "我不应该来这里",
+      "SFGrenadeTestOfTeamwork_EndlessAreaTitle_SUB": "但我觉得没关系"
+    },
+    "Hornet": {
+      "CUSTOM_HORNET_PRE_FINAL_BATTLE": "你好像想给我看点什么。<page>只要你需要，我就会出现，无论在什么地方。",
+      "SFGrenadeTestOfTeamwork_HornetMonologue1": "那么这就是你想给我看的东西。<page>但那是谁——",
+      "SFGrenadeTestOfTeamwork_HornetMonologue2": "那是什么？<br>它是从那里来的。<page>……<page>光芒……<br>被遗忘的光芒……"
+    },
+    "Enemy Dreams": {
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN_1": "被遗忘的光芒……"
+    },
+    "MISC": {
+      "TotAreaTitle_Event": "SFGrenadeTestOfTeamwork_TotAreaTitle"
+    }
   }
 }
