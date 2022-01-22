@@ -48,7 +48,7 @@ namespace TestOfTeamwork.MonoBehaviours
             FsmVariables destroyFsmVars = destroyFsm.FsmVariables;
             destroyFsmVars.FindFsmString("playerData bool").Value = DefeatBoolName;
 
-            int maxHp = 3000;
+            int maxHp = 3000; // 3000
             HealthManager hornetHm = hornetBoss.GetComponent<HealthManager>();
             hornetHm.hp = maxHp;
             
@@ -142,12 +142,8 @@ namespace TestOfTeamwork.MonoBehaviours
             newCorpse.SetActive(false);
             PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
             FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
-            corpseControlFsm.RemoveAction("Set PD", 2);
-            corpseControlFsm.RemoveAction("Set PD", 0); //corpseControlFsm.GetAction<SetPlayerDataBool>("Set PD", 0).boolName = DefeatBoolName;
-            corpseControlFsm.AddMethod("Set PD", () => //corpseControlFsm.InsertMethod("Land", () =>
-            { //{
-                GameManager.instance.AwardAchievement(AchievementStrings.DefeatedWeaverPrincessKey); //    GameManager.instance.AwardAchievement(AchievementStrings.DefeatedWeaverPrincessKey);
-            }); //}, 0);
+            corpseControlFsm.GetAction<CallMethodProper>("Set PD", 2).parameters[0].stringValue = AchievementStrings.DefeatedWeaverPrincessKey;
+            corpseControlFsm.GetAction<SetPlayerDataBool>("Set PD", 0).boolName = DefeatBoolName;
             corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
             corpseControlFsm.InsertMethod("End", () =>
             {
@@ -155,7 +151,7 @@ namespace TestOfTeamwork.MonoBehaviours
                 corpseControlFsmVars.FindFsmGameObject("Thread").Value.SetActive(false);
                 BlockerGo.SetActive(false);
             }, 0);
-            //corpseControlFsm.SetState(corpseControlFsm.Fsm.StartState);
+            corpseControlFsm.Fsm.RestartOnEnable = true;
             hornetEDEU.SetAttr("corpsePrefab", newCorpse);
 
             AdditionalEffects.transform.SetParent(hornetBoss.transform, false);
@@ -166,11 +162,12 @@ namespace TestOfTeamwork.MonoBehaviours
         private void Log(string message)
         {
             Logger.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
+            Debug.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
         }
 
         private void Log(object message)
         {
-            Logger.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
+            Log($"{message}");
         }
     }
 }
