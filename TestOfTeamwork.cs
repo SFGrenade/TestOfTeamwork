@@ -91,7 +91,7 @@ namespace TestOfTeamwork
             SceneChanger = new SceneChanger(preloadedObjects);
             AudioDict = new AudioStrings(SceneChanger);
 
-            GameManager.instance.StartCoroutine(Register2BossModCore());
+            //GameManager.instance.StartCoroutine(Register2BossModCore());
 
             Log("Initialized");
         }
