@@ -46,12 +46,18 @@ namespace TestOfTeamwork.MonoBehaviours
             blocker = gameObject.Find("Blocker");
 
             var beforeFightPrefab = Instantiate(PrefabHolder.Hornet2BossEncounterPrefab);
+            //beforeFightPrefab.SetActive(false);
             beforeFightPrefab.transform.position = transform.position;
-            beforeFightPrefab.SetActive(true);
+            beforeFightPrefab.SetActive(true); // DEBUG
             beforeFightPrefab.transform.localScale.Scale(transform.localScale);
 
+            //var bfpDIPT = beforeFightPrefab.AddComponent<DeactivateIfPlayerdataTrue>();
+            //bfpDIPT.boolName = nameof(TestOfTeamwork.Instance.SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess);
+            //
             var encounterFsm = beforeFightPrefab.LocateMyFSM("Encounter");
+            //encounterFsm.RemoveAction("Init", 1);
             encounterFsm.GetAction<PlayerDataBoolTest>("Init", 1).boolName = EncounterPdBoolName;
+            encounterFsm.RemoveTransition("Init", "DESTROY");
 
             encounterFsm.RemoveAction("Point", 2);
             encounterFsm.InsertAction("Point", new TransitionToAudioSnapshot() {
@@ -89,7 +95,9 @@ namespace TestOfTeamwork.MonoBehaviours
 
             encounterFsm.InsertMethod("Start Fight", () => {
                 BossGo.SetActive(true);
-            }, 5);
+            }, 5); // 0
+            encounterFsm.SetState(encounterFsm.Fsm.StartState);
+            //beforeFightPrefab.SetActive(true);
         }
 
         private void Log(string message)

@@ -87,7 +87,10 @@ namespace TestOfTeamwork.MonoBehaviours
 
             controlFsmVars.FindFsmFloat("Throw X L").Value = wpArena.xMin + ((wpArena.width / 3) - 1f);
             controlFsmVars.FindFsmFloat("Throw X R").Value = wpArena.xMax - ((wpArena.width / 3) - 1f);
+            ////controlFsm.RemoveAction("Inert", 1);
             controlFsm.GetAction<PlayerDataBoolTest>("Inert", 1).boolName = EncounterPdBoolName;
+            controlFsm.RemoveTransition("Inert", "REFIGHT");
+            controlFsm.RemoveTransition("Inert", "GG BOSS");
             controlFsm.AddMethod("Wake", () => {
                 BlockerGo.SetActive(true);
                 AdditionalEffects.SetActive(true);
@@ -123,6 +126,7 @@ namespace TestOfTeamwork.MonoBehaviours
                 controlFsmVars.FindFsmFloat("Run Wait Max").Value = 0.3f; // orig: 0.5f
                 controlFsmVars.FindFsmFloat("Stun Air Speed").Value = 20f; // orig: 15f
             });
+            controlFsm.SetState(controlFsm.Fsm.StartState);
 
             EnemyDreamnailReaction hornetEdr = hornetBoss.GetComponent<EnemyDreamnailReaction>();
             hornetEdr.SetConvoTitle("SFGrenadeTestOfTeamwork_WeaverPrincessDN");
@@ -139,11 +143,11 @@ namespace TestOfTeamwork.MonoBehaviours
             PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
             FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
             corpseControlFsm.RemoveAction("Set PD", 2);
-            corpseControlFsm.RemoveAction("Set PD", 0);
-            corpseControlFsm.AddMethod("Set PD", () =>
-            {
-                GameManager.instance.AwardAchievement(AchievementStrings.DefeatedWeaverPrincessKey);
-            });
+            corpseControlFsm.RemoveAction("Set PD", 0); //corpseControlFsm.GetAction<SetPlayerDataBool>("Set PD", 0).boolName = DefeatBoolName;
+            corpseControlFsm.AddMethod("Set PD", () => //corpseControlFsm.InsertMethod("Land", () =>
+            { //{
+                GameManager.instance.AwardAchievement(AchievementStrings.DefeatedWeaverPrincessKey); //    GameManager.instance.AwardAchievement(AchievementStrings.DefeatedWeaverPrincessKey);
+            }); //}, 0);
             corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
             corpseControlFsm.InsertMethod("End", () =>
             {
@@ -151,6 +155,7 @@ namespace TestOfTeamwork.MonoBehaviours
                 corpseControlFsmVars.FindFsmGameObject("Thread").Value.SetActive(false);
                 BlockerGo.SetActive(false);
             }, 0);
+            //corpseControlFsm.SetState(corpseControlFsm.Fsm.StartState);
             hornetEDEU.SetAttr("corpsePrefab", newCorpse);
 
             AdditionalEffects.transform.SetParent(hornetBoss.transform, false);
