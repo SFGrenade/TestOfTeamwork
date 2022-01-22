@@ -92,6 +92,7 @@ namespace TestOfTeamwork
             AudioDict = new AudioStrings(SceneChanger);
 
             //GameManager.instance.StartCoroutine(Register2BossModCore());
+            //Platform.Current.EncryptedSharedData.SetInt(AchievementStrings.DefeatedWeaverPrincessKey, 0); // DEBUG
 
             Log("Initialized");
         }

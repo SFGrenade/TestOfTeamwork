@@ -59,15 +59,15 @@ namespace TestOfTeamwork.MonoBehaviours
             
             PlayMakerFSM controlFsm = hornetBoss.LocateMyFSM("Control");
             FsmVariables controlFsmVars = controlFsm.FsmVariables;
-            controlFsmVars.FindFsmFloat("Gravity").Value = 2.2f;
-            controlFsmVars.FindFsmFloat("A Dash Speed").Value = 40f;
-            controlFsmVars.FindFsmFloat("Evade Speed").Value = 25f;
-            controlFsmVars.FindFsmFloat("G Dash Speed").Value = -35f;
-            controlFsmVars.FindFsmFloat("Throw Speed").Value = 45f;
-            controlFsmVars.FindFsmFloat("Run Speed").Value = -10f;
-            controlFsmVars.FindFsmFloat("Run Wait Min").Value = 0.2f;
-            controlFsmVars.FindFsmFloat("Run Wait Max").Value = 0.5f;
-            controlFsmVars.FindFsmFloat("Stun Air Speed").Value = 15f;
+            controlFsmVars.FindFsmFloat("Gravity").Value = 2.2f; // orig: 2.5
+            controlFsmVars.FindFsmFloat("A Dash Speed").Value = 40f; // orig: 35
+            controlFsmVars.FindFsmFloat("Evade Speed").Value = 25f; // orig: 22
+            controlFsmVars.FindFsmFloat("G Dash Speed").Value = -35f; // orig: -30
+            controlFsmVars.FindFsmFloat("Throw Speed").Value = 45f; // orig: 38
+            controlFsmVars.FindFsmFloat("Run Speed").Value = -10f; // orig: -8
+            controlFsmVars.FindFsmFloat("Run Wait Min").Value = 0.2f; // orig: 0.25
+            controlFsmVars.FindFsmFloat("Run Wait Max").Value = 0.5f; // orig: 0.6
+            controlFsmVars.FindFsmFloat("Stun Air Speed").Value = 15f; // orig: 10
 
             Rect h2Arena = new Rect(15, 27, 23, 13);
             Rect wpArena = new Rect(8, 24, 32, 22);
@@ -116,7 +116,7 @@ namespace TestOfTeamwork.MonoBehaviours
             }, 0);
             controlFsm.AddMethod("Escalation", () =>
             {
-                controlFsmVars.FindFsmFloat("Gravity").Value = 2f; // orig: 2f
+                controlFsmVars.FindFsmFloat("Gravity").Value = 2f; // orig: 2.2f
                 controlFsmVars.FindFsmFloat("A Dash Speed").Value = 45f; // orig: 40f
                 controlFsmVars.FindFsmFloat("Evade Speed").Value = 30f; // orig: 25f
                 controlFsmVars.FindFsmFloat("G Dash Speed").Value = -40f; // orig: -35f
@@ -127,6 +127,7 @@ namespace TestOfTeamwork.MonoBehaviours
                 controlFsmVars.FindFsmFloat("Stun Air Speed").Value = 20f; // orig: 15f
             });
             controlFsm.SetState(controlFsm.Fsm.StartState);
+            //controlFsm.MakeLog();
 
             EnemyDreamnailReaction hornetEdr = hornetBoss.GetComponent<EnemyDreamnailReaction>();
             hornetEdr.SetConvoTitle("SFGrenadeTestOfTeamwork_WeaverPrincessDN");
@@ -136,23 +137,52 @@ namespace TestOfTeamwork.MonoBehaviours
             hornetR.SetAttr("recoilSpeedBase", 10f);
             hornetR.SetAttr("recoilDuration", 0.15f);
 
-            EnemyDeathEffects hornetEDEU = hornetBoss.GetComponent<EnemyDeathEffectsUninfected>();
-            GameObject origCorpse = hornetEDEU.GetAttr<EnemyDeathEffects, GameObject>("corpsePrefab");
-            GameObject newCorpse = GameObject.Instantiate(origCorpse);
-            newCorpse.SetActive(false);
-            PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
-            FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
-            corpseControlFsm.GetAction<CallMethodProper>("Set PD", 2).parameters[0].stringValue = AchievementStrings.DefeatedWeaverPrincessKey;
-            corpseControlFsm.GetAction<SetPlayerDataBool>("Set PD", 0).boolName = DefeatBoolName;
-            corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
-            corpseControlFsm.InsertMethod("End", () =>
+            EnemyDeathEffectsUninfected hornetEDEU = hornetBoss.GetComponent<EnemyDeathEffectsUninfected>();
             {
+                //Log("############################################################\n############################################################\n############################################################");
+                GameObject origCorpse = hornetEDEU.GetAttr<EnemyDeathEffects, GameObject>("corpsePrefab");
+                //GameObject newCorpse = hornetEDEU.GetAttr<EnemyDeathEffects, GameObject>("corpsePrefab");
+                GameObject newCorpse = GameObject.Instantiate(origCorpse);
                 newCorpse.SetActive(false);
-                corpseControlFsmVars.FindFsmGameObject("Thread").Value.SetActive(false);
-                BlockerGo.SetActive(false);
-            }, 0);
-            corpseControlFsm.Fsm.RestartOnEnable = true;
-            hornetEDEU.SetAttr("corpsePrefab", newCorpse);
+                PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
+                FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
+                corpseControlFsm.GetAction<CallMethodProper>("Set PD", 2).parameters[0].stringValue = AchievementStrings.DefeatedWeaverPrincessKey;
+                corpseControlFsm.GetAction<SetPlayerDataBool>("Set PD", 0).boolName = DefeatBoolName;
+                corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
+                corpseControlFsm.InsertMethod("Land", () =>
+                {
+                    BlockerGo.SetActive(false);
+                }, 0);
+                corpseControlFsm.AddMethod("Yank", () =>
+                {
+                    newCorpse.SetActive(false);
+                    corpseControlFsmVars.FindFsmGameObject("Thread").Value.SetActive(false);
+                });
+                //corpseControlFsm.MakeLog();
+                hornetEDEU.SetAttr<EnemyDeathEffects, GameObject>("corpsePrefab", newCorpse);
+            }
+            {
+                GameObject origCorpse = hornetEDEU.GetAttr<EnemyDeathEffects, GameObject>("corpsePrefab");
+                //GameObject newCorpse = hornetEDEU.GetAttr<EnemyDeathEffects, GameObject>("corpsePrefab");
+                GameObject newCorpse = GameObject.Instantiate(origCorpse, hornetEDEU.transform.position + hornetEDEU.corpseSpawnPoint, Quaternion.identity, hornetEDEU.transform);
+                newCorpse.SetActive(false);
+                PlayMakerFSM corpseControlFsm = newCorpse.LocateMyFSM("Control");
+                FsmVariables corpseControlFsmVars = corpseControlFsm.FsmVariables;
+                corpseControlFsm.GetAction<CallMethodProper>("Set PD", 2).parameters[0].stringValue = AchievementStrings.DefeatedWeaverPrincessKey;
+                corpseControlFsm.GetAction<SetPlayerDataBool>("Set PD", 0).boolName = DefeatBoolName;
+                corpseControlFsm.ChangeTransition("Land", "FINISHED", "Pause frame");
+                corpseControlFsm.InsertMethod("Land", () =>
+                {
+                    BlockerGo.SetActive(false);
+                }, 0);
+                corpseControlFsm.AddMethod("End", () =>
+                {
+                    newCorpse.SetActive(false);
+                    corpseControlFsmVars.FindFsmGameObject("Thread").Value.SetActive(false);
+                });
+                //corpseControlFsm.MakeLog();
+                hornetEDEU.SetAttr<EnemyDeathEffects, GameObject>("corpse", newCorpse);
+            }
 
             AdditionalEffects.transform.SetParent(hornetBoss.transform, false);
             hornetBoss.transform.position = transform.position;
