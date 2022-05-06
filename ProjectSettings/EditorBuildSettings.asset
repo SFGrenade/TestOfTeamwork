@@ -4,4 +4,22 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/SF_ToT_ToT_01.unity
+    guid: 748227638db8ceb4eaf0f0bc00479773
+  - enabled: 1
+    path: Assets/Scenes/SF_ToT_ToT_02.unity
+    guid: 6a21c215292c39a42bd351c88c24236b
+  - enabled: 1
+    path: Assets/Scenes/SF_ToT_ToT_03.unity
+    guid: ee1ebab7e8e7c1d4498b1dbefb5739bf
+  - enabled: 1
+    path: Assets/Scenes/SF_ToT_ToT_Endless.unity
+    guid: d5782999448c06247a26dbe19995f64e

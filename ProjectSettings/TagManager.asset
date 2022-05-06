@@ -14,29 +14,29 @@ TagManager:
   - UI
   - 
   - 
+  - Terrain
+  - Player
+  - Transition Gates
+  - Enemies
+  - Projectiles
+  - Hero Detector
+  - Terrain Detector
+  - Enemy Detector
+  - Item
+  - Hero Attack
+  - Particle
+  - Interactive Object
+  - Hero Box
+  - Grass
+  - Enemy Attack
+  - Damage All
+  - Bouncer
+  - Soft Terrain
+  - Corpse
+  - UGUI
   - 
-  - Audio
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Map Pin
   - 
   m_SortingLayers:
   - name: Default
