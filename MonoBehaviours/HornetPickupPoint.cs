@@ -159,8 +159,7 @@ namespace TestOfTeamwork.MonoBehaviours
                 _heroController.cState.preventDash = false;
                 _heroController.SetAttr("doubleJump_steps", 0);
                 _heroController.SetAttr("dash_timer", 0.0f);
-                _heroController.SetAttr("airDashed", false);
-                _heroController.SetAttr("doubleJumped", false);
+                _heroController.ResetAirMoves();
                 _heroController.hero_state = ActorStates.airborne;
                 _heroController.AffectedByGravity(true);
 
