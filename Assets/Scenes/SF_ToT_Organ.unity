@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 623536342, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: 623536342, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 48
@@ -2158,7 +2158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 46167085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1798505517, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1798505517, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
@@ -4063,7 +4063,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 385037535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1068394875, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: 1068394875, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameTextConvo: SFGrenadeTestOfTeamwork_NPC_Talk
@@ -7248,7 +7248,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 804275504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1798505517, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1798505517, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
@@ -8588,7 +8588,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1046935592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1081894953, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1081894953, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managerTransform: {fileID: 979}
@@ -8601,7 +8601,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1046935592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1989680822, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: 1989680822, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneType: 0
@@ -8619,72 +8619,72 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   greenChannel:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   blueChannel:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   defaultIntensity: 0.9
   heroLightColor: {r: 1, g: 1, b: 1, a: 0.316}
@@ -11360,7 +11360,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1433843258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1798505517, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1798505517, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
@@ -12694,7 +12694,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674552861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1798505517, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1798505517, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
@@ -12954,7 +12954,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1777088819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1798505517, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1798505517, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
@@ -14739,7 +14739,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2044641757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1798505517, guid: 1bb79d8d70aa5e349bc053fa710a3db3, type: 3}
+  m_Script: {fileID: -1798505517, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
