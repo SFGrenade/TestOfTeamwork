@@ -94,7 +94,53 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
         //GameManager.instance.StartCoroutine(Register2BossModCore());
         //Platform.Current.EncryptedSharedData.SetInt(AchievementStrings.DefeatedWeaverPrincessKey, 0); // DEBUG
 
+        DebugMod.AddActionToKeyBindList(() => {
+                SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion = !SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion;
+                DebugMod.LogToConsole($"'ToT Necklace' toggled to {SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion}.");
+            }, "Toggle Necklace", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() => {
+                SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = !SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess;
+                DebugMod.LogToConsole($"'ToT Boss Dead' toggled to {SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess}.");
+            }, "Toggle Boss Dead", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() => {
+                SaveSettings.SFGrenadeTestOfTeamworkTotOpened = !SaveSettings.SFGrenadeTestOfTeamworkTotOpened;
+                DebugMod.LogToConsole($"'ToT Area Open' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpened}.");
+            }, "Toggle Area Open", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() => {
+                SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut;
+                DebugMod.LogToConsole($"'ToT Shortcut Open' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut}.");
+            }, "Toggle Shortcut Open", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() => {
+                SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem;
+                DebugMod.LogToConsole($"'ToT Totem Accessible' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem}.");
+            }, "Toggle Totem Accessible", "Test of Teamwork", true);
+
         Log("Initialized");
+    }
+
+    public void DebugToggleNecklace()
+    {
+        SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion = !SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion;
+    }
+
+    public void DebugToggleBossDead()
+    {
+        SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = !SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess;
+    }
+
+    public void DebugToggleOpened()
+    {
+        SaveSettings.SFGrenadeTestOfTeamworkTotOpened = !SaveSettings.SFGrenadeTestOfTeamworkTotOpened;
+    }
+
+    public void DebugToggleShortcutOpen()
+    {
+        SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut;
+    }
+
+    public void DebugToggleTotemOpen()
+    {
+        SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem;
     }
 
     private void InitCallbacks()
