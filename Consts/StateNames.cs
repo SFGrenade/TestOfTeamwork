@@ -1,7 +1,6 @@
-﻿namespace TestOfTeamwork.Consts
+﻿namespace TestOfTeamwork.Consts;
+
+internal struct StateNames
 {
-    internal struct StateNames
-    {
-        public const string InvStateHornet = "SF ToT Hornet Companion";
-    }
+    public const string InvStateHornet = "SF ToT Hornet Companion";
 }

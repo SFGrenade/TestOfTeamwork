@@ -33,7 +33,10 @@
       "SFGrenadeTestOfTeamwork_HornetMonologue2": "What was that?<br>It came from up there.<page>...<page>Light...<br>Faded light..."
     },
     "Enemy Dreams": {
-      "SFGrenadeTestOfTeamwork_WeaverPrincessDN_1": "Faded light..."
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN_1": "Faded light...",
+      "SFGrenadeTestOfTeamwork_NPC_1": "Hmmm...",
+      "SFGrenadeTestOfTeamwork_NPC_2": "It had an interesting effect...",
+      "SFGrenadeTestOfTeamwork_NPC_3": "Maybe I can do something with it?"
     },
     "MISC": {
       "TotAreaTitle_Event": "SFGrenadeTestOfTeamwork_TotAreaTitle"
@@ -71,7 +74,10 @@
       "SFGrenadeTestOfTeamwork_HornetMonologue2": "¿Qué ha sido eso?<br>Ha venido de ahí arriba.<page>...<page>Luz...<br>Luz olvidada..."
     },
     "Enemy Dreams": {
-      "SFGrenadeTestOfTeamwork_WeaverPrincessDN_1": "Luz olvidada..."
+      "SFGrenadeTestOfTeamwork_WeaverPrincessDN_1": "Luz olvidada...",
+      "SFGrenadeTestOfTeamwork_NPC_1": "Mmm...",
+      "SFGrenadeTestOfTeamwork_NPC_2": "Ha tenido un efecto interesante...",
+      "SFGrenadeTestOfTeamwork_NPC_3": "¿Quizá puedo usarlo de alguna forma?"
     },
     "MISC": {
       "TotAreaTitle_Event": "SFGrenadeTestOfTeamwork_TotAreaTitle"

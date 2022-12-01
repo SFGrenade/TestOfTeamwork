@@ -1,19 +1,19 @@
-﻿namespace TestOfTeamwork
+﻿namespace TestOfTeamwork;
+
+public class TotSaveSettings
 {
-    public class TotSaveSettings
-    {
-        // Mechanics
-        public bool SFGrenadeTestOfTeamworkHornetCompanion = false;
+    // Mechanics
+    public bool SFGrenadeTestOfTeamworkHornetCompanion = false;
 
-        // Bosses
-        public bool SFGrenadeTestOfTeamworkEncounteredWeaverPrincess = false;
-        public bool SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = false;
+    // Bosses
+    public bool SFGrenadeTestOfTeamworkEncounteredWeaverPrincess = false;
+    public bool SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = false;
 
-        // Areas
-        public bool SFGrenadeTestOfTeamworkTotOpened = false;
-        public bool SFGrenadeTestOfTeamworkVisitedTestOfTeamwork = false;
-        public bool SFGrenadeTestOfTeamworkTotOpenedShortcut = false;
-        public bool SFGrenadeTestOfTeamworkTotOpenedTotem = false;
+    // Areas
+    public bool SFGrenadeTestOfTeamworkTotOpened = false;
+    public bool SFGrenadeTestOfTeamworkVisitedTestOfTeamwork = false;
+    public bool SFGrenadeTestOfTeamworkTotOpenedShortcut = false;
+    public bool SFGrenadeTestOfTeamworkTotOpenedTotem = false;
 
 #if DEBUG_CHARMS
         // Better charms
@@ -22,9 +22,8 @@
         public bool[] equippedCustomCharms = new bool[] { false, false, false, false };
         public int[] customCharmCosts = new int[] { 1, 1, 1, 1 };
 #endif
-    }
+}
 
-    public class TotGlobalSettings
-    {
-    }
+public class TotGlobalSettings
+{
 }

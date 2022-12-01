@@ -1,27 +1,26 @@
 ﻿using UnityEngine;
 
-namespace TestOfTeamwork.MonoBehaviours.Patcher
+namespace TestOfTeamwork.MonoBehaviours.Patcher;
+
+class SceneMapPatcher : MonoBehaviour
 {
-    class SceneMapPatcher : MonoBehaviour
+    private Material _sceneMapMaterial;
+    private bool _initialized = false;
+    public Texture tex;
+
+    public void Start()
     {
-        private Material _sceneMapMaterial;
-        private bool _initialized = false;
-        public Texture tex;
-
-        public void Start()
+        if (!_initialized)
         {
-            if (!_initialized)
-            {
-                _sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
-                _sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
+            _sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
+            _sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
 
-                _initialized = true;
-            }
+            _initialized = true;
+        }
 
-            foreach (var cMr in gameObject.GetComponentsInChildren<MeshRenderer>(false))
-            {
-                cMr.material = _sceneMapMaterial;
-            }
+        foreach (var cMr in gameObject.GetComponentsInChildren<MeshRenderer>(false))
+        {
+            cMr.material = _sceneMapMaterial;
         }
     }
 }

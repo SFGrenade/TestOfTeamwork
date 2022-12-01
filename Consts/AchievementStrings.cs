@@ -1,8 +1,7 @@
-﻿namespace TestOfTeamwork.Consts
+﻿namespace TestOfTeamwork.Consts;
+
+internal struct AchievementStrings
 {
-    internal struct AchievementStrings
-    {
-        // Bosses
-        public const string DefeatedWeaverPrincessKey = "SFGrenadeTestOfTeamwork_DefeatedWeaverPrincess";
-    }
+    // Bosses
+    public const string DefeatedWeaverPrincessKey = "SFGrenadeTestOfTeamwork_DefeatedWeaverPrincess";
 }

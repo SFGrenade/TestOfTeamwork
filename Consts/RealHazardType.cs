@@ -1,12 +1,11 @@
-﻿namespace TestOfTeamwork.Consts
+﻿namespace TestOfTeamwork.Consts;
+
+enum RealHazardType
 {
-    enum RealHazardType
-    {
-        NON_HAZARD = 0,
-        NORMAL,
-        SPIKES,
-        ACID,
-        LAVA,
-        PIT
-    }
+    NON_HAZARD = 0,
+    NORMAL,
+    SPIKES,
+    ACID,
+    LAVA,
+    PIT
 }
