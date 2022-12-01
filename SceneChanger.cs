@@ -18,7 +18,7 @@ namespace TestOfTeamwork
     public class SceneChanger : MonoBehaviour
     {
         private const bool Debug = false;
-        private const string AbPath = "E:\\Github_Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
+        private const string AbPath = "E:\\Documents\\Projects\\Unity Projects\\TestOfTeamwork Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbOverallMat { get; private set; } = null;
         public AssetBundle AbTotScene { get; private set; } = null;
