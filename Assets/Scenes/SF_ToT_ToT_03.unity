@@ -6137,7 +6137,7 @@ GameObject:
   - component: {fileID: 46167087}
   - component: {fileID: 46167088}
   m_Layer: 11
-  m_Name: Soul Totem white_Infinte
+  m_Name: Soul Totem white_Infinte 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83621,7 +83621,7 @@ GameObject:
   - component: {fileID: 1045878555}
   - component: {fileID: 1045878556}
   m_Layer: 11
-  m_Name: Soul Totem white_Infinte
+  m_Name: Soul Totem white_Infinte 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124446,7 +124446,7 @@ GameObject:
   - component: {fileID: 1660399922}
   - component: {fileID: 1660399923}
   m_Layer: 11
-  m_Name: White Palace Fly
+  m_Name: White Palace Fly 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134340,7 +134340,7 @@ GameObject:
   - component: {fileID: 1821878677}
   - component: {fileID: 1821878678}
   m_Layer: 11
-  m_Name: Soul Totem white_Infinte
+  m_Name: Soul Totem white_Infinte 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147236,7 +147236,7 @@ GameObject:
   - component: {fileID: 2044641759}
   - component: {fileID: 2044641760}
   m_Layer: 11
-  m_Name: White Palace Fly
+  m_Name: White Palace Fly 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

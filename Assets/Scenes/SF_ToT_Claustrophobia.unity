@@ -4413,7 +4413,7 @@ GameObject:
   - component: {fileID: 95450548}
   - component: {fileID: 95450547}
   m_Layer: 11
-  m_Name: wp_saw (2)
+  m_Name: wp_saw 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8242,7 +8242,7 @@ GameObject:
   - component: {fileID: 162355057}
   - component: {fileID: 162355056}
   m_Layer: 11
-  m_Name: wp_saw (1)
+  m_Name: wp_saw 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10246,7 +10246,7 @@ GameObject:
   - component: {fileID: 200930605}
   - component: {fileID: 200930604}
   m_Layer: 11
-  m_Name: Soul Totem white_Infinte
+  m_Name: Soul Totem white_Infinte 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19349,7 +19349,7 @@ GameObject:
   - component: {fileID: 392481926}
   - component: {fileID: 392481925}
   m_Layer: 11
-  m_Name: wp_saw (2)
+  m_Name: wp_saw 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22686,7 +22686,7 @@ GameObject:
   - component: {fileID: 439891989}
   - component: {fileID: 439891988}
   m_Layer: 11
-  m_Name: wp_saw (13)
+  m_Name: wp_saw 16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23589,7 +23589,7 @@ GameObject:
   - component: {fileID: 455257094}
   - component: {fileID: 455257093}
   m_Layer: 11
-  m_Name: wp_saw (9)
+  m_Name: wp_saw 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23811,7 +23811,7 @@ GameObject:
   - component: {fileID: 459395333}
   - component: {fileID: 459395332}
   m_Layer: 11
-  m_Name: wp_saw (3)
+  m_Name: wp_saw 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30752,7 +30752,7 @@ GameObject:
   - component: {fileID: 580552551}
   - component: {fileID: 580552550}
   m_Layer: 11
-  m_Name: wp_saw (10)
+  m_Name: wp_saw 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36631,7 +36631,7 @@ GameObject:
   - component: {fileID: 715995195}
   - component: {fileID: 715995194}
   m_Layer: 11
-  m_Name: wp_saw (4)
+  m_Name: wp_saw 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38653,7 +38653,7 @@ GameObject:
   - component: {fileID: 746593959}
   - component: {fileID: 746593960}
   m_Layer: 11
-  m_Name: wp_saw
+  m_Name: wp_saw 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39992,7 +39992,7 @@ GameObject:
   - component: {fileID: 767659262}
   - component: {fileID: 767659261}
   m_Layer: 11
-  m_Name: wp_saw (1)
+  m_Name: wp_saw 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40462,7 +40462,7 @@ GameObject:
   - component: {fileID: 771542667}
   - component: {fileID: 771542666}
   m_Layer: 11
-  m_Name: Soul Totem white_Infinte
+  m_Name: Soul Totem white_Infinte 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42712,7 +42712,7 @@ GameObject:
   - component: {fileID: 814747721}
   - component: {fileID: 814747720}
   m_Layer: 11
-  m_Name: wp_saw (5)
+  m_Name: wp_saw 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48389,7 +48389,7 @@ GameObject:
   - component: {fileID: 939802954}
   - component: {fileID: 939802953}
   m_Layer: 11
-  m_Name: wp_saw (5)
+  m_Name: wp_saw 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62099,7 +62099,7 @@ GameObject:
   - component: {fileID: 1183322919}
   - component: {fileID: 1183322920}
   m_Layer: 11
-  m_Name: wp_saw
+  m_Name: wp_saw 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64181,7 +64181,7 @@ GameObject:
   - component: {fileID: 1225354588}
   - component: {fileID: 1225354587}
   m_Layer: 11
-  m_Name: wp_saw (4)
+  m_Name: wp_saw 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77122,7 +77122,7 @@ GameObject:
   - component: {fileID: 1465932352}
   - component: {fileID: 1465932353}
   m_Layer: 11
-  m_Name: wp_saw
+  m_Name: wp_saw 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80245,7 +80245,7 @@ GameObject:
   - component: {fileID: 1527413005}
   - component: {fileID: 1527413004}
   m_Layer: 11
-  m_Name: wp_saw (6)
+  m_Name: wp_saw 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82996,7 +82996,7 @@ GameObject:
   - component: {fileID: 1564545551}
   - component: {fileID: 1564545550}
   m_Layer: 11
-  m_Name: wp_saw (11)
+  m_Name: wp_saw 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89207,7 +89207,7 @@ GameObject:
   - component: {fileID: 1664435096}
   - component: {fileID: 1664435097}
   m_Layer: 11
-  m_Name: wp_saw
+  m_Name: wp_saw 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90370,7 +90370,7 @@ GameObject:
   - component: {fileID: 1683055742}
   - component: {fileID: 1683055741}
   m_Layer: 11
-  m_Name: wp_saw (3)
+  m_Name: wp_saw 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92068,7 +92068,7 @@ GameObject:
   - component: {fileID: 1740412032}
   - component: {fileID: 1740412031}
   m_Layer: 11
-  m_Name: wp_saw (8)
+  m_Name: wp_saw 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94693,7 +94693,7 @@ GameObject:
   - component: {fileID: 1782713664}
   - component: {fileID: 1782713663}
   m_Layer: 11
-  m_Name: Soul Totem white_Infinte
+  m_Name: Soul Totem white_Infinte 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97546,7 +97546,7 @@ GameObject:
   - component: {fileID: 1844177159}
   - component: {fileID: 1844177158}
   m_Layer: 11
-  m_Name: wp_saw (6)
+  m_Name: wp_saw 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99282,7 +99282,7 @@ GameObject:
   - component: {fileID: 1871980817}
   - component: {fileID: 1871980816}
   m_Layer: 11
-  m_Name: wp_saw (12)
+  m_Name: wp_saw 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108953,7 +108953,7 @@ GameObject:
   - component: {fileID: 2047479709}
   - component: {fileID: 2047479710}
   m_Layer: 11
-  m_Name: wp_saw
+  m_Name: wp_saw 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109257,7 +109257,7 @@ GameObject:
   - component: {fileID: 2055404691}
   - component: {fileID: 2055404692}
   m_Layer: 11
-  m_Name: wp_saw
+  m_Name: wp_saw 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
