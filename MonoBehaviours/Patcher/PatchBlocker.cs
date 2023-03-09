@@ -23,6 +23,7 @@ class PatchBlocker : MonoBehaviour
         {
             GameObject actualBlocker = Instantiate(PrefabHolder.PopQuakeFloorPrefab, transform.parent, true);
             actualBlocker.SetActive(false);
+            actualBlocker.name = gameObject.name;
             actualBlocker.transform.position = transform.position;
             actualBlocker.transform.localScale = transform.lossyScale;
             actualBlocker.transform.eulerAngles = transform.eulerAngles;
