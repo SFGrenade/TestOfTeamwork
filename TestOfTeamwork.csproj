@@ -7,8 +7,8 @@
     <Product>TestOfTeamwork</Product>
     <Description>A Hollow Knight Mod</Description>
     <Copyright>Copyright © SFGrenade 2019-2021</Copyright>
-    <AssemblyVersion>1.5.77.13337</AssemblyVersion>
-    <FileVersion>1.5.77.13337</FileVersion>
+    <AssemblyVersion>1.5.78.0</AssemblyVersion>
+    <FileVersion>1.5.78.0</FileVersion>
     <OutputPath>bin/$(Configuration)/</OutputPath>
     <LangVersion>latest</LangVersion>
     <HollowKnightRefs Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/Games/gog/hollow-knight/game/Hollow Knight_Data/Managed/</HollowKnightRefs>
