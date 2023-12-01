@@ -6,7 +6,8 @@
     <AssemblyTitle>TestOfTeamwork</AssemblyTitle>
     <Product>TestOfTeamwork</Product>
     <Description>A Hollow Knight Mod</Description>
-    <Copyright>Copyright © SFGrenade 2019-2021</Copyright>
+    <Copyright>Copyright © SFGrenade 2024</Copyright>
+    <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
     <AssemblyVersion>1.5.79.0</AssemblyVersion>
     <FileVersion>1.5.79.0</FileVersion>
     <OutputPath>bin/$(Configuration)/</OutputPath>
@@ -30,12 +31,12 @@
 
     <Copy Condition="'$(DocumentationFile)'!=''" SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb;$(TargetDir)/$(TargetName).xml" DestinationFolder="$(HollowKnightRefs)/Mods/$(TargetName)/" />
     <Copy Condition="'$(DocumentationFile)'==''" SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(HollowKnightRefs)/Mods/$(TargetName)/" />
-    
+
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ExportDir)/$(TargetName)/" />
-    
+
     <Copy Condition="'$(DocumentationFile)'!=''" SourceFiles="ReadMe.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb;$(TargetDir)/$(TargetName).xml" DestinationFolder="$(ExportDir)/$(TargetName)/zip/" />
     <Copy Condition="'$(DocumentationFile)'==''" SourceFiles="ReadMe.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(ExportDir)/$(TargetName)/zip/" />
-    
+
     <ZipDirectory SourceDirectory="$(ExportDir)/$(TargetName)/zip/" DestinationFile="$(ExportDir)/$(TargetName)/$(TargetName).zip" />
     <RemoveDir Directories="$(ExportDir)/$(TargetName)/zip/" />
 
