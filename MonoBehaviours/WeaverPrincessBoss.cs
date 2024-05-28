@@ -51,12 +51,12 @@ public class WeaverPrincessBoss : MonoBehaviour
         int maxHp = 3000; // 3000
         HealthManager hornetHm = hornetBoss.GetComponent<HealthManager>();
         hornetHm.hp = maxHp;
-            
+
         PlayMakerFSM stunControlFsm = hornetBoss.LocateMyFSM("Stun Control");
         FsmVariables stunControlFsmVars = stunControlFsm.FsmVariables;
         stunControlFsmVars.FindFsmInt("Stun Combo").Value = maxHp;
         stunControlFsmVars.FindFsmInt("Stun Hit Max").Value = maxHp;
-            
+
         PlayMakerFSM controlFsm = hornetBoss.LocateMyFSM("Control");
         FsmVariables controlFsmVars = controlFsm.FsmVariables;
         controlFsmVars.FindFsmFloat("Gravity").Value = 2.2f; // orig: 2.5

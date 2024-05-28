@@ -82,7 +82,7 @@ public class PatchSceneManager : MonoBehaviour
         new[]
         {
             new Keyframe(0, 0),
-            new Keyframe(1, 1), 
+            new Keyframe(1, 1),
         }
     );
     public AnimationCurve greenChannel = new AnimationCurve(
