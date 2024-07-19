@@ -28,8 +28,8 @@ public class TextureStrings
     private const string YFile = "TestOfTeamwork.Resources.Y.png";
     public const string EKey = "E";
     private const string EFile = "TestOfTeamwork.Resources.E.png";
-    public const string Key = "T";
-    private const string File = "TestOfTeamwork.Resources.T.png";
+    public const string TKey = "T";
+    private const string TFile = "TestOfTeamwork.Resources.T.png";
     public const string GcKey = "fammchild";
     private const string GcFile = "TestOfTeamwork.Resources.fammchild.png";
     public const string Gc2Key = "fammchild2";
@@ -51,7 +51,7 @@ public class TextureStrings
         tmpTextures.Add(AchievementWeaverPrincessKey, AchievementWeaverPrincessFile);
         tmpTextures.Add(YKey, YFile);
         tmpTextures.Add(EKey, EFile);
-        tmpTextures.Add(Key, File);
+        tmpTextures.Add(TKey, TFile);
         tmpTextures.Add(GcKey, GcFile);
         tmpTextures.Add(Gc2Key, Gc2File);
         tmpTextures.Add(PetalKey, PetalFile);

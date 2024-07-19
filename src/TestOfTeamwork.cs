@@ -24,10 +24,8 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
     public AudioStrings AudioDict { get; private set; }
     public SceneChanger SceneChanger { get; private set; }
 
-#if DEBUG_CHARMS
-        // DEBUG
-        public CharmHelper charmHelper { get; private set; }
-#endif
+    // DEBUG
+    public List<int> charmIds { get; private set; }
 
     public static AudioClip GetAudio(string name) => Instance.AudioDict.Get(name);
 
@@ -70,15 +68,13 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
         LangStrings = new LanguageStrings();
         SpriteDict = new TextureStrings();
 
-        AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincessKey, GetSprite(TextureStrings.AchievementWeaverPrincessKey), LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
+        AchievementHelper.AddAchievement(AchievementStrings.DefeatedWeaverPrincessKey, GetSprite(TextureStrings.AchievementWeaverPrincessKey),
+            LanguageStrings.AchievementDefeatedWeaverPrincessTitleKey, LanguageStrings.AchievementDefeatedWeaverPrincessTextKey, true);
 
         InitInventory();
 
-#if DEBUG_CHARMS
-            charmHelper = new CharmHelper();
-            charmHelper.customCharms = 4;
-            charmHelper.customSprites = new Sprite[] { GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.TKey) };
-#endif
+        charmIds = CharmHelper.AddSprites(GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey),
+            GetSprite(TextureStrings.TKey));
 
         InitCallbacks();
     }
@@ -94,26 +90,31 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
         //GameManager.instance.StartCoroutine(Register2BossModCore());
         //Platform.Current.EncryptedSharedData.SetInt(AchievementStrings.DefeatedWeaverPrincessKey, 0); // DEBUG
 
-        DebugMod.AddActionToKeyBindList(() => {
-                SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion = !SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion;
-                DebugMod.LogToConsole($"'ToT Necklace' toggled to {SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion}.");
-            }, "Toggle Necklace", "Test of Teamwork", true);
-        DebugMod.AddActionToKeyBindList(() => {
-                SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = !SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess;
-                DebugMod.LogToConsole($"'ToT Boss Dead' toggled to {SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess}.");
-            }, "Toggle Boss Dead", "Test of Teamwork", true);
-        DebugMod.AddActionToKeyBindList(() => {
-                SaveSettings.SFGrenadeTestOfTeamworkTotOpened = !SaveSettings.SFGrenadeTestOfTeamworkTotOpened;
-                DebugMod.LogToConsole($"'ToT Area Open' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpened}.");
-            }, "Toggle Area Open", "Test of Teamwork", true);
-        DebugMod.AddActionToKeyBindList(() => {
-                SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut;
-                DebugMod.LogToConsole($"'ToT Shortcut Open' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut}.");
-            }, "Toggle Shortcut Open", "Test of Teamwork", true);
-        DebugMod.AddActionToKeyBindList(() => {
-                SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem;
-                DebugMod.LogToConsole($"'ToT Totem Accessible' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem}.");
-            }, "Toggle Totem Accessible", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() =>
+        {
+            SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion = !SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion;
+            DebugMod.LogToConsole($"'ToT Necklace' toggled to {SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion}.");
+        }, "Toggle Necklace", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() =>
+        {
+            SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess = !SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess;
+            DebugMod.LogToConsole($"'ToT Boss Dead' toggled to {SaveSettings.SFGrenadeTestOfTeamworkDefeatedWeaverPrincess}.");
+        }, "Toggle Boss Dead", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() =>
+        {
+            SaveSettings.SFGrenadeTestOfTeamworkTotOpened = !SaveSettings.SFGrenadeTestOfTeamworkTotOpened;
+            DebugMod.LogToConsole($"'ToT Area Open' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpened}.");
+        }, "Toggle Area Open", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() =>
+        {
+            SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut;
+            DebugMod.LogToConsole($"'ToT Shortcut Open' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpenedShortcut}.");
+        }, "Toggle Shortcut Open", "Test of Teamwork", true);
+        DebugMod.AddActionToKeyBindList(() =>
+        {
+            SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem = !SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem;
+            DebugMod.LogToConsole($"'ToT Totem Accessible' toggled to {SaveSettings.SFGrenadeTestOfTeamworkTotOpenedTotem}.");
+        }, "Toggle Totem Accessible", "Test of Teamwork", true);
 
         Log("Initialized");
     }
@@ -157,7 +158,8 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
     private void InitInventory()
     {
-        ItemHelper.AddNormalItem(GetSprite(TextureStrings.InvHornetKey), nameof(SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion), LanguageStrings.HornetInvNameKey, LanguageStrings.HornetInvDescKey);
+        ItemHelper.AddNormalItem(GetSprite(TextureStrings.InvHornetKey), nameof(SaveSettings.SFGrenadeTestOfTeamworkHornetCompanion),
+            LanguageStrings.HornetInvNameKey, LanguageStrings.HornetInvDescKey);
     }
 
     private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
@@ -172,7 +174,8 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             }
         }
         catch
-        { }
+        {
+        }
 
         if (scene == TransitionGateNames.Rt)
         {
@@ -224,127 +227,136 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
     private string OnLanguageGetHook(string key, string sheet, string orig)
     {
-#if DEBUG_CHARMS
-            // There probably is a better way to do this, but for now take this
-#region Custom Charms
-            if (key.StartsWith("CHARM_NAME_"))
+        // There probably is a better way to do this, but for now take this
+
+        #region Custom Charms
+
+        if (key.StartsWith("CHARM_NAME_"))
+        {
+            int charmNum = int.Parse(key.Split('_')[2]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(key.Split('_')[2]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    return "CHARM NAME";
-                }
+                return "CHARM NAME";
             }
-            if (key.StartsWith("CHARM_DESC_"))
+        }
+
+        if (key.StartsWith("CHARM_DESC_"))
+        {
+            int charmNum = int.Parse(key.Split('_')[2]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(key.Split('_')[2]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    return "CHARM DESC";
-                }
+                return "CHARM DESC";
             }
-#endregion
-#endif
+        }
+
+        #endregion
+
         if (LangStrings.ContainsKey(key, sheet))
         {
             return LangStrings.Get(key, sheet);
         }
+
         return orig;
     }
 
     private bool OnGetPlayerBoolHook(string target, bool orig)
     {
-#if DEBUG_CHARMS
-            if (target.StartsWith("gotCharm_"))
+        if (target.StartsWith("gotCharm_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    return Settings.gotCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)];
-                }
+                return SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum)];
             }
-            if (target.StartsWith("newCharm_"))
+        }
+
+        if (target.StartsWith("newCharm_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    return Settings.newCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)];
-                }
+                return SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum)];
             }
-            if (target.StartsWith("equippedCharm_"))
+        }
+
+        if (target.StartsWith("equippedCharm_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    return Settings.equippedCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)];
-                }
+                return SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum)];
             }
-#endif
+        }
+
         var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
         if (tmpField != null)
         {
-            return (bool) tmpField.GetValue(SaveSettings);
+            return (bool)tmpField.GetValue(SaveSettings);
         }
+
         if (target == "alwaysFalse")
         {
             return false;
         }
+
         return orig;
     }
 
     private bool OnSetPlayerBoolHook(string target, bool orig)
     {
-#if DEBUG_CHARMS
-            if (target.StartsWith("gotCharm_"))
+        if (target.StartsWith("gotCharm_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    Settings.gotCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
-                }
+                SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum)] = orig;
             }
-            if (target.StartsWith("newCharm_"))
+        }
+
+        if (target.StartsWith("newCharm_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    Settings.newCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
-                }
+                SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum)] = orig;
             }
-            if (target.StartsWith("equippedCharm_"))
+        }
+
+        if (target.StartsWith("equippedCharm_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    Settings.equippedCustomCharms[charmHelper.charmIDs.IndexOf(charmNum)] = val;
-                }
+                SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum)] = orig;
             }
-#endif
+        }
+
         var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
         if (tmpField != null)
         {
             tmpField.SetValue(SaveSettings, orig);
         }
+
         return orig;
     }
 
     private int OnGetPlayerIntHook(string target, int orig)
     {
-#if DEBUG_CHARMS
-            if (target.StartsWith("charmCost_"))
+        if (target.StartsWith("charmCost_"))
+        {
+            int charmNum = int.Parse(target.Split('_')[1]);
+            if (charmIds.Contains(charmNum))
             {
-                int charmNum = int.Parse(target.Split('_')[1]);
-                if (charmHelper.charmIDs.Contains(charmNum))
-                {
-                    return Settings.customCharmCosts[charmHelper.charmIDs.IndexOf(charmNum)];
-                }
+                return SaveSettings.customCharmCosts[charmIds.IndexOf(charmNum)];
             }
-#endif
+        }
+
         var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
         if (tmpField != null)
         {
-            return (int) tmpField.GetValue(SaveSettings);
+            return (int)tmpField.GetValue(SaveSettings);
         }
+
         return orig;
     }
 
@@ -355,6 +367,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
         {
             tmpField.SetValue(SaveSettings, orig);
         }
+
         return orig;
     }
 
@@ -369,6 +382,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
         ScenePrefabName,
         STATUE_GO
     }
+
     private bool _r2BmcTimeout;
     private bool _r2BmcSuccess;
     private static readonly string R2BmcBmc = "BossModCore";
@@ -394,6 +408,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             {
                 _r2BmcTimeout = true;
             }
+
             yield return null;
         }
 
@@ -402,6 +417,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             Log(R2BmcBmc + " not found!");
             yield break;
         }
+
         Log(R2BmcBmc + " is able to be registered to!");
         yield return null;
 

@@ -263,6 +263,8 @@ public class SceneChanger : MonoBehaviour
         if (scene.name != "White_Palace_06")
             return;
 
+        scene.Find("_SceneManager").GetComponent<SceneManager>().environmentType = 7;
+
         var endless = UnityEngine.Random.Range(0.0f, 1.0f) < 0.001f;
         if (!endless)
         {
