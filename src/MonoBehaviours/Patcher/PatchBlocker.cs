@@ -2,7 +2,6 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using SFCore.Utils;
-using Object = UnityEngine.Object;
 
 namespace TestOfTeamwork.MonoBehaviours.Patcher;
 

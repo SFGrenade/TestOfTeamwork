@@ -1,7 +1,6 @@
 ﻿using System;
 using Modding;
 using UnityEngine;
-using Logger = Modding.Logger;
 
 namespace TestOfTeamwork.MonoBehaviours.Patcher;
 

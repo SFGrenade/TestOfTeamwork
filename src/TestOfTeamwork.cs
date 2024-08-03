@@ -3,15 +3,12 @@ using SFCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
-using MonoMod.RuntimeDetour;
 using TestOfTeamwork.Consts;
 using TestOfTeamwork.MonoBehaviours;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 using SFCore.Generics;
-using Logger = Modding.Logger;
 
 namespace TestOfTeamwork;
 
