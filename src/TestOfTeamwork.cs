@@ -70,8 +70,8 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
         InitInventory();
 
-        charmIds = CharmHelper.AddSprites(GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey),
-            GetSprite(TextureStrings.TKey));
+        // charmIds = CharmHelper.AddSprites(GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey),
+        //     GetSprite(TextureStrings.TKey));
 
         InitCallbacks();
     }
