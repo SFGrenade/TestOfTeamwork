@@ -123,7 +123,8 @@ public class SceneChanger : MonoBehaviour
         //    self.sceneHeight = height;
         //    FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
         //}
-        /*else*/ if (targetScene == TransitionGateNames.TotEndless)
+        /*else*/
+        if (targetScene == TransitionGateNames.TotEndless)
         {
             float width = 32;
             float height = 32;

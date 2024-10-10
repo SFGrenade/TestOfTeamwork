@@ -70,8 +70,12 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
         InitInventory();
 
-        // charmIds = CharmHelper.AddSprites(GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey),
-        //     GetSprite(TextureStrings.TKey));
+        // charmIds = new List<int>();
+        // for (int _ = 0; _ < 100; _++)
+        // {
+        //     charmIds.AddRange(CharmHelper.AddSprites(GetSprite(TextureStrings.YKey), GetSprite(TextureStrings.EKey), GetSprite(TextureStrings.EKey),
+        //         GetSprite(TextureStrings.TKey)));
+        // }
 
         InitCallbacks();
     }
@@ -263,7 +267,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                return SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum)];
+                return SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.gotCustomCharms.Length];
             }
         }
 
@@ -272,7 +276,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                return SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum)];
+                return SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.newCustomCharms.Length];
             }
         }
 
@@ -281,7 +285,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                return SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum)];
+                return SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.equippedCustomCharms.Length];
             }
         }
 
@@ -306,7 +310,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum)] = orig;
+                SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.gotCustomCharms.Length] = orig;
             }
         }
 
@@ -315,7 +319,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum)] = orig;
+                SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.newCustomCharms.Length] = orig;
             }
         }
 
@@ -324,7 +328,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum)] = orig;
+                SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.equippedCustomCharms.Length] = orig;
             }
         }
 
@@ -344,7 +348,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
             int charmNum = int.Parse(target.Split('_')[1]);
             if (charmIds.Contains(charmNum))
             {
-                return SaveSettings.customCharmCosts[charmIds.IndexOf(charmNum)];
+                return SaveSettings.customCharmCosts[charmIds.IndexOf(charmNum) % SaveSettings.customCharmCosts.Length];
             }
         }
 
