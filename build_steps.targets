@@ -1,0 +1,6 @@
+<Project>
+    <Target Name="Copy mod to unity project dir" AfterTargets="PostBuildEvent">
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(AssetbundleDir)/../Assemblies/" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(AssetbundleDir)/../Assemblies/" SkipUnchangedFiles="true" />
+    </Target>
+</Project>
