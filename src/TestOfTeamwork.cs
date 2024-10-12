@@ -21,8 +21,7 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
     public AudioStrings AudioDict { get; private set; }
     public SceneChanger SceneChanger { get; private set; }
 
-    // DEBUG
-    public List<int> charmIds { get; private set; }
+    // public List<int> charmIds { get; private set; }
 
     public static AudioClip GetAudio(string name) => Instance.AudioDict.Get(name);
 
@@ -228,29 +227,23 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
     private string OnLanguageGetHook(string key, string sheet, string orig)
     {
-        // There probably is a better way to do this, but for now take this
+        // if (key.StartsWith("CHARM_NAME_"))
+        // {
+        //     int charmNum = int.Parse(key.Split('_')[2]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         return "CHARM NAME";
+        //     }
+        // }
 
-        #region Custom Charms
-
-        if (key.StartsWith("CHARM_NAME_"))
-        {
-            int charmNum = int.Parse(key.Split('_')[2]);
-            if (charmIds.Contains(charmNum))
-            {
-                return "CHARM NAME";
-            }
-        }
-
-        if (key.StartsWith("CHARM_DESC_"))
-        {
-            int charmNum = int.Parse(key.Split('_')[2]);
-            if (charmIds.Contains(charmNum))
-            {
-                return "CHARM DESC";
-            }
-        }
-
-        #endregion
+        // if (key.StartsWith("CHARM_DESC_"))
+        // {
+        //     int charmNum = int.Parse(key.Split('_')[2]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         return "CHARM DESC";
+        //     }
+        // }
 
         if (LangStrings.ContainsKey(key, sheet))
         {
@@ -262,32 +255,32 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
     private bool OnGetPlayerBoolHook(string target, bool orig)
     {
-        if (target.StartsWith("gotCharm_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                return SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.gotCustomCharms.Length];
-            }
-        }
+        // if (target.StartsWith("gotCharm_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         return SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.gotCustomCharms.Length];
+        //     }
+        // }
 
-        if (target.StartsWith("newCharm_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                return SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.newCustomCharms.Length];
-            }
-        }
+        // if (target.StartsWith("newCharm_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         return SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.newCustomCharms.Length];
+        //     }
+        // }
 
-        if (target.StartsWith("equippedCharm_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                return SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.equippedCustomCharms.Length];
-            }
-        }
+        // if (target.StartsWith("equippedCharm_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         return SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.equippedCustomCharms.Length];
+        //     }
+        // }
 
         var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
         if (tmpField != null)
@@ -305,32 +298,32 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
     private bool OnSetPlayerBoolHook(string target, bool orig)
     {
-        if (target.StartsWith("gotCharm_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.gotCustomCharms.Length] = orig;
-            }
-        }
+        // if (target.StartsWith("gotCharm_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         SaveSettings.gotCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.gotCustomCharms.Length] = orig;
+        //     }
+        // }
 
-        if (target.StartsWith("newCharm_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.newCustomCharms.Length] = orig;
-            }
-        }
+        // if (target.StartsWith("newCharm_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         SaveSettings.newCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.newCustomCharms.Length] = orig;
+        //     }
+        // }
 
-        if (target.StartsWith("equippedCharm_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.equippedCustomCharms.Length] = orig;
-            }
-        }
+        // if (target.StartsWith("equippedCharm_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         SaveSettings.equippedCustomCharms[charmIds.IndexOf(charmNum) % SaveSettings.equippedCustomCharms.Length] = orig;
+        //     }
+        // }
 
         var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
         if (tmpField != null)
@@ -343,14 +336,14 @@ public class TestOfTeamwork : FullSettingsMod<TotSaveSettings, TotGlobalSettings
 
     private int OnGetPlayerIntHook(string target, int orig)
     {
-        if (target.StartsWith("charmCost_"))
-        {
-            int charmNum = int.Parse(target.Split('_')[1]);
-            if (charmIds.Contains(charmNum))
-            {
-                return SaveSettings.customCharmCosts[charmIds.IndexOf(charmNum) % SaveSettings.customCharmCosts.Length];
-            }
-        }
+        // if (target.StartsWith("charmCost_"))
+        // {
+        //     int charmNum = int.Parse(target.Split('_')[1]);
+        //     if (charmIds.Contains(charmNum))
+        //     {
+        //         return SaveSettings.customCharmCosts[charmIds.IndexOf(charmNum) % SaveSettings.customCharmCosts.Length];
+        //     }
+        // }
 
         var tmpField = ReflectionHelper.GetFieldInfo(typeof(TotSaveSettings), target);
         if (tmpField != null)

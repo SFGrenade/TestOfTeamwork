@@ -15,11 +15,11 @@ public class TotSaveSettings
     public bool SFGrenadeTestOfTeamworkTotOpenedShortcut = false;
     public bool SFGrenadeTestOfTeamworkTotOpenedTotem = false;
 
-    // Better charms
-    public bool[] gotCustomCharms = new bool[] { true, true, true, true };
-    public bool[] newCustomCharms = new bool[] { false, false, false, false };
-    public bool[] equippedCustomCharms = new bool[] { false, false, false, false };
-    public int[] customCharmCosts = new int[] { 1, 1, 1, 1 };
+    // // Better charms
+    // public bool[] gotCustomCharms = new bool[] { true, true, true, true };
+    // public bool[] newCustomCharms = new bool[] { false, false, false, false };
+    // public bool[] equippedCustomCharms = new bool[] { false, false, false, false };
+    // public int[] customCharmCosts = new int[] { 1, 1, 1, 1 };
 }
 
 public class TotGlobalSettings
