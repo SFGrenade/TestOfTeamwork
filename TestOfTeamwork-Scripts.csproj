@@ -15,9 +15,9 @@
     <LangVersion>latest</LangVersion>
     <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
     <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
-    <HollowKnightRefs />
-    <ExportDir />
-    <AssetbundleDir />
+    <HollowKnightRefs>../HkRefs</HollowKnightRefs>
+    <ExportDir>bin/Publish</ExportDir>
+    <AssetbundleDir>../Unity/Assets/AssetBundles</AssetbundleDir>
     <!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
   </PropertyGroup>
   <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
