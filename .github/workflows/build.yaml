@@ -63,6 +63,7 @@ jobs:
           projectPath: Unity
           buildsPath: Unity/build
           buildMethod: CreateAssetBundles.BuildAllAssetBundlesCompressed
+          dockerWorkspacePath: /github/workspace
 
       - name: Build master
         run: dotnet build -c Release
