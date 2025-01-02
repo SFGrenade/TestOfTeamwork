@@ -73,6 +73,9 @@ jobs:
           buildsPath: Unity/build
           buildMethod: CreateAssetBundles.BuildAllAssetBundlesCompressed
 
+      # commit assetbundle to repo?
+      # wouldn't work anyway since we already have a tag though
+
       - name: Build master
         run: dotnet build -c Release
         working-directory: master
