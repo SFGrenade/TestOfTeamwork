@@ -53,17 +53,20 @@ jobs:
         run: dotnet build -c Release
         working-directory: MonoBehaviour
 
+      - name: Fetch SFCoreUnity for Unity project
+        run: wget https://github.com/SFGrenade/SFCore/releases/download/latest/SFCoreUnity.dll -OutFile Assets/Assemblies/SFCore.dll
+        working-directory: Unity
+
       - uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: StandaloneWindows
+          targetPlatform: StandaloneWindows64
           projectPath: Unity
           buildsPath: Unity/build
           buildMethod: CreateAssetBundles.BuildAllAssetBundlesCompressed
-          dockerWorkspacePath: /github/workspace
 
       - name: Build master
         run: dotnet build -c Release
