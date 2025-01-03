@@ -5,6 +5,7 @@
 # Script stuff
 /[Aa]ssets/[Aa]sset[Bb]undles/
 /[Aa]ssets/[Aa]ssemblies/*.dll
+!/[Aa]ssets/[Aa]ssemblies/*.dll.meta
 
 
 

@@ -13,7 +13,7 @@ public class CreateAssetBundles
         }
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
                                         BuildAssetBundleOptions.None, 
-                                        BuildTarget.StandaloneWindows);
+                                        BuildTarget.StandaloneWindows64);
     }
     
     [MenuItem("Build AssetBundles/Build AssetBundles Uncompressed")]
@@ -26,6 +26,6 @@ public class CreateAssetBundles
         }
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
                                         BuildAssetBundleOptions.UncompressedAssetBundle, 
-                                        BuildTarget.StandaloneWindows);
+                                        BuildTarget.StandaloneWindows64);
     }
 }
