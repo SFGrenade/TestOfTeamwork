@@ -45,10 +45,6 @@ jobs:
         run: dotnet restore
         working-directory: MonoBehaviour
 
-      - name: Install dependencies master
-        run: dotnet restore
-        working-directory: master
-
       - name: Build MonoBehaviour
         run: dotnet build -c Release
         working-directory: MonoBehaviour
@@ -75,6 +71,10 @@ jobs:
 
       # commit assetbundle to repo?
       # wouldn't work anyway since we already have a tag though
+
+      - name: Install dependencies master
+        run: dotnet restore
+        working-directory: master
 
       - name: Build master
         run: dotnet build -c Release
