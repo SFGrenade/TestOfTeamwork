@@ -49784,8 +49784,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 967801579}
-  - component: {fileID: 967801577}
   - component: {fileID: 967801576}
+  - component: {fileID: 967801577}
   m_Layer: 0
   m_Name: __Initializer
   m_TagString: Untagged
@@ -49815,10 +49815,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 967801575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1989680822, guid: 9b701a9cf80dbc348809ba1c01726b05, type: 3}
+  m_Script: {fileID: 189551051, guid: 1cb23e0b91a3b6e4795b68493b400719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneType: 0
   mapZone: 21
   isWindy: 0
   isTremorZone: 0
@@ -49833,18 +49832,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -49857,18 +49856,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -49888,10 +49887,19 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.19824174
+      value: 0.28115243
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 1
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -49901,12 +49909,49 @@ MonoBehaviour:
     m_RotationOrder: 4
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   defaultIntensity: 0.9
-  heroLightColor: {r: 1, g: 1, b: 1, a: 0.316}
+  heroLightColor: {r: 1, g: 1, b: 1, a: 0.31764707}
   noParticles: 0
   overrideParticlesWith: 0
+  AtmosCueSet: SF ToT
+  AtmosCueSnapshotName: at Misc Wind
+  AtmosCueSnapshotIndex: 23
+  AtmosCueIsChannelEnabled: 00000000000000000000000000000001
+  MusicCueSet: 
+  MusicCueSnapshotName: Silent
+  MusicCueSnapshotIndex: 9
+  MusicCueChannelInfoClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  MusicCueChannelInfoSyncs: 000000000000000000000000000000000000000000000000
+  InfectedMusicCueSet: 
+  InfectedMusicCueSnapshotName: Silent
+  InfectedMusicCueSnapshotIndex: 9
+  InfectedMusicCueChannelInfoClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  InfectedMusicCueChannelInfoSyncs: 000000000000000000000000000000000000000000000000
+  MsSnapshotName: Silent
+  MsSnapshotIndex: 9
+  musicDelayTime: 0
+  musicTransitionTime: 3
+  AtsSnapshotName: at Misc Wind
+  AtsSnapshotIndex: 23
+  EsSnapshotName: en Arena
+  EsSnapshotIndex: 4
+  AcsSnapshotName: On
+  AcsSnapshotIndex: 0
+  SsSnapshotName: Away
+  SsSnapshotIndex: 0
   transitionTime: 0.5
   manualMapTrigger: 0
-  musicTransitionTime: 3
 --- !u!4 &967801579
 Transform:
   m_ObjectHideFlags: 0
