@@ -197,7 +197,8 @@ public class SceneChanger : MonoBehaviour
 
         hornetNpcFsm.CopyState("Box Up", "Give Item Spawn");
 
-        hornetNpcFsm.ChangeTransition("Give Item Spawn", FsmEvent.Finished.Name, "Talk Finish");
+        var giveItemConvoFinishTarget = hornetNpcFsm.GetTransition("Give Item", "CONVO_FINISH").ToFsmState;
+        hornetNpcFsm.ChangeTransition("Give Item Spawn", FsmEvent.Finished.Name, giveItemConvoFinishTarget.Name);
         hornetNpcFsm.ChangeTransition("Give Item", "CONVO_FINISH", "Give Item Spawn");
 
         hornetNpcFsm.RemoveAction("Give Item Spawn", 5);
